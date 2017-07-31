@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use App\Reciter;
+use App\Album;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('reciter', function ($value) {
             return Reciter::where('id', $value)->orWhere('slug', $value)->first();
+        });
+
+        Route::bind('album', function ($value) {
+            return Album::where('id', $value)->first();
         });
 
     }

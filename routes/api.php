@@ -17,10 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::namespace('Api')->prefix('reciters')->group(function () {
-    Route::delete('/{reciter}','RecitersController@destroy');
-    Route::post('/{reciter}','RecitersController@update');
-    Route::get('/{reciter}', 'RecitersController@show');
-    Route::post('/','RecitersController@store');
-    Route::get('/', 'RecitersController@index');
+Route::namespace('Api')->group(function () {
+    Route::prefix('/reciters')->group(function () {
+        Route::delete('/{reciter}','RecitersController@destroy');
+        Route::post('/{reciter}','RecitersController@update');
+        Route::get('/{reciter}', 'RecitersController@show');
+        Route::post('/','RecitersController@store');
+        Route::get('/', 'RecitersController@index');
+    });
+
+    Route::prefix('/album')->group(function () {
+
+    });
 });
