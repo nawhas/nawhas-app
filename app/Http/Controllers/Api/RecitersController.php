@@ -27,7 +27,16 @@ class RecitersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reciter = new Reciter;
+        $reciter->name = $request->name;
+        $reciter->slug = $request->slug;
+        $reciter->description = $request->description;
+        $reciter->hits = 1;
+        $reciter->image_path = "Hello";
+        $reciter->created_by = 1;
+        $reciter->save();
+
+        return $reciter;
     }
 
     /**
@@ -36,9 +45,9 @@ class RecitersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Reciter $reciter)
     {
-        //
+        return $reciter;
     }
 
     /**
@@ -48,9 +57,17 @@ class RecitersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Reciter $reciter)
     {
-        //
+        $reciter->name = $request->name;
+        $reciter->slug = $request->slug;
+        $reciter->description = $request->description;
+        $reciter->hits = 1;
+        $reciter->image_path = "Hello";
+        $reciter->created_by = 1;
+        $reciter->save();
+
+        return $reciter;
     }
 
     /**
@@ -59,8 +76,8 @@ class RecitersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Reciter $reciter)
     {
-        //
+        $reciter->destroy($reciter->id);
     }
 }
