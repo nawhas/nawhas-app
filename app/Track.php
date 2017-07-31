@@ -3,16 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Album;
+use App\Lyric;
 
 class Track extends Model
 {
-    public function Albums()
+    public function albums()
     {
-        return $this->belongsTo('App\Album', 'albums_id', 'id');
+        return $this->belongsTo(Album::class, 'albums_id', 'id');
     }
 
-    public function Lyrics()
+    public function lyrics()
     {
-        return $this->hasOne('App\Lyric', 'tracks_id', 'id');
+        return $this->hasOne(Lyric::class, 'tracks_id', 'id');
     }
 }
