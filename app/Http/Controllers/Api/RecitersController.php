@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Reciter;
 
 class RecitersController extends Controller
 {
@@ -16,6 +16,7 @@ class RecitersController extends Controller
     public function index()
     {
         $reciters = Reciter::all();
+
         return $reciters;
     }
 
@@ -32,7 +33,7 @@ class RecitersController extends Controller
         $reciter->slug = $request->slug;
         $reciter->description = $request->description;
         $reciter->hits = 1;
-        $reciter->image_path = "Hello";
+        $reciter->image_path = 'Hello';
         $reciter->created_by = 1;
         $reciter->save();
 
@@ -63,7 +64,7 @@ class RecitersController extends Controller
         $reciter->slug = $request->slug;
         $reciter->description = $request->description;
         $reciter->hits = 1;
-        $reciter->image_path = "Hello";
+        $reciter->image_path = 'Hello';
         $reciter->created_by = 1;
         $reciter->save();
 

@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Reciter;
-use App\Track;
 
 class Album extends Model
 {
