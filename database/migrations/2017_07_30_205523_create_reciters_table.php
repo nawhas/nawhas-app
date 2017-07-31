@@ -26,7 +26,7 @@ class CreateRecitersTable extends Migration
             $table->integer('created_by')->unsigned()->index();
             $table->foreign('created_by')->references('id')->on('users')
                 ->onUpdate('cascade')
-                ->onDelete('cascade'); 
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

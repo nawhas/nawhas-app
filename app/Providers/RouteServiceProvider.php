@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Reciter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use App\Reciter;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -29,7 +29,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('reciter', function ($value) {
             return Reciter::where('id', $value)->orWhere('slug', $value)->first();
         });
-
     }
 
     /**

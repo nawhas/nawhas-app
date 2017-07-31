@@ -20,7 +20,7 @@ class CreateLyricsTable extends Migration
             $table->foreign('track_id')->references('id')->on('tracks')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('language',10)->index();
+            $table->string('language', 10)->index();
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();
