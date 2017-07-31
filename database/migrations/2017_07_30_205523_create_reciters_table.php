@@ -16,6 +16,7 @@ class CreateRecitersTable extends Migration
         Schema::create('reciters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->integer('hits');
             $table->string('image_path');
