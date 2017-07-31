@@ -18,6 +18,7 @@ class CreateTracksTable extends Migration
             $table->string('name');
             $table->integer('albums_id');
             $table->string('file_path');
+            $table->string('mp3_link');
             $table->integer('hits');
             $table->integer('track_number');
             $table->smallInteger('status')->default(0);
