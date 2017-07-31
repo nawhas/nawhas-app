@@ -15,14 +15,21 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('reciter_id');
+            $table->string('name')->index();
+            $table->integer('reciter_id')->unsigned();
+            $table->foreign('reciter_id')->references('id')->on('reciters')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->integer('year');
             $table->integer('hits');
             $table->string('image_path');
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();
+            $table->integer('created_by')->unsigned()->index();
+            $table->foreign('created_by')->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
