@@ -16,7 +16,7 @@ class CreateAlbumsTable extends Migration
         Schema::create('albums', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('reciters_id');
+            $table->integer('reciter_id');
             $table->integer('year');
             $table->integer('hits');
             $table->string('image_path');

@@ -16,8 +16,8 @@ class CreateLyricsTable extends Migration
         Schema::create('lyrics', function (Blueprint $table) {
             $table->increments('id');
             $table->text('text');
-            $table->integer('tracks_id');
-            $table->integer('language_id');
+            $table->integer('track_id');
+            $table->string('language');
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();
