@@ -3,16 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Reciter;
+use App\Track;
 
 class Album extends Model
 {
-    public function Reciters()
+    public function reciters()
     {
-        return $this->belongsTo('App\Reciter', 'reciters_id', 'id');
+        return $this->belongsTo(Reciter::class, 'reciters_id', 'id');
     }
 
-    public function Tracks()
+    public function tracks()
     {
-        return $this->hasMany('App\Track', 'albums_id', 'id');
+        return $this->hasMany(Track::class, 'albums_id', 'id');
     }
 }
