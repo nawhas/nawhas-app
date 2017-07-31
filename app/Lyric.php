@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Track;
 
 class Lyric extends Model
 {
-    public function Tracks()
+    public function tracks()
     {
-        return $this->belongsTo('App\Track', 'tracks_id', 'id');
+        return $this->belongsTo(Track::class, 'tracks_id', 'id');
     }
 }
