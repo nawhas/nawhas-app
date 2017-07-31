@@ -79,5 +79,7 @@ class RecitersController extends Controller
     public function destroy(Reciter $reciter)
     {
         $reciter->destroy($reciter->id);
+
+        return response()->status(204);
     }
 }
