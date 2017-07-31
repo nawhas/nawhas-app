@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('Api')->prefix('reciters')->group(function () {
+    Route::get('/', 'RecitersController@index');
+});
