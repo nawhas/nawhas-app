@@ -9,6 +9,6 @@ class Lyric extends Model
 {
     public function tracks()
     {
-        return $this->belongsTo(Track::class, 'tracks_id', 'id');
+        return $this->belongsTo(Track::class, 'track_id', 'id');
     }
 }

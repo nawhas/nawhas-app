@@ -9,6 +9,6 @@ class Reciter extends Model
 {
     public function albums()
     {
-        return $this->hasMany(Album::class, 'reciters_id', 'id');
+        return $this->hasMany(Album::class, 'reciter_id', 'id');
     }
 }

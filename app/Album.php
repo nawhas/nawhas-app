@@ -10,11 +10,11 @@ class Album extends Model
 {
     public function reciters()
     {
-        return $this->belongsTo(Reciter::class, 'reciters_id', 'id');
+        return $this->belongsTo(Reciter::class, 'reciter_id', 'id');
     }
 
     public function tracks()
     {
-        return $this->hasMany(Track::class, 'albums_id', 'id');
+        return $this->hasMany(Track::class, 'album_id', 'id');
     }
 }

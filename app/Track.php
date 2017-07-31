@@ -10,11 +10,11 @@ class Track extends Model
 {
     public function albums()
     {
-        return $this->belongsTo(Album::class, 'albums_id', 'id');
+        return $this->belongsTo(Album::class, 'album_id', 'id');
     }
 
     public function lyrics()
     {
-        return $this->hasOne(Lyric::class, 'tracks_id', 'id');
+        return $this->hasOne(Lyric::class, 'track_id', 'id');
     }
 }
