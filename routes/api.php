@@ -18,9 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('Api')->prefix('reciters')->group(function () {
-    Route::delete('/{reciter}','RecitersController@destroy');
-    Route::post('/{reciter}','RecitersController@update');
+    Route::delete('/{reciter}', 'RecitersController@destroy');
+    Route::post('/{reciter}', 'RecitersController@update');
     Route::get('/{reciter}', 'RecitersController@show');
-    Route::post('/','RecitersController@store');
+    Route::post('/', 'RecitersController@store');
     Route::get('/', 'RecitersController@index');
 });
