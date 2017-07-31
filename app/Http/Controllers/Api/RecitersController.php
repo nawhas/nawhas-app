@@ -80,6 +80,6 @@ class RecitersController extends Controller
     {
         $reciter->destroy($reciter->id);
 
-        return response(null,204);
+        return response(null, 204);
     }
 }
