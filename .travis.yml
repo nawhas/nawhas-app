@@ -18,3 +18,13 @@ cache:
 install: composer install
 
 script: vendor/bin/phpunit
+
+deploy:
+  provider: script
+  script: curl -XGET $FORGE_URL
+  on:
+    branch: master
+
+env:
+  global:
+    - secure: "Zv9j/BBPHvUFrueejb8PKNIMk3HZDhbX7Z8XxW9x9FgzQy5OrKtlKO+GmRcn2roedKOrQKaXnOZqz8cwe4vSrSmU+pQfZT4JtdEa8JWi0fVI+NCyDccobQ/uuGpfCuNCjH4hlNNZCYDRDcU5Lm6QahV1t6kOOjozEYl96tj5juu5dcxlHMBCF1oH+CW6EgouON+x6xfC2jnq9DGveyFE7vu63ghgPaVrhWNaWVqsxqs9IcOFQNQzUEjc2ZBbqobaFEVF8f3XJT+UmjAl5LY9TX0eoVkxr8Pxfh+eWrbO16K0EGNMNGBhMKIIpclF1ES9b3/U/my2Hoz2PbVUCD52p2ak4rKG7EiuA9TAJiL2sjFTuRRMXgJvWD1gyaPoN0CxMapuejaj+d/VN4XOSJAPJWdSj98gxgo0rgRpTddQQPiFfDoXf1MXc5WtGjH32E8Gp/PPWhn0lbzrF5NbtxoCs75VxRkbOimugGdFbHoI3Wp9Y3EIBlgTpukrBq+axahiKffpmN/JN6EX+JucGi3MvbaufhbNnMxTM8pY5lVFoyDdZm8ydbLSKZu0uND8cPWezv9AB977Zb4Br3YJmOLyveQqLStOJE0nvWzZE44Y4yt5iFuurMJNYZ8S460ThgrVC4tNAjvq1WyXi6Vuh2W2BtO4fUoBKgkW4eQWoBOUL3U="
