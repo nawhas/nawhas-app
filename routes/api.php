@@ -20,16 +20,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function () {
     Route::prefix('/reciters')->group(function () {
         Route::prefix('/{reciter}')->group(function () {
+            //{reciter} routes
             Route::delete('/', 'RecitersController@destroy');
             Route::post('/', 'RecitersController@update');
             Route::get('/', 'RecitersController@show');
-            Route::get('/album', 'AlbumsController@index');
-            Route::post('/album', 'AlbumsController@store');
+            //end {reciter} routes
+            //album routes
+            Route::get('/albums', 'AlbumsController@index');
+            Route::post('/albums/add', 'AlbumsController@store');
             Route::prefix('/{album_year}')->group(function () {
                 Route::post('/update', 'AlbumsController@update');
                 Route::delete('/destroy', 'AlbumsController@destroy');
                 Route::get('/', 'AlbumsController@show');
             });
+            //end album routes
         });
         Route::post('/', 'RecitersController@store');
         Route::get('/', 'RecitersController@index');
