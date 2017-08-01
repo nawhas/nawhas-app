@@ -22,7 +22,8 @@ Route::namespace('Api')->group(function () {
         Route::prefix('/{reciter}')->group(function () {
             //{reciter} routes
             Route::delete('/', 'RecitersController@destroy');
-            Route::post('/', 'RecitersController@update');
+            Route::put('/{reciter}', 'RecitersController@update');
+            Route::patch('/', 'RecitersController@update');
             Route::get('/', 'RecitersController@show');
             //end {reciter} routes
             //album routes

@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Album;
-use App\Lyric;
 
 class Track extends Model
 {

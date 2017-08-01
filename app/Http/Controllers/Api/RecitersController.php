@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Reciter;
 
 class RecitersController extends Controller
 {
@@ -16,6 +16,7 @@ class RecitersController extends Controller
     public function index()
     {
         $reciters = Reciter::all();
+
         return $reciters;
     }
 
@@ -27,22 +28,23 @@ class RecitersController extends Controller
      */
     public function store(Request $request)
     {
-        $reciter = new Reciter;
-        $reciter->name = $request->name;
-        $reciter->slug = $request->slug;
-        $reciter->description = $request->description;
+        $reciter = new Reciter();
+        $reciter->name = $request->get('name');
+        $reciter->slug = str_slug($reciter->name);
+        $reciter->description = $request->get('description');
         $reciter->hits = 1;
-        $reciter->image_path = "Hello";
+        $reciter->image_path = $request->get('image_path');
         $reciter->created_by = 1;
         $reciter->save();
 
-        return $reciter;
+        return Reciter::find($reciter->id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Reciter $reciter
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Reciter $reciter)
@@ -53,17 +55,18 @@ class RecitersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Reciter $reciter
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Reciter $reciter)
     {
-        $reciter->name = $request->name;
-        $reciter->slug = $request->slug;
-        $reciter->description = $request->description;
+        $reciter->name = $request->get('name');
+        $reciter->slug = str_slug($reciter->name);
+        $reciter->description = $request->get('description');
         $reciter->hits = 1;
-        $reciter->image_path = "Hello";
+        $reciter->image_path = $request->get('image_path');
         $reciter->created_by = 1;
         $reciter->save();
 
@@ -73,7 +76,8 @@ class RecitersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param \App\Reciter $reciter
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Reciter $reciter)

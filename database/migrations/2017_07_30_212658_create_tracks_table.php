@@ -25,7 +25,7 @@ class CreateTracksTable extends Migration
             $table->string('mp3_link');
             $table->integer('hits');
             $table->integer('track_number');
-            $table->string('language',10);
+            $table->string('language', 10);
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();
