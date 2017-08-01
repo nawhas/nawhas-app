@@ -27,6 +27,7 @@ Route::namespace('Api')->group(function () {
             Route::post('/album', 'AlbumsController@store');
             Route::prefix('/{album_year}')->group(function () {
                 Route::post('/update', 'AlbumsController@update');
+                Route::delete('/destroy', 'AlbumsController@destroy');
                 Route::get('/', 'AlbumsController@show');
             });
         });
