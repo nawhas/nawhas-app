@@ -35,7 +35,6 @@ Route::namespace('Api')->group(function () {
             Route::patch('/', 'RecitersController@update');
             Route::get('/', 'RecitersController@show');
             //end {reciter} routes
-
         });
         Route::post('/', 'RecitersController@store');
         Route::get('/', 'RecitersController@index');
