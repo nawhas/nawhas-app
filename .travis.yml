@@ -24,6 +24,7 @@ deploy:
   script: curl -XGET $FORGE_URL
   on:
     branch: master
+    php: "7.1"
 
 env:
   global:
