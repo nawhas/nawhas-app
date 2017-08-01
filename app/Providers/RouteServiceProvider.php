@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Reciter;
-use App\Album;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -31,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
             return Reciter::where('id', $value)->orWhere('slug', $value)->first();
         });
 
-        Route::bind('album_year', function ($value, $route) {
+        Route::bind('album', function ($value, $route) {
             if ($reciter = $route->parameter('reciter')) {
                 return $reciter->albums()->where('year', $value)->firstOrFail();
             }

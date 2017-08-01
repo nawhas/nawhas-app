@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Reciter;
 use App\Album;
+use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
