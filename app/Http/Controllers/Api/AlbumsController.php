@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Reciter;
+use App\Album;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +16,9 @@ class AlbumsController extends Controller
      */
     public function index(Reciter $reciter)
     {
-        //
+        $album = Album::where('reciter_id', $reciter->id)->get();
+
+        return $album;
     }
 
     /**
@@ -23,9 +27,18 @@ class AlbumsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Reciter $reciter)
     {
-        //
+        $album = new Album;
+        $album->name = $request->get('name');
+        $album->reciter_id = $reciter->id;
+        $album->year = $request->get('year');
+        $album->hits = 1;
+        $album->image_path = 'hello';
+        $album->created_by = 1;
+        $album->save();
+
+        return Album::find($album->id);
     }
 
     /**
@@ -34,9 +47,9 @@ class AlbumsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Reciter $reciter, Album $album)
     {
-        //
+        return $album;
     }
 
     /**
@@ -46,9 +59,17 @@ class AlbumsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Reciter $reciter, Album $album)
     {
-        //
+        $album->name = $request->get('name');
+        $album->reciter_id = $reciter->id;
+        $album->year = $request->get('year');
+        $album->hits = 1;
+        $album->image_path = 'hello';
+        $album->created_by = 1;
+        $album->save();
+
+        return Album::find($album->id);
     }
 
     /**
@@ -57,8 +78,10 @@ class AlbumsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Reciter $reciter, Album $album)
     {
-        //
+        $album->destroy($album->id);
+
+        return response(null, 204);
     }
 }
