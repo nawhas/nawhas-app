@@ -20,21 +20,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function () {
     Route::prefix('/reciters')->group(function () {
         Route::prefix('/{reciter}')->group(function () {
+            //album routes
+            Route::prefix('/albums')->group(function () {
+                Route::post('/{album/update', 'AlbumsController@update');
+                Route::delete('/{album}/destroy', 'AlbumsController@destroy');
+                Route::get('/{album}', 'AlbumsController@show');
+                Route::post('/add', 'AlbumsController@store');
+                Route::get('/', 'AlbumsController@index');
+            });
+            //end album routes
             //{reciter} routes
             Route::delete('/', 'RecitersController@destroy');
-            Route::put('/{reciter}', 'RecitersController@update');
+            Route::put('/', 'RecitersController@update');
             Route::patch('/', 'RecitersController@update');
             Route::get('/', 'RecitersController@show');
             //end {reciter} routes
-            //album routes
-            Route::get('/albums', 'AlbumsController@index');
-            Route::post('/albums/add', 'AlbumsController@store');
-            Route::prefix('/{album_year}')->group(function () {
-                Route::post('/update', 'AlbumsController@update');
-                Route::delete('/destroy', 'AlbumsController@destroy');
-                Route::get('/', 'AlbumsController@show');
-            });
-            //end album routes
+
         });
         Route::post('/', 'RecitersController@store');
         Route::get('/', 'RecitersController@index');
