@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('reciter', function ($value) {
-            return Reciter::where('id', $value)->orWhere('slug', $value)->first();
+            return Reciter::where('id', $value)->orWhere('slug', $value)->firstOrFail();
         });
 
         Route::bind('album', function ($value, $route) {
