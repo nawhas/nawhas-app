@@ -34,7 +34,7 @@ class AlbumsController extends Controller
         $album->reciter_id = $reciter->id;
         $album->year = $request->get('year');
         $album->hits = 1;
-        $album->image_path = $request->get('image_path');
+        $album->image_path = $request->file('image_path');
         $album->created_by = 1;
         $album->save();
 

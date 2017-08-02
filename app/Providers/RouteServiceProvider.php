@@ -32,9 +32,11 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('album', function ($value, $route) {
-            throw new ModelNotFoundException();
             if ($reciter = $route->parameter('reciter')) {
                 return $reciter->albums()->where('year', $value)->firstOrFail();
+            }
+            else {
+                throw new ModelNotFoundException();
             }
         });
     }
