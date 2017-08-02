@@ -33,7 +33,7 @@ class RecitersController extends Controller
         $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
         $reciter->hits = 1;
-        $reciter->image_path = $request->get('image_path');
+        $reciter->image_path = $request->file('image_path');
         $reciter->created_by = 1;
         $reciter->save();
 
@@ -66,7 +66,7 @@ class RecitersController extends Controller
         $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
         $reciter->hits = 1;
-        $reciter->image_path = $request->get('image_path');
+        $reciter->image_path = $request->file('image_path');
         $reciter->created_by = 1;
         $reciter->save();
 
