@@ -27,7 +27,7 @@ Route::namespace('Api')->group(function () {
         Route::delete('/{reciter}', 'RecitersController@destroy');
     });
 
-// Album Routes
+    // Album Routes
     Route::prefix('reciters/{reciter}/albums')->group(function () {
         Route::get('/', 'AlbumsController@index');
         Route::post('/', 'AlbumsController@store');
