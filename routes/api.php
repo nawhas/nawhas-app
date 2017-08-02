@@ -37,8 +37,3 @@ Route::namespace('Api')->group(function () {
         Route::delete('/{album}', 'AlbumsController@destroy');
     });
 });
-/*
-Route::resource('photo', 'PhotoController', ['except' => [
-    'create', 'store', 'update', 'destroy'
-]]);
-*/
