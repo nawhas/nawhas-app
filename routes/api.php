@@ -18,25 +18,27 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('Api')->group(function () {
-    Route::prefix('/reciters')->group(function () {
-        Route::prefix('/{reciter}')->group(function () {
-            //album routes
-            Route::prefix('/albums')->group(function () {
-                Route::post('/{album/update', 'AlbumsController@update');
-                Route::delete('/{album}/destroy', 'AlbumsController@destroy');
-                Route::get('/{album}', 'AlbumsController@show');
-                Route::post('/add', 'AlbumsController@store');
-                Route::get('/', 'AlbumsController@index');
-            });
-            //end album routes
-            //{reciter} routes
-            Route::delete('/', 'RecitersController@destroy');
-            Route::put('/', 'RecitersController@update');
-            Route::patch('/', 'RecitersController@update');
-            Route::get('/', 'RecitersController@show');
-            //end {reciter} routes
-        });
-        Route::post('/', 'RecitersController@store');
+    Route::prefix('reciters')->group(function () {
         Route::get('/', 'RecitersController@index');
+        Route::post('/', 'RecitersController@store');
+        Route::get('/{reciter}', 'RecitersController@show');
+        Route::put('/{reciter}', 'RecitersController@update');
+        Route::patch('/{reciter}', 'RecitersController@update');
+        Route::delete('/{reciter}', 'RecitersController@destroy');
+    });
+
+// Album Routes
+    Route::prefix('reciters/{reciter}/albums')->group(function () {
+        Route::get('/', 'AlbumsController@index');
+        Route::post('/', 'AlbumsController@store');
+        Route::get('/{album}', 'AlbumsController@show');
+        Route::put('/{album}', 'AlbumsController@update');
+        Route::patch('/{album}', 'AlbumsController@update');
+        Route::delete('/{album}', 'AlbumsController@destroy');
     });
 });
+/*
+Route::resource('photo', 'PhotoController', ['except' => [
+    'create', 'store', 'update', 'destroy'
+]]);
+*/

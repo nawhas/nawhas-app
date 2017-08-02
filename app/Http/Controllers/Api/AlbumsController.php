@@ -62,7 +62,6 @@ class AlbumsController extends Controller
     public function update(Request $request, Reciter $reciter, Album $album)
     {
         $album->name = $request->get('name');
-        $album->reciter_id = $reciter->id;
         $album->year = $request->get('year');
         $album->hits = 1;
         $album->image_path = $request->get('image_path');
@@ -80,7 +79,7 @@ class AlbumsController extends Controller
      */
     public function destroy(Reciter $reciter, Album $album)
     {
-        $album->destroy($album->id);
+        $album->destroy();
 
         return response(null, 204);
     }

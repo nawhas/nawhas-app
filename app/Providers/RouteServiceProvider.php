@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Reciter;
+use \Illuminate\Database\Eloquent\ModelNotFoundException();
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -31,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('album', function ($value, $route) {
+            throw new ModelNotFoundException();
             if ($reciter = $route->parameter('reciter')) {
                 return $reciter->albums()->where('year', $value)->firstOrFail();
             }
