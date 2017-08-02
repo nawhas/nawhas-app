@@ -36,5 +36,4 @@ Route::namespace('Api')->group(function () {
         Route::patch('/{album}', 'AlbumsController@update');
         Route::delete('/{album}', 'AlbumsController@destroy');
     });
-    
 });
