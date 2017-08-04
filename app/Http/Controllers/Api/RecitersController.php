@@ -9,6 +9,14 @@ use App\Http\Controllers\Controller;
 class RecitersController extends Controller
 {
     /**
+     * RecitersController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except(['index', 'show']);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
