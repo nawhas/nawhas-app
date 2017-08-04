@@ -83,7 +83,7 @@ class TracksController extends Controller
      */
     public function destroy(Reciter $reciter, Album $album, Track $track)
     {
-        $track->destroy();
+        $track->destroy($track->id);
 
         return response(null, 204);
     }

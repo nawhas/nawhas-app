@@ -82,7 +82,7 @@ class RecitersController extends Controller
      */
     public function destroy(Reciter $reciter)
     {
-        $reciter->destroy();
+        $reciter->destroy($reciter->id);
 
         return response(null, 204);
     }
