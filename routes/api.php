@@ -36,4 +36,10 @@ Route::namespace('Api')->group(function () {
         Route::patch('/{album}', 'AlbumsController@update');
         Route::delete('/{album}', 'AlbumsController@destroy');
     });
+
+    Route::prefix('reciters/{reciter}/albums/{album}/tracks')->group(function () {
+        Route::get('/','TracksController@index');
+        Route::post('/','TracksController@store');
+        Route::get('/{track}', 'TracksController@show');
+    });
 });

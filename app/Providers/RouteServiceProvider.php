@@ -38,6 +38,14 @@ class RouteServiceProvider extends ServiceProvider
                 throw new ModelNotFoundException();
             }
         });
+
+        Route::bind('track', function ($value, $route) {
+            if ($album = $route->parameter('album')) {
+                return $album->tracks()->where('id', $value)->orWhere('slug', $value)->firstOrFail();
+            } else {
+                throw new ModelNotFoundException();
+            }
+        });
     }
 
     /**
