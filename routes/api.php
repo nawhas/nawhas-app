@@ -41,5 +41,8 @@ Route::namespace('Api')->group(function () {
         Route::get('/','TracksController@index');
         Route::post('/','TracksController@store');
         Route::get('/{track}', 'TracksController@show');
+        Route::put('/{track}', 'TracksController@update');
+        Route::patch('/{track}', 'TracksController@update');
+        Route::delete('/{track}', 'TracksController@destroy');
     });
 });

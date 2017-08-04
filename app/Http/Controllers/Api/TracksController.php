@@ -56,26 +56,23 @@ class TracksController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Reciter $reciter, Album $album, Track $track)
     {
-        //
+        $track->name = $request->get('name');
+        $track->slug = str_slug($request->get('name'));
+        $track->mp3_link = $request->get('mp3_link');
+        $track->file_path =$request->get('file_path');
+        $track->track_number = $request->get('track_number');
+        $track->language = 'English';
+        $track->save();
+
+        return Track::find($track->id);
     }
 
     /**
@@ -84,8 +81,10 @@ class TracksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Reciter $reciter, Album $album, Track $track)
     {
-        //
+        $track->destroy();
+
+        return response(null, 204);
     }
 }
