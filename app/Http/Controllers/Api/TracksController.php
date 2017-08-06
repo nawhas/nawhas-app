@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Reciter;
 use App\Album;
 use App\Track;
+use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,13 +28,14 @@ class TracksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Reciter $reciter, Album $album) {
+    public function store(Request $request, Reciter $reciter, Album $album)
+    {
         $track = new Track;
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
         $track->album_id = $album->id;
         $track->mp3_link = $request->get('mp3_link');
-        $track->file_path =$request->get('file_path');
+        $track->file_path = $request->get('file_path');
         $track->hits = 1;
         $track->track_number = $request->get('track_number');
         $track->language = 'English';
@@ -67,7 +68,7 @@ class TracksController extends Controller
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
         $track->mp3_link = $request->get('mp3_link');
-        $track->file_path =$request->get('file_path');
+        $track->file_path = $request->get('file_path');
         $track->track_number = $request->get('track_number');
         $track->language = 'English';
         $track->save();

@@ -38,8 +38,8 @@ Route::namespace('Api')->group(function () {
     });
 
     Route::prefix('reciters/{reciter}/albums/{album}/tracks')->group(function () {
-        Route::get('/','TracksController@index');
-        Route::post('/','TracksController@store');
+        Route::get('/', 'TracksController@index');
+        Route::post('/', 'TracksController@store');
         Route::get('/{track}', 'TracksController@show');
         Route::put('/{track}', 'TracksController@update');
         Route::patch('/{track}', 'TracksController@update');
