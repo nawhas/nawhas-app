@@ -87,7 +87,7 @@ class AlbumsController extends Controller
      */
     public function destroy(Reciter $reciter, Album $album)
     {
-        $album->destroy();
+        $album->destroy($album->id);
 
         return response(null, 204);
     }
