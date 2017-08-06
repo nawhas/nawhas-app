@@ -38,7 +38,7 @@ class TracksController extends Controller
         $track->file_path = $request->get('file_path');
         $track->hits = 1;
         $track->track_number = $request->get('track_number');
-        $track->language = 'English';
+        $track->language = 'en';
         $track->created_by = 1;
         $track->save();
 
@@ -70,7 +70,7 @@ class TracksController extends Controller
         $track->mp3_link = $request->get('mp3_link');
         $track->file_path = $request->get('file_path');
         $track->track_number = $request->get('track_number');
-        $track->language = 'English';
+        $track->language = 'en';
         $track->save();
 
         return Track::find($track->id);
