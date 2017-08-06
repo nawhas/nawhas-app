@@ -3,8 +3,10 @@
 namespace Tests\Feature\Api;
 
 use App\Reciter;
+use App\User;
 use Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class RecitersApiTest extends TestCase
@@ -52,6 +54,9 @@ class RecitersApiTest extends TestCase
      */
     public function testCreateReciter()
     {
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+
         $faker = Faker\Factory::create();
 
         $this->postJson('/api/reciters/', $data = [
@@ -76,6 +81,9 @@ class RecitersApiTest extends TestCase
      */
     public function testUpdateReciter()
     {
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+
         /** @var Reciter $reciter */
         $reciter = factory(Reciter::class)->create();
         $faker = Faker\Factory::create();
@@ -103,9 +111,11 @@ class RecitersApiTest extends TestCase
      */
     public function testDeleteReciter()
     {
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+
         /** @var Reciter $reciter */
         $reciter = factory(Reciter::class)->create();
-        $faker = Faker\Factory::create();
 
         $this->delete('/api/reciters/' . $reciter->id)
             ->assertStatus(204);

@@ -15,7 +15,9 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-install: composer install
+install:
+  - composer install
+  - php artisan passport:keys && chmod 600 storage/oauth-private.key storage/oauth-public.key
 
 script: vendor/bin/phpunit
 

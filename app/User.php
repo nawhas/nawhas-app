@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Laravel\Passport\HasApiToken;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
