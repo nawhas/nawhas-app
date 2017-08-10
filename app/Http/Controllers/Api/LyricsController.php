@@ -19,6 +19,7 @@ class LyricsController extends Controller
     public function index(Reciter $reciter, Album $album, Track $track)
     {
         $lyric = $track->lyrics()->first();
+        
         return $lyric;
     }
 
