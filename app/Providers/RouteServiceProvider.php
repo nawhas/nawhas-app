@@ -46,6 +46,14 @@ class RouteServiceProvider extends ServiceProvider
                 throw new ModelNotFoundException();
             }
         });
+
+        Route::bind('lyric', function ($value, $route) {
+            if ($track = $route->parameter('track')) {
+                return $track->lyrics()->where('id', $value)->firstOrFail();
+            } else {
+                throw new ModelNotFoundException();
+            }
+        });
     }
 
     /**
