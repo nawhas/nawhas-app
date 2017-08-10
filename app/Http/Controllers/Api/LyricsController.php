@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Album;
 use App\Lyric;
 use App\Track;
-use App\Album;
 use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
