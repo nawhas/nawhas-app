@@ -34,6 +34,7 @@ class RecitersTransformer extends TransformerAbstract
             'first_name' => $first_name,
             'middle_name' => $middle_name,
             'last_name' => $last_name,
+            'slug' => $reciter->slug,
             'image' => $reciter->image_path,
             'created_at' => $reciter->created_at->format('l jS \\of F Y h:i:s A'),
         ];
