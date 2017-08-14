@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Reciter;
+use App\Transformers\RecitersTransformer;
+use League\Fractal\Manager;
+use League\Fractal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,9 +26,15 @@ class RecitersController extends Controller
      */
     public function index()
     {
+        $fractal = new Manager();
+
         $reciters = Reciter::all();
 
-        return $reciters;
+        $resource = new Fractal\Resource\Collection($reciters, new RecitersTransformer);
+
+        $array = $fractal->createData($resource)->toArray();
+
+        return $fractal->createData($resource)->toJson();
     }
 
     /**
