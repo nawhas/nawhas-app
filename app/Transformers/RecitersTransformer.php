@@ -19,6 +19,7 @@ class RecitersTransformer extends TransformerAbstract
             'slug' => $reciter->slug,
             'image' => $reciter->image_path,
             'created_at' => $reciter->created_at->toDateString(),
+            'updated_at' => $reciter->updated_at->toDateString(),
         ];
     }
 }
