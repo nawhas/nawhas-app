@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\TransformsResponses;
 use App\Reciter;
-use League\Fractal;
-use League\Fractal\Manager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\RecitersTransformer;
+use App\Http\Controllers\TransformsResponses;
 
 class RecitersController extends Controller
 {
