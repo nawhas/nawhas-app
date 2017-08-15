@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers\Api;
+
 use App\Reciter;
-use App\Transformers\RecitersTransformer;
-use League\Fractal\Manager;
 use League\Fractal;
+use League\Fractal\Manager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Transformers\RecitersTransformer;
+
 class RecitersController extends Controller
 {
     /**
@@ -15,6 +18,7 @@ class RecitersController extends Controller
     {
         $this->middleware('auth:api')->except(['index', 'show']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,8 +30,10 @@ class RecitersController extends Controller
         $reciters = Reciter::all();
         $resource = new Fractal\Resource\Collection($reciters, new RecitersTransformer);
         $array = $fractal->createData($resource)->toArray();
+
         return $fractal->createData($resource)->toJson();
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -44,8 +50,10 @@ class RecitersController extends Controller
         $reciter->image_path = $request->get('image_path');
         $reciter->created_by = 1;
         $reciter->save();
+
         return Reciter::find($reciter->id);
     }
+
     /**
      * Display the specified resource.
      *
@@ -57,6 +65,7 @@ class RecitersController extends Controller
     {
         return $reciter;
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -74,8 +83,10 @@ class RecitersController extends Controller
         $reciter->image_path = $request->get('image_path');
         $reciter->created_by = 1;
         $reciter->save();
+
         return $reciter;
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -86,6 +97,7 @@ class RecitersController extends Controller
     public function destroy(Reciter $reciter)
     {
         $reciter->destroy($reciter->id);
+
         return response(null, 204);
     }
 }

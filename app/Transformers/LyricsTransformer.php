@@ -2,7 +2,6 @@
 
 namespace App\Transformers;
 
-
 use App\Lyric;
 use League\Fractal\TransformerAbstract;
 

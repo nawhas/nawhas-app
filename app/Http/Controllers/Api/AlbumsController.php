@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Album;
-use App\Http\Controllers\TransformsResponses;
 use App\Reciter;
-use App\Transformers\AlbumsTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Transformers\AlbumsTransformer;
+use App\Http\Controllers\TransformsResponses;
 
 class AlbumsController extends Controller
 {
@@ -32,6 +32,7 @@ class AlbumsController extends Controller
     public function index(Reciter $reciter)
     {
         $album = Album::where('reciter_id', $reciter->id)->get();
+
         return $this->respondWithCollection($album);
     }
 

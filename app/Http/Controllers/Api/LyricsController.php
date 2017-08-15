@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Album;
-use App\Http\Controllers\TransformsResponses;
 use App\Lyric;
 use App\Track;
 use App\Reciter;
-use App\Transformers\LyricsTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Transformers\LyricsTransformer;
+use App\Http\Controllers\TransformsResponses;
 
 class LyricsController extends Controller
 {
