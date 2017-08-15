@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\TransformsResponses;
 use App\Reciter;
 use League\Fractal;
 use League\Fractal\Manager;
@@ -11,12 +12,16 @@ use App\Transformers\RecitersTransformer;
 
 class RecitersController extends Controller
 {
+    use TransformsResponses;
+
     /**
      * RecitersController constructor.
+     * @param RecitersTransformer $transformer
      */
-    public function __construct()
+    public function __construct(RecitersTransformer $transformer)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
+        $this->transformer = $transformer;
     }
 
     /**
@@ -26,12 +31,9 @@ class RecitersController extends Controller
      */
     public function index()
     {
-        $fractal = new Manager();
         $reciters = Reciter::all();
-        $resource = new Fractal\Resource\Collection($reciters, new RecitersTransformer);
-        $array = $fractal->createData($resource)->toArray();
 
-        return $fractal->createData($resource)->toJson();
+        return $this->respondWithCollection($reciters);
     }
 
     /**
@@ -51,7 +53,7 @@ class RecitersController extends Controller
         $reciter->created_by = 1;
         $reciter->save();
 
-        return Reciter::find($reciter->id);
+        return $this->respondWithItem(Reciter::find($reciter->id));
     }
 
     /**
@@ -63,7 +65,7 @@ class RecitersController extends Controller
      */
     public function show(Reciter $reciter)
     {
-        return $reciter;
+        return $this->respondWithItem($reciter);
     }
 
     /**
@@ -84,7 +86,7 @@ class RecitersController extends Controller
         $reciter->created_by = 1;
         $reciter->save();
 
-        return $reciter;
+        return $this->respondWithItem(Reciter::find($reciter->id));
     }
 
     /**
