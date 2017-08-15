@@ -3,29 +3,47 @@
 namespace App\Http\Controllers\Api;
 
 use App\Album;
+use App\Http\Controllers\TransformsResponses;
 use App\Track;
 use App\Reciter;
+use App\Transformers\TracksTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TracksController extends Controller
 {
+    use TransformsResponses;
+
+    /**
+     * TracksController constructor.
+     * @param TracksTransformer $transformer
+     */
+    public function __construct(TracksTransformer $transformer)
+    {
+        $this->middleware('auth:api')->except(['index', 'show']);
+        $this->transformer = $transformer;
+    }
+
     /**
      * Display a listing of the resource.
      *
+     * @param Reciter $reciter
+     * @param Album $album
      * @return \Illuminate\Http\Response
      */
     public function index(Reciter $reciter, Album $album)
     {
         $tracks = Track::where('album_id', $album->id)->get();
 
-        return $tracks;
+        return $this->respondWithCollection($tracks);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param Reciter $reciter
+     * @param Album $album
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Reciter $reciter, Album $album)
@@ -42,26 +60,32 @@ class TracksController extends Controller
         $track->created_by = 1;
         $track->save();
 
-        return Track::find($track->id);
+        return $this->respondWithItem(Track::find($track->id));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Reciter $reciter
+     * @param Album $album
+     * @param Track $track
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function show(Reciter $reciter, Album $album, Track $track)
     {
-        return $track;
+        return $this->respondWithItem($track);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param Reciter $reciter
+     * @param Album $album
+     * @param Track $track
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function update(Request $request, Reciter $reciter, Album $album, Track $track)
     {
@@ -73,14 +97,17 @@ class TracksController extends Controller
         $track->language = 'en';
         $track->save();
 
-        return Track::find($track->id);
+        return $this->respondWithItem(Track::find($track->id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Reciter $reciter
+     * @param Album $album
+     * @param Track $track
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function destroy(Reciter $reciter, Album $album, Track $track)
     {

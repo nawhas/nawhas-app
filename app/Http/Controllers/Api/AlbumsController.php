@@ -3,30 +3,36 @@
 namespace App\Http\Controllers\Api;
 
 use App\Album;
+use App\Http\Controllers\TransformsResponses;
 use App\Reciter;
+use App\Transformers\AlbumsTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AlbumsController extends Controller
 {
+    use TransformsResponses;
+
     /**
      * AlbumsController constructor.
+     * @param AlbumsTransformer $transformer
      */
-    public function __construct()
+    public function __construct(AlbumsTransformer $transformer)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
+        $this->transformer = $transformer;
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param Reciter $reciter
      * @return \Illuminate\Http\Response
      */
     public function index(Reciter $reciter)
     {
         $album = Album::where('reciter_id', $reciter->id)->get();
-
-        return $album;
+        return $this->respondWithCollection($album);
     }
 
     /**
@@ -46,26 +52,30 @@ class AlbumsController extends Controller
         $album->created_by = 1;
         $album->save();
 
-        return Album::find($album->id);
+        return $this->respondWithItem(Album::find($album->id));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Reciter $reciter
+     * @param Album $album
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function show(Reciter $reciter, Album $album)
     {
-        return $album;
+        return $this->respondWithItem($album);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param Reciter $reciter
+     * @param Album $album
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function update(Request $request, Reciter $reciter, Album $album)
     {
@@ -76,14 +86,16 @@ class AlbumsController extends Controller
         $album->created_by = 1;
         $album->save();
 
-        return Album::find($album->id);
+        return $this->respondWithItem(Album::find($album->id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Reciter $reciter
+     * @param Album $album
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function destroy(Reciter $reciter, Album $album)
     {
