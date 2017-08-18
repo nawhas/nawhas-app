@@ -31,7 +31,7 @@ class RecitersController extends Controller
     {
         $reciters = Reciter::all();
 
-        return $this->respondWithCollection($reciters);
+        return $this->respondWithPaginator(Paginator $paginator, $reciters);
     }
 
     /**
