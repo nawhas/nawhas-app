@@ -66,7 +66,7 @@ class RecitersApiTest extends TestCase
         ])->assertJsonFragment([
             'name' => $data['name'],
             'description' => $data['description'],
-            'image' => $data['image_path'],
+            'image' => $data['image'],
         ]);
     }
 
@@ -95,7 +95,7 @@ class RecitersApiTest extends TestCase
             'id' => $reciter->id,
             'name' => $data['name'],
             'description' => $data['description'],
-            'image' => $data['image_path'],
+            'image' => $data['image'],
         ]);
     }
 
