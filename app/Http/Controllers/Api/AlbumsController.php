@@ -37,6 +37,7 @@ class AlbumsController extends Controller
 
         if ($request->get('per_page')) {
             $paginate = $query->paginate($request->get('per_page', 10));
+
             return $this->respondWithPaginator($paginate);
         }
 
