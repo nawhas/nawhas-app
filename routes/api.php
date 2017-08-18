@@ -45,4 +45,13 @@ Route::namespace('Api')->group(function () {
         Route::patch('/{track}', 'TracksController@update');
         Route::delete('/{track}', 'TracksController@destroy');
     });
+
+    Route::prefix('reciters/{reciter}/albums/{album}/tracks/{track}/lyrics')->group(function () {
+        Route::get('/', 'LyricsController@index');
+        Route::post('/', 'LyricsController@store');
+        Route::get('/{lyric}', 'LyricsController@show');
+        Route::put('/{lyric}', 'LyricsController@update');
+        Route::patch('/{lyric}', 'LyricsController@update');
+        Route::delete('/{lyric}', 'LyricsController@destroy');
+    });
 });
