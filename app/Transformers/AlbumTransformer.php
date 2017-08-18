@@ -5,7 +5,7 @@ namespace App\Transformers;
 use App\Album;
 use League\Fractal\TransformerAbstract;
 
-class AlbumsTransformer extends TransformerAbstract
+class AlbumTransformer extends TransformerAbstract
 {
     /**
      * @param Album $album

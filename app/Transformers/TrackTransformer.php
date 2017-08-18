@@ -5,7 +5,7 @@ namespace App\Transformers;
 use App\Track;
 use League\Fractal\TransformerAbstract;
 
-class TracksTransformer extends TransformerAbstract
+class TrackTransformer extends TransformerAbstract
 {
     /**
      * @param Track $track

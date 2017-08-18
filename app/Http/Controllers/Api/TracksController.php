@@ -7,7 +7,7 @@ use App\Track;
 use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Transformers\TracksTransformer;
+use App\Transformers\TrackTransformer;
 use App\Http\Controllers\TransformsResponses;
 
 class TracksController extends Controller
@@ -16,9 +16,9 @@ class TracksController extends Controller
 
     /**
      * TracksController constructor.
-     * @param TracksTransformer $transformer
+     * @param TrackTransformer $transformer
      */
-    public function __construct(TracksTransformer $transformer)
+    public function __construct(TrackTransformer $transformer)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;

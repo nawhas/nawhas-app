@@ -8,14 +8,18 @@ use App\Track;
 use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Transformers\LyricsTransformer;
+use App\Transformers\LyricTransformer;
 use App\Http\Controllers\TransformsResponses;
 
 class LyricsController extends Controller
 {
     use TransformsResponses;
 
-    public function __construct(LyricsTransformer $transformer)
+    /**
+     * LyricsController constructor.
+     * @param LyricTransformer $transformer
+     */
+    public function __construct(LyricTransformer $transformer)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;

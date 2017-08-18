@@ -6,7 +6,7 @@ use App\Album;
 use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Transformers\AlbumsTransformer;
+use App\Transformers\AlbumTransformer;
 use App\Http\Controllers\TransformsResponses;
 
 class AlbumsController extends Controller
@@ -15,9 +15,9 @@ class AlbumsController extends Controller
 
     /**
      * AlbumsController constructor.
-     * @param AlbumsTransformer $transformer
+     * @param AlbumTransformer $transformer
      */
-    public function __construct(AlbumsTransformer $transformer)
+    public function __construct(AlbumTransformer $transformer)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;
@@ -39,7 +39,8 @@ class AlbumsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param Reciter $reciter
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Reciter $reciter)

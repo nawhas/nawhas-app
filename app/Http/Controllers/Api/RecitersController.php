@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Reciter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Transformers\RecitersTransformer;
+use App\Transformers\ReciterTransformer;
 use App\Http\Controllers\TransformsResponses;
 
 class RecitersController extends Controller
@@ -14,9 +14,9 @@ class RecitersController extends Controller
 
     /**
      * RecitersController constructor.
-     * @param RecitersTransformer $transformer
+     * @param ReciterTransformer $transformer
      */
-    public function __construct(RecitersTransformer $transformer)
+    public function __construct(ReciterTransformer $transformer)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;
