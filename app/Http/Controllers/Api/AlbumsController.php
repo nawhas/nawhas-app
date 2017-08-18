@@ -26,14 +26,21 @@ class AlbumsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @param Reciter $reciter
      * @return \Illuminate\Http\Response
      */
-    public function index(Reciter $reciter)
+    public function index(Request $request, Reciter $reciter)
     {
-        $album = Album::where('reciter_id', $reciter->id)->get();
+        $query = Album::query()
+            ->where('reciter_id', $reciter->id);
 
-        return $this->respondWithCollection($album);
+        if ($request->get('per_page')) {
+            $paginate = $query->paginate($request->get('per_page', 10));
+            return $this->respondWithPaginator($paginate);
+        }
+
+        return $this->respondWithCollection($query->get());
     }
 
     /**

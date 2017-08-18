@@ -27,15 +27,22 @@ class TracksController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @param Reciter $reciter
      * @param Album $album
      * @return \Illuminate\Http\Response
      */
-    public function index(Reciter $reciter, Album $album)
+    public function index(Request $request, Reciter $reciter, Album $album)
     {
-        $tracks = Track::where('album_id', $album->id)->get();
+        $query = Track::query()
+            ->where('album_id', $album->id);
 
-        return $this->respondWithCollection($tracks);
+        if ($request->get('per_page')) {
+            $paginate = $query->paginate($request->get('per_page', 10));
+            return $this->respondWithPaginator($paginate);
+        }
+
+        return $this->respondWithCollection($query->get());
     }
 
     /**

@@ -25,13 +25,19 @@ class RecitersController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reciters = Reciter::all();
+        $query = Reciter::query();
 
-        return $this->respondWithPaginator(Paginator $paginator, $reciters);
+        if ($request->get('per_page')) {
+            $paginate = $query->paginate($request->get('per_page', 10));
+            return $this->respondWithPaginator($paginate);
+        }
+
+        return $this->respondWithCollection($query->get());
     }
 
     /**
