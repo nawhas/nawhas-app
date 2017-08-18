@@ -19,7 +19,7 @@ class TracksTransformer extends TransformerAbstract
             'album_id' => $track->album_id,
             'name' => $track->name,
             'file' => $track->file_path,
-            'link' => $track->mp3_link,
+            'audio_file_url' => $track->mp3_link,
             'track_number' => $track->track_number,
             'language' => $track->language,
             'created_at' => $track->created_at->toDateString(),
