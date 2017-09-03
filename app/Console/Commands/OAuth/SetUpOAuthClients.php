@@ -58,6 +58,7 @@ class SetUpOAuthClients extends Command
 
         if (!env('FRONTEND_URL')) {
             $this->error('`FRONTEND_URL` env variable is missing or undefined.');
+
             return;
         }
 
