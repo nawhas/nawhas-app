@@ -5,7 +5,7 @@ risky: false
 disabled:
   - concat_without_spaces
   - binary_operator_spaces
-  - alpha_ordered_imports
+  - length_ordered_imports
 
 enabled:
   - concat_with_spaces
