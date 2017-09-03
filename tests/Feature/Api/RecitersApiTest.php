@@ -22,12 +22,12 @@ class RecitersApiTest extends TestCase
     {
         /** @var Reciter $reciter */
         $reciter = factory(Reciter::class)->create();
-
         $this->get('/v1/reciters/' . $reciter->id)->assertStatus(200)->assertJsonStructure([
-            'id', 'name', 'slug', 'description', 'hits',
-            'image_path', 'status', 'moderated_at', 'moderated_by',
-            'created_by', 'created_at', 'updated_at',
-        ])->assertJson($reciter->toArray());
+            'data' => [
+                'id', 'name', 'slug', 'description', 'image_path',
+                'created_by', 'created_at', 'updated_at',
+            ]
+        ]);
     }
 
     /**
@@ -41,10 +41,11 @@ class RecitersApiTest extends TestCase
         $reciter = factory(Reciter::class)->create();
 
         $this->get('/v1/reciters/' . $reciter->slug)->assertStatus(200)->assertJsonStructure([
-            'id', 'name', 'slug', 'description', 'hits',
-            'image_path', 'status', 'moderated_at', 'moderated_by',
-            'created_by', 'created_at', 'updated_at',
-        ])->assertJson($reciter->toArray());
+            'data' => [
+                'id', 'name', 'slug', 'description', 'image_path',
+                'created_by', 'created_at', 'updated_at',
+            ]
+        ]);
     }
 
     /**
@@ -64,13 +65,10 @@ class RecitersApiTest extends TestCase
             'description' => $faker->paragraph,
             'image_path' => $faker->imageUrl(640, 480, 'people'),
         ])->assertStatus(200)->assertJsonStructure([
-            'id', 'name', 'slug', 'description', 'hits',
-            'image_path', 'status', 'moderated_at', 'moderated_by',
-            'created_by', 'created_at', 'updated_at',
-        ])->assertJsonFragment([
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'image_path' => $data['image_path'],
+            'data' => [
+                'id', 'name', 'slug', 'description', 'image_path',
+                'created_by', 'created_at', 'updated_at',
+            ]
         ]);
     }
 
@@ -93,14 +91,10 @@ class RecitersApiTest extends TestCase
             'description' => $faker->paragraph,
             'image_path' => $faker->imageUrl(640, 480, 'people'),
         ])->assertStatus(200)->assertJsonStructure([
-            'id', 'name', 'slug', 'description', 'hits',
-            'image_path', 'status', 'moderated_at', 'moderated_by',
-            'created_by', 'created_at', 'updated_at',
-        ])->assertJsonFragment([
-            'id' => $reciter->id,
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'image_path' => $data['image_path'],
+            'data' => [
+                'id', 'name', 'slug', 'description', 'image_path',
+                'created_by', 'created_at', 'updated_at',
+            ]
         ]);
     }
 
