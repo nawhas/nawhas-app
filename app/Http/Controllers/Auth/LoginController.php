@@ -20,7 +20,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-
     /**
      * Log the user out of the application.
      *

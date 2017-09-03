@@ -87,7 +87,7 @@ class SetUpOAuthClients extends Command
         // Production Client
         $clients[] = $this->clients->createPasswordGrantClient(
             null,
-            "Nawhas.com",
+            'Nawhas.com',
             config('app.frontend_url') . '/auth/callback'
         );
 
@@ -95,7 +95,7 @@ class SetUpOAuthClients extends Command
             // Dev Server Client
             $clients[] = $this->clients->createPasswordGrantClient(
                 null,
-                "Nawhas.com",
+                'Nawhas.com',
                 'http://localhost:8080/auth/callback'
             );
         }
