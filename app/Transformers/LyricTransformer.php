@@ -18,8 +18,8 @@ class LyricTransformer extends TransformerAbstract
             'track_id' => $lyric->track_id,
             'text' => $lyric->text,
             'language' => $lyric->language,
-            'created_at' => $lyric->created_at->toDateString(),
-            'updated_at' => $lyric->updated_at->toDateString(),
+            'created_at' => $lyric->created_at->toDateTimeString(),
+            'updated_at' => $lyric->updated_at->toDateTimeString(),
         ];
     }
 }

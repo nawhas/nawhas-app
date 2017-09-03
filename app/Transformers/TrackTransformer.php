@@ -18,12 +18,12 @@ class TrackTransformer extends TransformerAbstract
             'slug' => $track->slug,
             'album_id' => $track->album_id,
             'name' => $track->name,
-            'file' => $track->file_path,
-            'audio_file_url' => $track->mp3_link,
+            'file_path' => $track->file_path,
+            'mp3_link' => $track->mp3_link,
             'track_number' => $track->track_number,
             'language' => $track->language,
-            'created_at' => $track->created_at->toDateString(),
-            'updated_at' => $track->updated_at->toDateString(),
+            'created_at' => $track->created_at->toDateTimeString(),
+            'updated_at' => $track->updated_at->toDateTimeString(),
         ];
     }
 }

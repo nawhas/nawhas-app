@@ -18,9 +18,9 @@ class AlbumTransformer extends TransformerAbstract
             'reciter_id' => $album->reciter_id,
             'name' => $album->name,
             'year' => $album->year,
-            'image' => $album->image_path,
-            'created_at' => $album->created_at->toDateString(),
-            'updated_at' => $album->updated_at->toDateString(),
+            'image_path' => $album->image_path,
+            'created_at' => $album->created_at->toDateTimeString(),
+            'updated_at' => $album->updated_at->toDateTimeString(),
         ];
     }
 }
