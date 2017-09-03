@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Reciter;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Transformers\ReciterTransformer;
 use App\Http\Controllers\TransformsResponses;

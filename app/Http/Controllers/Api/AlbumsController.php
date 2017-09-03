@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Album;
 use App\Reciter;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Transformers\AlbumTransformer;
 use App\Http\Controllers\TransformsResponses;
-use Illuminate\Http\Response;
 
 class AlbumsController extends Controller
 {
