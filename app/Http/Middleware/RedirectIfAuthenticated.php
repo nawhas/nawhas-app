@@ -2,11 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Auth\RedirectsToFrontend;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
+    use RedirectsToFrontend;
+
     /**
      * Handle an incoming request.
      *
@@ -18,7 +21,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            return redirect($this->redirectTo());
         }
 
         return $next($request);
