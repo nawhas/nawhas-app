@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Album;
 use App\Reciter;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\AlbumTransformer;
 use App\Http\Controllers\TransformsResponses;
+use Illuminate\Http\Response;
 
 class AlbumsController extends Controller
 {
@@ -28,15 +30,16 @@ class AlbumsController extends Controller
      *
      * @param Request $request
      * @param Reciter $reciter
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request, Reciter $reciter)
+    public function index(Request $request, Reciter $reciter) : JsonResponse
     {
-        $query = Album::query()
-            ->where('reciter_id', $reciter->id);
+        $query = Album::query()->where('reciter_id', $reciter->id);
 
         if ($request->get('per_page')) {
-            $paginate = $query->paginate($request->get('per_page', 10));
+            $paginate = $query->paginate(
+                $request->get('per_page', config('api.pagination.size'))
+            );
 
             return $this->respondWithPaginator($paginate);
         }
@@ -49,11 +52,12 @@ class AlbumsController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param Reciter $reciter
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Reciter $reciter)
+    public function store(Request $request, Reciter $reciter) : JsonResponse
     {
-        $album = new Album;
+        $album = new Album();
         $album->name = $request->get('name');
         $album->reciter_id = $reciter->id;
         $album->year = $request->get('year');
@@ -70,10 +74,10 @@ class AlbumsController extends Controller
      *
      * @param Reciter $reciter
      * @param Album $album
-     * @return \Illuminate\Http\Response
-     * @internal param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Reciter $reciter, Album $album)
+    public function show(Reciter $reciter, Album $album) : JsonResponse
     {
         return $this->respondWithItem($album);
     }
@@ -81,13 +85,13 @@ class AlbumsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @param Reciter $reciter
      * @param Album $album
-     * @return \Illuminate\Http\Response
-     * @internal param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter, Album $album)
+    public function update(Request $request, Reciter $reciter, Album $album) : JsonResponse
     {
         $album->name = $request->get('name');
         $album->year = $request->get('year');
@@ -104,12 +108,12 @@ class AlbumsController extends Controller
      *
      * @param Reciter $reciter
      * @param Album $album
+     *
      * @return \Illuminate\Http\Response
-     * @internal param int $id
      */
     public function destroy(Reciter $reciter, Album $album)
     {
-        $album->destroy($album->id);
+        $album->delete();
 
         return response(null, 204);
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Album;
 use App\Track;
 use App\Reciter;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\TrackTransformer;
@@ -30,15 +31,16 @@ class TracksController extends Controller
      * @param Request $request
      * @param Reciter $reciter
      * @param Album $album
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request, Reciter $reciter, Album $album)
+    public function index(Request $request, Reciter $reciter, Album $album) : JsonResponse
     {
         $query = Track::query()
             ->where('album_id', $album->id);
 
         if ($request->get('per_page')) {
-            $paginate = $query->paginate($request->get('per_page', 10));
+            $paginate = $query->paginate($request->get('per_page', config('api.pagination.size')));
 
             return $this->respondWithPaginator($paginate);
         }
@@ -52,11 +54,12 @@ class TracksController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param Reciter $reciter
      * @param Album $album
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Reciter $reciter, Album $album)
+    public function store(Request $request, Reciter $reciter, Album $album) : JsonResponse
     {
-        $track = new Track;
+        $track = new Track();
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
         $track->album_id = $album->id;
@@ -77,10 +80,10 @@ class TracksController extends Controller
      * @param Reciter $reciter
      * @param Album $album
      * @param Track $track
-     * @return \Illuminate\Http\Response
-     * @internal param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Reciter $reciter, Album $album, Track $track)
+    public function show(Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
         return $this->respondWithItem($track);
     }
@@ -92,10 +95,10 @@ class TracksController extends Controller
      * @param Reciter $reciter
      * @param Album $album
      * @param Track $track
-     * @return \Illuminate\Http\Response
-     * @internal param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter, Album $album, Track $track)
+    public function update(Request $request, Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
@@ -114,12 +117,12 @@ class TracksController extends Controller
      * @param Reciter $reciter
      * @param Album $album
      * @param Track $track
+     *
      * @return \Illuminate\Http\Response
-     * @internal param int $id
      */
     public function destroy(Reciter $reciter, Album $album, Track $track)
     {
-        $track->destroy($track->id);
+        $track->delete();
 
         return response(null, 204);
     }

@@ -6,6 +6,7 @@ use App\Album;
 use App\Lyric;
 use App\Track;
 use App\Reciter;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\LyricTransformer;
@@ -31,9 +32,10 @@ class LyricsController extends Controller
      * @param Reciter $reciter
      * @param Album $album
      * @param Track $track
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Reciter $reciter, Album $album, Track $track)
+    public function index(Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
         $lyric = $track->lyrics()->first();
 
@@ -47,11 +49,12 @@ class LyricsController extends Controller
      * @param Reciter $reciter
      * @param Album $album
      * @param Track $track
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Reciter $reciter, Album $album, Track $track)
+    public function store(Request $request, Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
-        $lyric = new Lyric;
+        $lyric = new Lyric();
         $lyric->track_id = $track->id;
         $lyric->text = $request->get('text');
         $lyric->language = $request->get('language');
@@ -68,10 +71,10 @@ class LyricsController extends Controller
      * @param Album $album
      * @param Track $track
      * @param Lyric $lyric
-     * @return \Illuminate\Http\Response
-     * @internal param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Reciter $reciter, Album $album, Track $track, Lyric $lyric)
+    public function show(Reciter $reciter, Album $album, Track $track, Lyric $lyric) : JsonResponse
     {
         return $this->respondWithItem($lyric);
     }
@@ -84,10 +87,10 @@ class LyricsController extends Controller
      * @param Album $album
      * @param Track $track
      * @param Lyric $lyric
-     * @return \Illuminate\Http\Response
-     * @internal param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter, Album $album, Track $track, Lyric $lyric)
+    public function update(Request $request, Reciter $reciter, Album $album, Track $track, Lyric $lyric) : JsonResponse
     {
         $lyric->text = $request->get('text');
         $lyric->language = $request->get('language');
@@ -103,12 +106,12 @@ class LyricsController extends Controller
      * @param Album $album
      * @param Track $track
      * @param Lyric $lyric
+     *
      * @return \Illuminate\Http\Response
-     * @internal param int $id
      */
     public function destroy(Reciter $reciter, Album $album, Track $track, Lyric $lyric)
     {
-        $lyric->destroy($lyric->id);
+        $lyric->delete();
 
         return response(null, 204);
     }
