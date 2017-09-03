@@ -19,7 +19,7 @@ class CreateRecitersTable extends Migration
             $table->string('slug')->unique()->index();
             $table->text('description');
             $table->integer('hits');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();

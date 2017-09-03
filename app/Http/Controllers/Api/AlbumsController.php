@@ -5,39 +5,59 @@ namespace App\Http\Controllers\Api;
 use App\Album;
 use App\Reciter;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Transformers\AlbumTransformer;
+use App\Http\Controllers\TransformsResponses;
 
 class AlbumsController extends Controller
 {
+    use TransformsResponses;
+
     /**
      * AlbumsController constructor.
+     * @param AlbumTransformer $transformer
      */
-    public function __construct()
+    public function __construct(AlbumTransformer $transformer)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
+        $this->transformer = $transformer;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Reciter $reciter
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Reciter $reciter)
+    public function index(Request $request, Reciter $reciter) : JsonResponse
     {
-        $album = Album::where('reciter_id', $reciter->id)->get();
+        $query = Album::query()->where('reciter_id', $reciter->id);
 
-        return $album;
+        if ($request->get('per_page')) {
+            $paginate = $query->paginate(
+                $request->get('per_page', config('api.pagination.size'))
+            );
+
+            return $this->respondWithPaginator($paginate);
+        }
+
+        return $this->respondWithCollection($query->get());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param Reciter $reciter
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Reciter $reciter)
+    public function store(Request $request, Reciter $reciter) : JsonResponse
     {
-        $album = new Album;
+        $album = new Album();
         $album->name = $request->get('name');
         $album->reciter_id = $reciter->id;
         $album->year = $request->get('year');
@@ -46,28 +66,32 @@ class AlbumsController extends Controller
         $album->created_by = 1;
         $album->save();
 
-        return Album::find($album->id);
+        return $this->respondWithItem(Album::find($album->id));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Reciter $reciter
+     * @param Album $album
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Reciter $reciter, Album $album)
+    public function show(Reciter $reciter, Album $album) : JsonResponse
     {
-        return $album;
+        return $this->respondWithItem($album);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Reciter $reciter
+     * @param Album $album
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter, Album $album)
+    public function update(Request $request, Reciter $reciter, Album $album) : JsonResponse
     {
         $album->name = $request->get('name');
         $album->year = $request->get('year');
@@ -76,18 +100,20 @@ class AlbumsController extends Controller
         $album->created_by = 1;
         $album->save();
 
-        return Album::find($album->id);
+        return $this->respondWithItem(Album::find($album->id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Reciter $reciter
+     * @param Album $album
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Reciter $reciter, Album $album)
     {
-        $album->destroy($album->id);
+        $album->delete();
 
         return response(null, 204);
     }

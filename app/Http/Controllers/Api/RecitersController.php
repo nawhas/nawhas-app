@@ -4,37 +4,55 @@ namespace App\Http\Controllers\Api;
 
 use App\Reciter;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Transformers\ReciterTransformer;
+use App\Http\Controllers\TransformsResponses;
 
 class RecitersController extends Controller
 {
+    use TransformsResponses;
+
     /**
      * RecitersController constructor.
+     * @param ReciterTransformer $transformer
      */
-    public function __construct()
+    public function __construct(ReciterTransformer $transformer)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
+        $this->transformer = $transformer;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request) : JsonResponse
     {
-        $reciters = Reciter::all();
+        $query = Reciter::query();
 
-        return $reciters;
+        if ($request->get('per_page')) {
+            $paginate = $query->paginate(
+                $request->get('per_page', config('api.pagination.size'))
+            );
+
+            return $this->respondWithPaginator($paginate);
+        }
+
+        return $this->respondWithCollection($query->get());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request) : JsonResponse
     {
         $reciter = new Reciter();
         $reciter->name = $request->get('name');
@@ -45,7 +63,7 @@ class RecitersController extends Controller
         $reciter->created_by = 1;
         $reciter->save();
 
-        return Reciter::find($reciter->id);
+        return $this->respondWithItem(Reciter::find($reciter->id));
     }
 
     /**
@@ -53,11 +71,11 @@ class RecitersController extends Controller
      *
      * @param Reciter $reciter
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Reciter $reciter)
+    public function show(Reciter $reciter) : JsonResponse
     {
-        return $reciter;
+        return $this->respondWithItem($reciter);
     }
 
     /**
@@ -66,9 +84,9 @@ class RecitersController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  Reciter $reciter
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter)
+    public function update(Request $request, Reciter $reciter) : JsonResponse
     {
         $reciter->name = $request->get('name');
         $reciter->slug = str_slug($reciter->name);
@@ -78,7 +96,7 @@ class RecitersController extends Controller
         $reciter->created_by = 1;
         $reciter->save();
 
-        return $reciter;
+        return $this->respondWithItem(Reciter::find($reciter->id));
     }
 
     /**
@@ -90,7 +108,7 @@ class RecitersController extends Controller
      */
     public function destroy(Reciter $reciter)
     {
-        $reciter->destroy($reciter->id);
+        $reciter->delete();
 
         return response(null, 204);
     }

@@ -52,6 +52,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'frontend_url' => rtrim(env('FRONTEND_URL', 'http://nawhas.app'), '/'),
 
     /*
     |--------------------------------------------------------------------------
