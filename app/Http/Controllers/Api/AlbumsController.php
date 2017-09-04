@@ -44,7 +44,7 @@ class AlbumsController extends Controller
             return $this->respondWithPaginator($paginate);
         }
 
-        return $this->respondWithCollection($query->get());
+        return $this->respondWithCollection($query->popularLast(3)->get());
     }
 
     /**
@@ -79,6 +79,7 @@ class AlbumsController extends Controller
      */
     public function show(Reciter $reciter, Album $album) : JsonResponse
     {
+        $album->visit();
         return $this->respondWithItem($album);
     }
 

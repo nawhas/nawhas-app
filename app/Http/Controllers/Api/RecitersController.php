@@ -42,7 +42,7 @@ class RecitersController extends Controller
             return $this->respondWithPaginator($paginate);
         }
 
-        return $this->respondWithCollection($query->get());
+        return $this->respondWithCollection($query->popularLast(3)->get());
     }
 
     /**
@@ -75,6 +75,7 @@ class RecitersController extends Controller
      */
     public function show(Reciter $reciter) : JsonResponse
     {
+        $reciter->visit();
         return $this->respondWithItem($reciter);
     }
 

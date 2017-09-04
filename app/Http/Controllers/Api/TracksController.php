@@ -45,7 +45,7 @@ class TracksController extends Controller
             return $this->respondWithPaginator($paginate);
         }
 
-        return $this->respondWithCollection($query->get());
+        return $this->respondWithCollection($query->popularLast(3)->get());
     }
 
     /**
@@ -85,6 +85,7 @@ class TracksController extends Controller
      */
     public function show(Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
+        $track->visit();
         return $this->respondWithItem($track);
     }
 

@@ -2,12 +2,13 @@
 
 namespace App;
 
+use \JordanMiguel\LaravelPopular\Traits\Visitable;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Track extends Model
 {
-    use Searchable;
+    use Visitable, Searchable;
 
     public function albums()
     {
