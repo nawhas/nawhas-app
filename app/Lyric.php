@@ -2,13 +2,12 @@
 
 namespace App;
 
-use JordanMiguel\LaravelPopular\Traits\Visitable;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Lyric extends Model
 {
-    use Visitable, Searchable;
+    use Searchable;
 
     public function tracks()
     {
