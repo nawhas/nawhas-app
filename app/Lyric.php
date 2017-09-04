@@ -2,7 +2,7 @@
 
 namespace App;
 
-use \JordanMiguel\LaravelPopular\Traits\Visitable;
+use JordanMiguel\LaravelPopular\Traits\Visitable;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 

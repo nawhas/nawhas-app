@@ -80,6 +80,7 @@ class AlbumsController extends Controller
     public function show(Reciter $reciter, Album $album) : JsonResponse
     {
         $album->visit();
+
         return $this->respondWithItem($album);
     }
 
