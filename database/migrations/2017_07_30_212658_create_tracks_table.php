@@ -21,9 +21,7 @@ class CreateTracksTable extends Migration
             $table->foreign('album_id')->references('id')->on('albums')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('file_path');
-            $table->string('mp3_link');
-            $table->integer('hits');
+            $table->string('audio');
             $table->integer('track_number');
             $table->string('language', 10);
             $table->smallInteger('status')->default(0);

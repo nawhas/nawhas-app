@@ -21,7 +21,6 @@ class CreateAlbumsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->integer('year');
-            $table->integer('hits');
             $table->string('image_path');
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
