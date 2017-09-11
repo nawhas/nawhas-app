@@ -55,7 +55,7 @@ class RecitersController extends Controller
      */
     public function store(Request $request) : JsonResponse
     {
-        $photoName = time().'.'.$request->image_path->getClientOriginalExtension();
+        $photoName = time() . '.' . $request->image_path->getClientOriginalExtension();
         $request->image_path->move(public_path('reciters'), $photoName);
         $reciter = new Reciter();
         $reciter->name = $request->get('name');
@@ -114,7 +114,8 @@ class RecitersController extends Controller
         return response(null, 204);
     }
 
-    public function test() {
+    public function test()
+    {
         return Request::all();
     }
 }
