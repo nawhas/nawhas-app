@@ -74,48 +74,59 @@ class ImportDataCommand extends Command
         } else {
             $this->comment('reciters were found');
         }
-        foreach ($reciterContent as $d) {
-            $reciterBio = $dir . '/' . $d . '/bio.txt';
-            if(!file_exists($reciterBio)) {
-                $this->error('bio.txt does not exist for ' . $d);
-                return;
-            } else {
-                $this->comment('successfully found bio.txt');
-            }
-            if(!$reciterBio = file_get_contents($reciterBio, true)) {
-                $this->error('An error occurred when trying to read bio.txt for ' . $d);
-                return;
-            } else {
-                $this->comment('Successfully imported bio from txt');
-            }
-
+        foreach ($reciterContent as $reciterName) {
+            // set variables
+            $reciterSlug = str_slug($reciterName);
+            $reciterDir = $dir . '/' . $reciterName;
+            $reciterBio = $reciterDir . '/bio.txt';
             $reciterAvatarFile = '';
-            $reciterAvaterPNG = $dir . '/' . $d . '/avatar.png';
-            $reciterAvaterJPEG = $dir . '/' . $d . '/avatar.jpg';
+            $reciterAvaterPNG = $reciterDir . '/avatar.png';
+            $reciterAvaterJPEG = $reciterDir . '/avatar.jpg';
 
-            if(file_exists($reciterAvaterJPEG)) {
-                $reciterAvatarFile = 'avatar.jpg';
-            } else if(file_exists($reciterAvaterPNG)) {
-                $reciterAvatarFile = 'avatar.png';
-            }
-            if(!$reciterAvatarFile) {
-                $this->error($d . ' does not have an avatar.png or avatar.jpg file');
-                return;
-            } else {
-                $this->comment('Avatar found for ' . $d);
-            }
+            // check if the reciter does not exist in db
+            if(!$reciter = Reciter::where('slug', $reciterSlug)->first()) {
+                // check if bio file exists
+                if(!file_exists($reciterBio)) {
+                    $this->error('bio.txt does not exist for ' . $reciterName);
+                    return;
+                } else {
+                    $this->comment('successfully found bio.txt');
+                }
+                if(!$reciterBio = file_get_contents($reciterBio, true)) {
+                    $this->error('An error occurred when trying to read bio.txt for ' . $reciterName);
+                    return;
+                } else {
+                    $this->comment('Successfully imported bio from txt');
+                }
 
-            $reciter = new Reciter;
-            $reciter->name = $d;
-            $reciter->slug = str_slug($d);
-            $reciter->description = $reciterBio;
-            $reciter->image_path = $reciterAvatarFile;
-            $reciter->created_by = 1;
-            if(!$reciter->save()) {
-                $this->error('Reciter did not save');
-                return;
+                // check if avatar exists
+                if(file_exists($reciterAvaterJPEG)) {
+                    $reciterAvatarFile = 'avatar.jpg';
+                } else if(file_exists($reciterAvaterPNG)) {
+                    $reciterAvatarFile = 'avatar.png';
+                }
+                if(!$reciterAvatarFile) {
+                    $this->error($reciterName . ' does not have an avatar.png or avatar.jpg file');
+                    return;
+                } else {
+                    $this->comment('Avatar found for ' . $reciterName);
+                }
+
+                // create reciter
+                $reciter = new Reciter;
+                $reciter->name = $reciterName;
+                $reciter->slug = $reciterSlug;
+                $reciter->description = $reciterBio;
+                $reciter->image_path = $reciterAvatarFile;
+                $reciter->created_by = 1;
+                if(!$reciter->save()) {
+                    $this->error('Reciter did not save');
+                    return;
+                } else {
+                    $this->comment('Reciter ' . $reciterName . ' has been created');
+                }
             } else {
-                $this->comment('Reciter ' . $d . ' has been created');
+                $this->comment($reciterName . ' already exists');
             }
         }
 
