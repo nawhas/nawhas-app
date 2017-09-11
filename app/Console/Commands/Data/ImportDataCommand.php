@@ -150,8 +150,8 @@ class ImportDataCommand extends Command
                 list($albumHijriMonth, $albumHijriYear) = explode(' ', $albumHijri);
 
                 //check if album exists
-                if(!$reciter->albums->where('year', $albumYear)->first()) {
-                    $albumDir = $albumsDir . '/' . $albumContent;
+                $albumDir = $albumsDir . '/' . $albumContent;
+                if(!$album = $reciter->albums->where('year', $albumYear)->first()) {
                     $albumArtworkFile = '';
                     $albumArtworkPNG = $albumDir . '/artwork.png';
                     $albumArtworkJPEG = $albumDir . '/artwork.jpg';
@@ -180,7 +180,45 @@ class ImportDataCommand extends Command
                 }
 
                 // tracks section
-                
+                $this->comment('checking for prerequisites for tracks');
+                $this->comment('Scanning in ' . $reciter->name . '(s) directory for tracks in album ' . $albumYear);
+                $tracksDir = $albumDir . '/tracks';
+                $tracksContent = scandir($tracksDir);
+                unset($tracksContent[0]);
+                unset($tracksContent[1]);
+                $tracksContent = array_values($tracksContent);
+                if(!count($tracksContent) > 0) {
+                    $this->error("There are no tracks for album " . $albumYear . ' for reciter ' . $reciterName);
+                    return;
+                } else {
+                    $this->comment('tracks were found');
+                }
+                foreach ($tracksContent as $trackContent) {
+                    list($trackNumber, $trackName) = explode(' - ', $trackContent);
+                    $trackDir = $tracksDir . '/' . $trackContent;
+                    $trackSlug = str_slug($trackName);
+                    if(!$track = Track::where('slug', $trackSlug)->first()){
+                        if(!file_exists($trackDir . '/audio.mp3')) {
+                            $this->error('no audio file');
+                            return;
+                        }
+                        $track = new Track();
+                        $track->name = $trackName;
+                        $track->slug = str_slug($trackName);
+                        $track->album_id = $album->id;
+                        $track->audio = 'audio.mp3';
+                        $track->track_number = $trackNumber;
+                        $track->language = 'en';
+                        $track->created_by = 1;
+                        $track->save();
+                        $this->comment('Track created successfully');
+                    } else {
+                        $this->comment('Track already exists');
+                    }
+
+                    // lyrics
+                    
+                }
             }
         }
     }
