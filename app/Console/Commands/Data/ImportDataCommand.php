@@ -128,8 +128,60 @@ class ImportDataCommand extends Command
             } else {
                 $this->comment($reciterName . ' already exists');
             }
-        }
 
-        $this->info('Data imported successfully.');
+            //albums section
+            $this->comment('checking for prerequisites for albums');
+            $this->comment('Scanning in ' . $reciter->name . '(s) directory for albums');
+            $albumsDir = $reciterDir . '/albums';
+            $albumsContent = scandir($albumsDir);
+            unset($albumsContent[0]);
+            unset($albumsContent[1]);
+            $albumsContent = array_values($albumsContent);
+            if(!count($albumsContent) > 0) {
+                $this->error("There are no albums for " . $reciterName);
+                return;
+            } else {
+                $this->comment('albums were found');
+            }
+
+            // loop through albums
+            foreach ($albumsContent as $albumContent) {
+                list($albumYear, $albumHijri, $albumName) = explode(' - ', $albumContent);
+                list($albumHijriMonth, $albumHijriYear) = explode(' ', $albumHijri);
+
+                //check if album exists
+                if(!$reciter->albums->where('year', $albumYear)->first()) {
+                    $albumDir = $albumsDir . '/' . $albumContent;
+                    $albumArtworkFile = '';
+                    $albumArtworkPNG = $albumDir . '/artwork.png';
+                    $albumArtworkJPEG = $albumDir . '/artwork.jpg';
+                    //check if artwork exists
+                    if(file_exists($albumArtworkPNG)) {
+                        $albumArtworkFile = 'artwork.jpg';
+                    } else if(file_exists($albumArtworkJPEG)) {
+                        $albumArtworkFile = 'artwork.png';
+                    }
+                    if(!$albumArtworkFile) {
+                        $this->error($reciterName . ' does not have an artowrk.png or artwork.jpg for year' . $albumYear);
+                        return;
+                    } else {
+                        $this->comment('Avatar found for ' . $reciterName . ' Album '. $albumYear);
+                    }
+                    // create Album
+                    $album = new Album;
+                    $album->reciter_id = $reciter->id;
+                    $album->name = $albumName;
+                    $album->year = $albumYear;
+                    $album->image_path = $albumArtworkFile;
+                    $album->created_by = 1;
+                    $album->save();
+                } else {
+                    $this->comment($albumYear .' Album Found');
+                }
+
+                // tracks section
+                
+            }
+        }
     }
 }
