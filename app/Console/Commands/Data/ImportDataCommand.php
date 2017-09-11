@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Data;
 
+use App\Lyric;
 use File;
 use App\Reciter;
 use App\Album;
@@ -41,17 +42,6 @@ class ImportDataCommand extends Command
      */
     public function handle()
     {
-        /*
-         * /reciters
-       -> /Nadeem Sarwar
-            -> avatar.jpg
-            -> bio.txt
-            -> /2013 - Muharram 1436
-                  -> artwork.jpg
-                  -> /01 - Allah Allah Min Raasil Ya Hussain
-                          -> lyrics.txt
-                          -> audio.mp3
-        */
         $this->comment('This command will help you import data for nawhas.com');
 
         $this->comment('Verifying installation prerequisites...');
@@ -139,7 +129,6 @@ class ImportDataCommand extends Command
             $albumsContent = array_values($albumsContent);
             if(!count($albumsContent) > 0) {
                 $this->error("There are no albums for " . $reciterName);
-                return;
             } else {
                 $this->comment('albums were found');
             }
@@ -189,7 +178,6 @@ class ImportDataCommand extends Command
                 $tracksContent = array_values($tracksContent);
                 if(!count($tracksContent) > 0) {
                     $this->error("There are no tracks for album " . $albumYear . ' for reciter ' . $reciterName);
-                    return;
                 } else {
                     $this->comment('tracks were found');
                 }
@@ -217,7 +205,29 @@ class ImportDataCommand extends Command
                     }
 
                     // lyrics
-                    
+                    $this->comment('checking for prerequisites for lyrics');
+                    if(!$lyric = $track->lyrics) {
+                        if(!file_exists($trackDir . '/lyrics.txt')) {
+                            $this->error('Lyric does not exist for reciter ' . $reciterName . ' Album ' . $albumYear . ' Track ' . $trackName);
+                        } else {
+                            $lyricFile = $trackDir . '/lyrics.txt';
+                            if(!$lyricFile = file_get_contents($lyricFile, true)) {
+                                $this->error('An error occurred when trying to read lyrics.txt for');
+                                return;
+                            } else {
+                                $this->comment('Successfully imported bio from txt');
+                            }
+                            $lyric = new Lyric();
+                            $lyric->track_id = $track->id;
+                            $lyric->text = $lyricFile;
+                            $lyric->language = 'en';
+                            $lyric->created_by = 1;
+                            $lyric->save();
+                            $this->comment('Successfully created lyric');
+                        }
+                    }else {
+                        $this->comment('Lyric already exists');
+                    }
                 }
             }
         }
