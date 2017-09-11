@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/uploads
 /storage/*.key
 /vendor
 /.idea
@@ -11,4 +12,3 @@ npm-debug.log
 yarn-error.log
 .env
 /database/seeds/*
-/public/uploads/*
