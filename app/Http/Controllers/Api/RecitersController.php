@@ -20,7 +20,7 @@ class RecitersController extends Controller
      */
     public function __construct(ReciterTransformer $transformer)
     {
-        $this->middleware('auth:api')->except(['index', 'show']);
+        $this->middleware('auth:api')->except(['index', 'show', 'store']);
         $this->transformer = $transformer;
     }
 
@@ -55,12 +55,14 @@ class RecitersController extends Controller
      */
     public function store(Request $request) : JsonResponse
     {
+        $photoName = time().'.'.$request->image_path->getClientOriginalExtension();
+        $request->image_path->move(public_path('reciters'), $photoName);
         $reciter = new Reciter();
         $reciter->name = $request->get('name');
         $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
         $reciter->image_path = $request->get('image_path');
-        $reciter->created_by = Auth::user()->id;
+        $reciter->created_by = 1;
         $reciter->save();
 
         return $this->respondWithItem(Reciter::find($reciter->id));
@@ -110,5 +112,9 @@ class RecitersController extends Controller
         $reciter->delete();
 
         return response(null, 204);
+    }
+
+    public function test() {
+        return Request::all();
     }
 }
