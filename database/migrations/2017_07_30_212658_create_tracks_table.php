@@ -22,6 +22,7 @@ class CreateTracksTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('audio');
+            $table->string('video');
             $table->integer('track_number');
             $table->string('language', 10);
             $table->smallInteger('status')->default(0);
