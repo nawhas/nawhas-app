@@ -806,16 +806,16 @@
         },
         {
             "name": "jordanmiguel/laravel-popular",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jordanmiguel/laravel-popular.git",
-                "reference": "17b60f28f5f3d2b27e74ec1f7aa6c052c2535871"
+                "reference": "f50ccb92b3c8a066f01b62e3a616890ea44d9cd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jordanmiguel/laravel-popular/zipball/17b60f28f5f3d2b27e74ec1f7aa6c052c2535871",
-                "reference": "17b60f28f5f3d2b27e74ec1f7aa6c052c2535871",
+                "url": "https://api.github.com/repos/jordanmiguel/laravel-popular/zipball/f50ccb92b3c8a066f01b62e3a616890ea44d9cd2",
+                "reference": "f50ccb92b3c8a066f01b62e3a616890ea44d9cd2",
                 "shasum": ""
             },
             "require": {
@@ -859,22 +859,10 @@
                 "laravel-popular",
                 "popular"
             ],
-            "time": "2017-09-03T11:19:42+00:00"
+            "time": "2017-09-07T21:54:17+00:00"
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
-            "version": "v5.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "65da63c8ad4836e2bcddcff75becd49c71c5041c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/65da63c8ad4836e2bcddcff75becd49c71c5041c",
-                "reference": "65da63c8ad4836e2bcddcff75becd49c71c5041c",
-=======
             "version": "v5.5.3",
             "source": {
                 "type": "git",
@@ -885,7 +873,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/779a98d3b2ebed2128db1a668dcc10a65c9b01be",
                 "reference": "779a98d3b2ebed2128db1a668dcc10a65c9b01be",
->>>>>>> master
                 "shasum": ""
             },
             "require": {
@@ -1004,11 +991,7 @@
                 "framework",
                 "laravel"
             ],
-<<<<<<< HEAD
-            "time": "2017-09-04T14:09:04+00:00"
-=======
             "time": "2017-09-07T13:50:21+00:00"
->>>>>>> master
         },
         {
             "name": "laravel/passport",
