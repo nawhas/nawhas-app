@@ -66,7 +66,7 @@ class TracksController extends Controller
         $track->album_id = $album->id;
         $track->video = $request->get('video');
         $track->audio = $request->get('audio');
-        $track->track_number = $request->get('track_number');
+        $track->number = $request->get('number');
         $track->language = 'en';
         $track->created_by = Auth::user()->id;
         $track->save();
@@ -104,7 +104,7 @@ class TracksController extends Controller
         $track->slug = str_slug($request->get('name'));
         $track->video = $request->get('video');
         $track->audio = $request->get('audio');
-        $track->track_number = $request->get('track_number');
+        $track->number = $request->get('number');
         $track->language = 'en';
         $track->save();
 

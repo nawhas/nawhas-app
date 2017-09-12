@@ -20,7 +20,7 @@ class TrackTransformer extends TransformerAbstract
             'name' => $track->name,
             'audio' => $track->audio,
             'video' => $track->video,
-            'track_number' => $track->track_number,
+            'number' => $track->number,
             'language' => $track->language,
             'created_at' => $track->created_at->toDateTimeString(),
             'updated_at' => $track->updated_at->toDateTimeString(),
