@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use App\Album;
 use App\Track;
 use App\Reciter;
@@ -67,7 +68,7 @@ class TracksController extends Controller
         $track->audio = $request->get('audio');
         $track->track_number = $request->get('track_number');
         $track->language = 'en';
-        $track->created_by = 1;
+        $track->created_by = Auth::user()->id;
         $track->save();
 
         return $this->respondWithItem(Track::find($track->id));

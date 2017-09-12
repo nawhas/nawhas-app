@@ -60,7 +60,7 @@ class RecitersController extends Controller
         $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
         $reciter->image_path = $request->get('image_path');
-        $reciter->created_by = 1;
+        $reciter->created_by = Auth::user()->id;
         $reciter->save();
 
         return $this->respondWithItem(Reciter::find($reciter->id));
@@ -110,10 +110,5 @@ class RecitersController extends Controller
         $reciter->delete();
 
         return response(null, 204);
-    }
-
-    public function test()
-    {
-        return Request::all();
     }
 }
