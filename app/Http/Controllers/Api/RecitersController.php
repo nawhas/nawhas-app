@@ -20,7 +20,7 @@ class RecitersController extends Controller
      */
     public function __construct(ReciterTransformer $transformer)
     {
-        $this->middleware('auth:api')->except(['index', 'show', 'store']);
+        $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;
     }
 
