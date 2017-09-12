@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use App\Album;
 use App\Track;
 use App\Reciter;
@@ -63,12 +64,11 @@ class TracksController extends Controller
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
         $track->album_id = $album->id;
-        $track->mp3_link = $request->get('mp3_link');
-        $track->file_path = $request->get('file_path');
-        $track->hits = 1;
-        $track->track_number = $request->get('track_number');
+        $track->video = $request->get('video');
+        $track->audio = $request->get('audio');
+        $track->number = $request->get('number');
         $track->language = 'en';
-        $track->created_by = 1;
+        $track->created_by = Auth::user()->id;
         $track->save();
 
         return $this->respondWithItem(Track::find($track->id));
@@ -104,9 +104,9 @@ class TracksController extends Controller
     {
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
-        $track->mp3_link = $request->get('mp3_link');
-        $track->file_path = $request->get('file_path');
-        $track->track_number = $request->get('track_number');
+        $track->video = $request->get('video');
+        $track->audio = $request->get('audio');
+        $track->number = $request->get('number');
         $track->language = 'en';
         $track->save();
 

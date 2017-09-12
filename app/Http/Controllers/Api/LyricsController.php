@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use App\Album;
 use App\Lyric;
 use App\Track;
@@ -58,7 +59,7 @@ class LyricsController extends Controller
         $lyric->track_id = $track->id;
         $lyric->text = $request->get('text');
         $lyric->language = $request->get('language');
-        $lyric->created_by = 1;
+        $lyric->created_by = Auth::user()->id;
         $lyric->save();
 
         return $this->respondWithItem(Lyric::find($lyric->id));
