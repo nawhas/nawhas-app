@@ -63,9 +63,8 @@ class TracksController extends Controller
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
         $track->album_id = $album->id;
-        $track->mp3_link = $request->get('mp3_link');
-        $track->file_path = $request->get('file_path');
-        $track->hits = 1;
+        $track->video = $request->get('video');
+        $track->audio = $request->get('audio');
         $track->track_number = $request->get('track_number');
         $track->language = 'en';
         $track->created_by = 1;
@@ -102,8 +101,8 @@ class TracksController extends Controller
     {
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
-        $track->mp3_link = $request->get('mp3_link');
-        $track->file_path = $request->get('file_path');
+        $track->video = $request->get('video');
+        $track->audio = $request->get('audio');
         $track->track_number = $request->get('track_number');
         $track->language = 'en';
         $track->save();
