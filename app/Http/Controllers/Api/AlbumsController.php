@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use App\Album;
 use App\Reciter;
 use Illuminate\Http\Request;
@@ -61,9 +62,10 @@ class AlbumsController extends Controller
         $album->name = $request->get('name');
         $album->reciter_id = $reciter->id;
         $album->year = $request->get('year');
-        $album->hits = 1;
+        $album->hijri_year = $request->get('hijri_year');
+        $album->hijri_month = $request->get('hijri_month');
         $album->image_path = $request->get('image_path');
-        $album->created_by = 1;
+        $album->created_by = Auth::user()->id;
         $album->save();
 
         return $this->respondWithItem(Album::find($album->id));
@@ -95,9 +97,10 @@ class AlbumsController extends Controller
     {
         $album->name = $request->get('name');
         $album->year = $request->get('year');
-        $album->hits = 1;
+        $album->hijri_year = $request->get('hijri_year');
+        $album->hijri_month = $request->get('hijri_month');
         $album->image_path = $request->get('image_path');
-        $album->created_by = 1;
+        $album->created_by = Auth::user()->id;
         $album->save();
 
         return $this->respondWithItem(Album::find($album->id));
