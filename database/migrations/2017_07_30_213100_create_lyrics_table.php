@@ -15,7 +15,7 @@ class CreateLyricsTable extends Migration
     {
         Schema::create('lyrics', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('text');
+            $table->longText('text');
             $table->integer('track_id')->unsigned();
             $table->foreign('track_id')->references('id')->on('tracks')
                 ->onUpdate('cascade')
