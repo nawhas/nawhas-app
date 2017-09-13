@@ -56,6 +56,8 @@ Route::namespace('Api')->group(function () {
     });
 
     Route::prefix('popular')->group(function () {
-        Route::get('/reciters', 'LyricsController@index');
+        Route::get('/reciters', 'popularController@reciters');
+        Route::get('/albums', 'popularController@albums');
+        Route::get('/tracks', 'popularController@tracks');
     });
 });
