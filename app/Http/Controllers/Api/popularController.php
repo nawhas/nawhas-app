@@ -8,12 +8,12 @@ use App\Http\Controllers\Controller;
 
 class popularController extends Controller
 {
-    static function reciters()
+    static function reciters(Request $request)
     {
-        if (isset($_GET['period'])){
-            $period = $_GET['period'];
+        if ($request->get('period')) {
+            $period = $request->get('period');
         } else {
-            $period = 3;
+            $period = 30;
         }
         return Reciter::popularLast($period)->get();
     }
