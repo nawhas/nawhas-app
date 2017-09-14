@@ -1,7 +1,5 @@
 /node_modules
 /public/hot
-/public/storage
-public/uploads
 /storage/*.key
 /vendor
 /.idea
@@ -13,3 +11,4 @@ yarn-error.log
 .env
 .phpstorm.meta.php
 _ide_helper.php
+.DS_Store

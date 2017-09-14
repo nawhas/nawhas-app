@@ -100,7 +100,7 @@ class ImportDataCommand extends Command
 
             if (count($avatar) > 0) {
                 $avatarFilePath = array_first($avatar);
-                $uploadedAvatarPath = Storage::putFile('reciters', new ExplicitExtensionFile($avatarFilePath));
+                $uploadedAvatarPath = Storage::putFile('reciters', new ExplicitExtensionFile($avatarFilePath), 'public');
                 $reciter->avatar = Storage::url($uploadedAvatarPath);
             }
 
@@ -146,7 +146,7 @@ class ImportDataCommand extends Command
 
             if (count($artwork) > 0) {
                 $artworkFilePath = array_first($artwork);
-                $uploadedArtworkPath = Storage::putFile('albums', new ExplicitExtensionFile($artworkFilePath));
+                $uploadedArtworkPath = Storage::putFile('albums', new ExplicitExtensionFile($artworkFilePath), 'public');
                 $album->artwork = Storage::url($uploadedArtworkPath);
             }
 
@@ -188,7 +188,7 @@ class ImportDataCommand extends Command
             $audio = $this->filesystem->glob($directory . '/audio.*');
             if (count($audio) > 0) {
                 $audioFilePath = array_first($audio);
-                $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath));
+                $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath), 'public');
                 $track->audio = Storage::url($uploadedAudioPath);
             }
 
