@@ -3,11 +3,13 @@
 namespace App\Console\Commands\Data;
 
 use App\Lyric;
-use File;
 use App\Reciter;
 use App\Album;
+use App\Support\File\ExplicitExtensionFile;
 use App\Track;
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 
 class ImportDataCommand extends Command
 {
@@ -16,23 +18,29 @@ class ImportDataCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'data:import';
+    protected $signature = 'data:import {path}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'This command is to import data from a folder structure';
+    protected $description = 'Import reciters, albums, and nawhas from a folder.';
+
+    /**
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    private $filesystem;
 
     /**
      * Create a new command instance.
      *
-     * @return void
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
      */
-    public function __construct()
+    public function __construct(Filesystem $filesystem)
     {
         parent::__construct();
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -42,202 +50,161 @@ class ImportDataCommand extends Command
      */
     public function handle()
     {
-        $this->comment('This command will help you import data for nawhas.com');
+        $directory = $this->argument('path');
 
-        $this->comment('Verifying installation prerequisites...');
-        $dir = 'public/uploads/reciters';
-        if (!File::exists($dir)) {
-            $this->error('Please create reciters folder');
+        if (!$this->filesystem->exists($directory)) {
+            $this->error("The directory you specified does not exist. [{$directory}]");
 
             return;
-        } else {
-            $this->comment('The reciters folder exists');
         }
 
-        $this->comment('Scanning the directory for reciters');
-        $reciterContent = scandir($dir);
-        unset($reciterContent[0]);
-        unset($reciterContent[1]);
-        $reciterContent = array_values($reciterContent);
-        if (!count($reciterContent) > 0) {
+        $this->comment('Importing data from ' . $directory . '');
+
+        $this->importReciters($directory);
+    }
+
+    private function importReciters(string $baseDirectory)
+    {
+        $directories = $this->filesystem->directories($baseDirectory);
+
+        if (!count($directories) > 0) {
             $this->error('There are no reciters');
-
             return;
-        } else {
-            $this->comment('reciters were found');
         }
-        foreach ($reciterContent as $reciterName) {
-            // set variables
-            $reciterSlug = str_slug($reciterName);
-            $reciterDir = $dir . '/' . $reciterName;
-            $reciterBio = $reciterDir . '/bio.txt';
-            $reciterAvatarFile = '';
-            $reciterAvaterPNG = $reciterDir . '/avatar.png';
-            $reciterAvaterJPEG = $reciterDir . '/avatar.jpg';
 
-            // check if the reciter does not exist in db
-            if (!$reciter = Reciter::where('slug', $reciterSlug)->first()) {
-                // check if bio file exists
-                if (!file_exists($reciterBio)) {
-                    $this->error('bio.txt does not exist for ' . $reciterName);
+        $this->info('Found ' . count($directories) . ' reciters!');
 
-                    return;
-                } else {
-                    $this->comment('successfully found bio.txt');
-                }
-                if (!$reciterBio = file_get_contents($reciterBio, true)) {
-                    $this->error('An error occurred when trying to read bio.txt for ' . $reciterName);
+        foreach ($directories as $directory) {
+            $name = basename($directory);
 
-                    return;
-                } else {
-                    $this->comment('Successfully imported bio from txt');
-                }
+            $this->comment('>> Importing "' . $name . '"');
 
-                // check if avatar exists
-                if (file_exists($reciterAvaterJPEG)) {
-                    $reciterAvatarFile = 'avatar.jpg';
-                } elseif (file_exists($reciterAvaterPNG)) {
-                    $reciterAvatarFile = 'avatar.png';
-                }
-                if (!$reciterAvatarFile) {
-                    $this->error($reciterName . ' does not have an avatar.png or avatar.jpg file');
+            // Check to see if a reciter with this name already exists.
+            $reciter = Reciter::where('name', $name)->first();
 
-                    return;
-                } else {
-                    $this->comment('Avatar found for ' . $reciterName);
-                }
-
-                // create reciter
-                $reciter = new Reciter;
-                $reciter->name = $reciterName;
-                $reciter->slug = $reciterSlug;
-                $reciter->description = $reciterBio;
-                $reciter->image_path = $reciterAvatarFile;
-                $reciter->created_by = 1;
-                if (!$reciter->save()) {
-                    $this->error('Reciter did not save');
-
-                    return;
-                } else {
-                    $this->comment('Reciter ' . $reciterName . ' has been created');
-                }
-            } else {
-                $this->comment($reciterName . ' already exists');
+            // If it doesn't exist already, create a new one.
+            if ($reciter === null) {
+                $reciter = new Reciter(['name' => $name]);
             }
 
-            //albums section
-            $this->comment('checking for prerequisites for albums');
-            $this->comment('Scanning in ' . $reciter->name . '(s) directory for albums');
-            $albumsDir = $reciterDir . '/albums';
-            $albumsContent = scandir($albumsDir);
-            unset($albumsContent[0]);
-            unset($albumsContent[1]);
-            $albumsContent = array_values($albumsContent);
-            if (!count($albumsContent) > 0) {
-                $this->error('There are no albums for ' . $reciterName);
-            } else {
-                $this->comment('albums were found');
+            // Set the slug.
+            $reciter->slug = str_slug($reciter->name);
+
+            // Set the bio for the reciter if bio.txt exists.
+            $bioFile = $directory . '/bio.txt';
+            if ($this->filesystem->exists($bioFile)) {
+                $reciter->description = trim($this->filesystem->get($bioFile));
             }
 
-            // loop through albums
-            foreach ($albumsContent as $albumContent) {
-                list($albumYear, $albumHijri, $albumName) = explode(' - ', $albumContent);
-                list($albumHijriMonth, $albumHijriYear) = explode(' ', $albumHijri);
+            $avatar = $this->filesystem->glob($directory . '/avatar.*');
 
-                //check if album exists
-                $albumDir = $albumsDir . '/' . $albumContent;
-                if (!$album = $reciter->albums->where('year', $albumYear)->first()) {
-                    $albumArtworkFile = '';
-                    $albumArtworkPNG = $albumDir . '/artwork.png';
-                    $albumArtworkJPEG = $albumDir . '/artwork.jpg';
-                    //check if artwork exists
-                    if (file_exists($albumArtworkPNG)) {
-                        $albumArtworkFile = 'artwork.jpg';
-                    } elseif (file_exists($albumArtworkJPEG)) {
-                        $albumArtworkFile = 'artwork.png';
-                    }
-                    if (!$albumArtworkFile) {
-                        $this->error($reciterName . ' does not have an artowrk.png or artwork.jpg for year' . $albumYear);
+            if (count($avatar) > 0) {
+                $avatarFilePath = array_first($avatar);
+                $uploadedAvatarPath = Storage::putFile('reciters', new ExplicitExtensionFile($avatarFilePath));
+                $reciter->avatar = Storage::url($uploadedAvatarPath);
+            }
 
-                        return;
-                    } else {
-                        $this->comment('Avatar found for ' . $reciterName . ' Album ' . $albumYear);
-                    }
-                    // create Album
-                    $album = new Album;
-                    $album->reciter_id = $reciter->id;
-                    $album->name = $albumName;
-                    $album->year = $albumYear;
-                    $album->image_path = $albumArtworkFile;
-                    $album->created_by = 1;
-                    $album->save();
-                } else {
-                    $this->comment($albumYear . ' Album Found');
+            $reciter->save();
+
+            $this->importAlbums($reciter, $directory);
+        }
+
+        $this->info("All done!");
+    }
+
+    private function importAlbums(Reciter $reciter, string $directory)
+    {
+        $directories = $this->filesystem->directories($directory);
+
+        $this->comment("\tFound " . count($directories) . " albums...");
+
+        foreach ($directories as $directory) {
+            $base = $this->filesystem->basename($directory);
+
+            $this->comment("\t>> Importing \"{$base}\"");
+
+            list($year, $hijri, $name) = explode(' - ', $base);
+            list($hijriMonth, $hijriYear) = explode(' ', $hijri);
+
+            /** @var Album|null $album */
+            $album = $reciter->albums()
+                ->where('year', $year)
+                ->where('name', $name)
+                ->first();
+
+            if ($album === null) {
+                $album = new Album([
+                    'year' => $year,
+                    'name' => $name,
+                ]);
+            }
+
+            $album->hijri_year = $hijriYear;
+            $album->hijri_month = $hijriMonth;
+
+            $artwork = $this->filesystem->glob($directory . '/artwork.*');
+
+            if (count($artwork) > 0) {
+                $artworkFilePath = array_first($artwork);
+                $uploadedArtworkPath = Storage::putFile('albums', new ExplicitExtensionFile($artworkFilePath));
+                $album->artwork = Storage::url($uploadedArtworkPath);
+            }
+
+            $reciter->albums()->save($album);
+
+            $this->importTracks($reciter, $album, $directory);
+        }
+    }
+
+    private function importTracks(Reciter $reciter, Album $album, string $directory)
+    {
+        $directories = $this->filesystem->directories($directory);
+
+        $this->comment("\t\tFound " . count($directories) . ' tracks...');
+
+        foreach ($directories as $directory) {
+            $base = $this->filesystem->basename($directory);
+
+            $this->comment("\t\t>> Importing \"{$base}\"");
+
+            list($number, $name) = explode(' - ', $base);
+
+            /** @var Track|null $album */
+            $track = $album->tracks()
+                ->where('name', $name)
+                ->first();
+
+            if ($track === null) {
+                $track = new Track([
+                    'name' => $name,
+                ]);
+            }
+
+            $track->reciter_id = $album->reciter_id;
+            $track->number = $number;
+            $track->slug = str_slug($name);
+
+            // Get Audio Path
+            $audio = $this->filesystem->glob($directory . '/audio.*');
+            if (count($audio) > 0) {
+                $audioFilePath = array_first($audio);
+                $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath));
+                $track->audio = Storage::url($uploadedAudioPath);
+            }
+
+            $album->tracks()->save($track);
+
+            // Lyrics
+            if ($this->filesystem->exists($directory . '/lyrics.txt')) {
+                $lyrics = $track->lyrics;
+
+                if (!$lyrics) {
+                    $lyrics = new Lyric();
                 }
 
-                // tracks section
-                $this->comment('checking for prerequisites for tracks');
-                $this->comment('Scanning in ' . $reciter->name . '(s) directory for tracks in album ' . $albumYear);
-                $tracksDir = $albumDir . '/tracks';
-                $tracksContent = scandir($tracksDir);
-                unset($tracksContent[0]);
-                unset($tracksContent[1]);
-                $tracksContent = array_values($tracksContent);
-                if (!count($tracksContent) > 0) {
-                    $this->error('There are no tracks for album ' . $albumYear . ' for reciter ' . $reciterName);
-                } else {
-                    $this->comment('tracks were found');
-                }
-                foreach ($tracksContent as $trackContent) {
-                    list($trackNumber, $trackName) = explode(' - ', $trackContent);
-                    $trackDir = $tracksDir . '/' . $trackContent;
-                    $trackSlug = str_slug($trackName);
-                    if (!$track = Track::where('slug', $trackSlug)->first()) {
-                        if (!file_exists($trackDir . '/audio.mp3')) {
-                            $this->error('no audio file');
-
-                            return;
-                        }
-                        $track = new Track();
-                        $track->name = $trackName;
-                        $track->slug = str_slug($trackName);
-                        $track->album_id = $album->id;
-                        $track->audio = 'audio.mp3';
-                        $track->track_number = $trackNumber;
-                        $track->language = 'en';
-                        $track->created_by = 1;
-                        $track->save();
-                        $this->comment('Track created successfully');
-                    } else {
-                        $this->comment('Track already exists');
-                    }
-
-                    // lyrics
-                    $this->comment('checking for prerequisites for lyrics');
-                    if (!$lyric = $track->lyrics) {
-                        if (!file_exists($trackDir . '/lyrics.txt')) {
-                            $this->error('Lyric does not exist for reciter ' . $reciterName . ' Album ' . $albumYear . ' Track ' . $trackName);
-                        } else {
-                            $lyricFile = $trackDir . '/lyrics.txt';
-                            if (!$lyricFile = file_get_contents($lyricFile, true)) {
-                                $this->error('An error occurred when trying to read lyrics.txt for');
-
-                                return;
-                            } else {
-                                $this->comment('Successfully imported bio from txt');
-                            }
-                            $lyric = new Lyric();
-                            $lyric->track_id = $track->id;
-                            $lyric->text = $lyricFile;
-                            $lyric->language = 'en';
-                            $lyric->created_by = 1;
-                            $lyric->save();
-                            $this->comment('Successfully created lyric');
-                        }
-                    } else {
-                        $this->comment('Lyric already exists');
-                    }
-                }
+                $text = $this->filesystem->get($directory . '/lyrics.txt');
+                $lyrics->text = $text;
+                $track->lyrics()->save($lyrics);
             }
         }
     }

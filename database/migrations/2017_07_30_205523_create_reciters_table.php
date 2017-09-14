@@ -17,12 +17,12 @@ class CreateRecitersTable extends Migration
             $table->increments('id');
             $table->string('name')->index();
             $table->string('slug')->unique()->index();
-            $table->text('description');
-            $table->string('image_path')->nullable();
+            $table->text('description')->nullable();
+            $table->string('avatar')->nullable();
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();
-            $table->integer('created_by')->unsigned()->index();
+            $table->integer('created_by')->nullable()->unsigned()->index();
             $table->foreign('created_by')->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
