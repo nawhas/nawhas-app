@@ -69,6 +69,7 @@ class ImportDataCommand extends Command
 
         if (!count($directories) > 0) {
             $this->error('There are no reciters');
+
             return;
         }
 
@@ -109,14 +110,14 @@ class ImportDataCommand extends Command
             $this->importAlbums($reciter, $directory);
         }
 
-        $this->info("All done!");
+        $this->info('All done!');
     }
 
     private function importAlbums(Reciter $reciter, string $directory)
     {
         $directories = $this->filesystem->directories($directory);
 
-        $this->comment("\tFound " . count($directories) . " albums...");
+        $this->comment("\tFound " . count($directories) . ' albums...');
 
         foreach ($directories as $directory) {
             $base = $this->filesystem->basename($directory);

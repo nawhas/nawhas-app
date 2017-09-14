@@ -10,7 +10,7 @@ class Album extends Model
     use Searchable;
 
     protected $fillable = [
-        'year', 'name'
+        'year', 'name',
     ];
 
     public function reciters()
