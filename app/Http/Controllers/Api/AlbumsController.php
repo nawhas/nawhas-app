@@ -62,8 +62,6 @@ class AlbumsController extends Controller
         $album->name = $request->get('name');
         $album->reciter_id = $reciter->id;
         $album->year = $request->get('year');
-        $album->hijri_year = $request->get('hijri_year');
-        $album->hijri_month = $request->get('hijri_month');
         $album->artwork = $request->get('artwork');
         $album->created_by = Auth::user()->id;
         $album->save();
@@ -97,8 +95,6 @@ class AlbumsController extends Controller
     {
         $album->name = $request->get('name');
         $album->year = $request->get('year');
-        $album->hijri_year = $request->get('hijri_year');
-        $album->hijri_month = $request->get('hijri_month');
         $album->artwork = $request->get('artwork');
         $album->created_by = Auth::user()->id;
         $album->save();

@@ -20,9 +20,7 @@ class CreateAlbumsTable extends Migration
             $table->foreign('reciter_id')->references('id')->on('reciters')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->integer('year');
-            $table->integer('hijri_year');
-            $table->string('hijri_month')->nullable();
+            $table->string('year', 7);
             $table->string('artwork')->nullable();
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
