@@ -16,7 +16,11 @@ class CreateTracksTable extends Migration
         Schema::create('tracks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->index();
-            $table->string('slug')->unique()->index();
+            $table->string('slug')->index();
+            $table->integer('reciter_id')->unsigned();
+            $table->foreign('reciter_id')->references('id')->on('reciters')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->integer('album_id')->unsigned();
             $table->foreign('album_id')->references('id')->on('albums')
                 ->onUpdate('cascade')
@@ -24,14 +28,15 @@ class CreateTracksTable extends Migration
             $table->string('audio')->nullable();
             $table->string('video')->nullable();
             $table->integer('number');
-            $table->string('language', 10);
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();
-            $table->integer('created_by')->unsigned()->index();
+            $table->integer('created_by')->nullable()->unsigned()->index();
             $table->foreign('created_by')->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->unique(['album_id', 'slug']);
             $table->timestamps();
         });
     }

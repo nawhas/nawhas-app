@@ -17,7 +17,7 @@ class ReciterTransformer extends TransformerAbstract
             'id' => $reciter->id,
             'name' => $reciter->name,
             'slug' => $reciter->slug,
-            'image_path' => $reciter->image_path,
+            'avatar' => $reciter->avatar,
             'description' => $reciter->description,
             'created_by' => $reciter->created_by,
             'created_at' => $reciter->created_at->toDateTimeString(),

@@ -24,7 +24,7 @@ class RecitersApiTest extends TestCase
         $reciter = factory(Reciter::class)->create();
         $this->get('/v1/reciters/' . $reciter->id)->assertStatus(200)->assertJsonStructure([
             'data' => [
-                'id', 'name', 'slug', 'description', 'image_path',
+                'id', 'name', 'slug', 'description', 'avatar',
                 'created_by', 'created_at', 'updated_at',
             ]
         ]);
@@ -42,7 +42,7 @@ class RecitersApiTest extends TestCase
 
         $this->get('/v1/reciters/' . $reciter->slug)->assertStatus(200)->assertJsonStructure([
             'data' => [
-                'id', 'name', 'slug', 'description', 'image_path',
+                'id', 'name', 'slug', 'description', 'avatar',
                 'created_by', 'created_at', 'updated_at',
             ]
         ]);
@@ -63,10 +63,10 @@ class RecitersApiTest extends TestCase
         $this->postJson('/v1/reciters/', $data = [
             'name' => $faker->name,
             'description' => $faker->paragraph,
-            'image_path' => $faker->imageUrl(640, 480, 'people'),
+            'avatar' => $faker->imageUrl(640, 480, 'people'),
         ])->assertStatus(200)->assertJsonStructure([
             'data' => [
-                'id', 'name', 'slug', 'description', 'image_path',
+                'id', 'name', 'slug', 'description', 'avatar',
                 'created_by', 'created_at', 'updated_at',
             ]
         ]);
@@ -89,10 +89,10 @@ class RecitersApiTest extends TestCase
         $this->putJson('/v1/reciters/' . $reciter->id, $data = [
             'name' => $faker->name,
             'description' => $faker->paragraph,
-            'image_path' => $faker->imageUrl(640, 480, 'people'),
+            'avatar' => $faker->imageUrl(640, 480, 'people'),
         ])->assertStatus(200)->assertJsonStructure([
             'data' => [
-                'id', 'name', 'slug', 'description', 'image_path',
+                'id', 'name', 'slug', 'description', 'avatar',
                 'created_by', 'created_at', 'updated_at',
             ]
         ]);
