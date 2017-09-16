@@ -185,8 +185,19 @@ class ImportDataCommand extends Command
             $audio = $this->filesystem->glob($directory . '/audio.*');
             if (count($audio) > 0) {
                 $audioFilePath = array_first($audio);
-                $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath), 'public');
-                $track->audio = Storage::url($uploadedAudioPath);
+                $audioFilePath = md5_file($audioFilePath) . '.' . $this->filesystem->extension($audioFilePath);
+                if (!$track->audio === null) {
+                    $uploadedAudioFile = end(preg_split('/',$track->audio));
+                    if ($uploadedAudioFile === $audioFilePath) {
+                        $this->info("'" . $audio . "'" . 'already uploaded');
+                    } else {
+                        $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath), 'public');
+                        $track->audio = Storage::url($uploadedAudioPath);
+                    }
+                } else {
+                    $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath), 'public');
+                    $track->audio = Storage::url($uploadedAudioPath);
+                }
             }
 
             $album->tracks()->save($track);
