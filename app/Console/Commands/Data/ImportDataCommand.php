@@ -124,8 +124,7 @@ class ImportDataCommand extends Command
 
             $this->comment("\t>> Importing \"{$base}\"");
 
-            list($year, $hijri, $name) = explode(' - ', $base);
-            list($hijriMonth, $hijriYear) = explode(' ', $hijri);
+            list($year, $name) = explode(' - ', $base);
 
             /** @var Album|null $album */
             $album = $reciter->albums()
@@ -139,9 +138,6 @@ class ImportDataCommand extends Command
                     'name' => $name,
                 ]);
             }
-
-            $album->hijri_year = $hijriYear;
-            $album->hijri_month = $hijriMonth;
 
             $artwork = $this->filesystem->glob($directory . '/artwork.*');
 
