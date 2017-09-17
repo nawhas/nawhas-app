@@ -54,4 +54,10 @@ Route::namespace('Api')->group(function () {
         Route::patch('/{lyric}', 'LyricsController@update');
         Route::delete('/{lyric}', 'LyricsController@destroy');
     });
+
+    Route::prefix('popular')->group(function () {
+        Route::get('/reciters', 'PopularEntitiesController@reciters');
+        Route::get('/albums', 'PopularEntitiesController@albums');
+        Route::get('/tracks', 'PopularEntitiesController@tracks');
+    });
 });

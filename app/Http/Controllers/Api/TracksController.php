@@ -85,6 +85,8 @@ class TracksController extends Controller
      */
     public function show(Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
+        $track->visit();
+
         return $this->respondWithItem($track);
     }
 

@@ -3,9 +3,8 @@
 namespace App\Transformers;
 
 use App\Lyric;
-use League\Fractal\TransformerAbstract;
 
-class LyricTransformer extends TransformerAbstract
+class LyricTransformer extends Transformer
 {
     /**
      * @param Lyric $lyric

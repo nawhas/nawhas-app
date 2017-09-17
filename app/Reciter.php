@@ -2,12 +2,13 @@
 
 namespace App;
 
+use JordanMiguel\LaravelPopular\Traits\Visitable;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Reciter extends Model
 {
-    use Searchable;
+    use Visitable, Searchable;
 
     protected $fillable = ['name'];
 

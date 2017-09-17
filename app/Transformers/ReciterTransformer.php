@@ -3,9 +3,8 @@
 namespace App\Transformers;
 
 use App\Reciter;
-use League\Fractal\TransformerAbstract;
 
-class ReciterTransformer extends TransformerAbstract
+class ReciterTransformer extends Transformer
 {
     /**
      * @param Reciter $reciter

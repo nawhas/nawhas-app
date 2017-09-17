@@ -75,6 +75,8 @@ class RecitersController extends Controller
      */
     public function show(Reciter $reciter) : JsonResponse
     {
+        $reciter->visit();
+
         return $this->respondWithItem($reciter);
     }
 

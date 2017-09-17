@@ -10,6 +10,7 @@
         "barryvdh/laravel-cors": "^0.9.2",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
+        "jordanmiguel/laravel-popular": "v1.0.3",
         "laravel/framework": "5.5.*",
         "laravel/passport": "^3.0",
         "laravel/scout": "^3.0",
