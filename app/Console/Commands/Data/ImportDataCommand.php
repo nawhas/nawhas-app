@@ -101,8 +101,7 @@ class ImportDataCommand extends Command
 
             if (count($avatar) > 0) {
                 $avatarFilePath = array_first($avatar);
-                $uploadedAvatarPath = Storage::putFile('reciters', new ExplicitExtensionFile($avatarFilePath), 'public');
-                $reciter->avatar = Storage::url($uploadedAvatarPath);
+                $reciter->avatar = $this->uploadFile($avatarFilePath, 'reciters');
             }
 
             $reciter->save();
@@ -143,8 +142,7 @@ class ImportDataCommand extends Command
 
             if (count($artwork) > 0) {
                 $artworkFilePath = array_first($artwork);
-                $uploadedArtworkPath = Storage::putFile('albums', new ExplicitExtensionFile($artworkFilePath), 'public');
-                $album->artwork = Storage::url($uploadedArtworkPath);
+                $album->artwork = $this->uploadFile($artworkFilePath, 'albums');
             }
 
             $reciter->albums()->save($album);
@@ -185,8 +183,7 @@ class ImportDataCommand extends Command
             $audio = $this->filesystem->glob($directory . '/audio.*');
             if (count($audio) > 0) {
                 $audioFilePath = array_first($audio);
-                $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath), 'public');
-                $track->audio = Storage::url($uploadedAudioPath);
+                $track->audio = $this->uploadFile($audioFilePath, 'tracks');
             }
 
             $album->tracks()->save($track);
@@ -204,5 +201,19 @@ class ImportDataCommand extends Command
                 $track->lyrics()->save($lyrics);
             }
         }
+    }
+
+    protected function uploadFile(string $file, string $directory) : string
+    {
+        $extension = $this->filesystem->extension($file);
+        $md5 = $this->filesystem->hash($file);
+        $filename = $md5 . '.' . $extension;
+        $path = $directory . '/' . $filename;
+        if (Storage::exists($path)) {
+            return Storage::url($path);
+        }
+        $uploadedFilePath = Storage::putFileAs($directory, new ExplicitExtensionFile($file), $filename, 'public');
+
+        return Storage::url($uploadedFilePath);
     }
 }
