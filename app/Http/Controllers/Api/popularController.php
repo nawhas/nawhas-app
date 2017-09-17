@@ -18,6 +18,6 @@ class popularController extends Controller
             $period = 30;
         }
 
-        return Reciter::popularLast($period)->get();
+        return Reciter::queryPopularLast()->get();
     }
 }
