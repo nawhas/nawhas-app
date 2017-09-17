@@ -45,7 +45,7 @@ class AlbumsController extends Controller
             return $this->respondWithPaginator($paginate);
         }
 
-        return $this->respondWithCollection($query->popularLast(3)->get());
+        return $this->respondWithCollection($query->get());
     }
 
     /**

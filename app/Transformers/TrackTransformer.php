@@ -3,9 +3,8 @@
 namespace App\Transformers;
 
 use App\Track;
-use League\Fractal\TransformerAbstract;
 
-class TrackTransformer extends TransformerAbstract
+class TrackTransformer extends Transformer
 {
     /**
      * @param Track $track

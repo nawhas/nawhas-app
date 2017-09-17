@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e572193a7f5754695b74ecac525d0a30",
+    "content-hash": "adaca749756790865a913016543959e7",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -1241,16 +1241,16 @@
         },
         {
             "name": "jordanmiguel/laravel-popular",
-            "version": "v1.0.4",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nawhas/laravel-popular.git",
-                "reference": "fa818933de01c6eca3b23de49a26a5ff6154f819"
+                "url": "https://github.com/jordanmiguel/laravel-popular.git",
+                "reference": "f50ccb92b3c8a066f01b62e3a616890ea44d9cd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nawhas/laravel-popular/zipball/fa818933de01c6eca3b23de49a26a5ff6154f819",
-                "reference": "fa818933de01c6eca3b23de49a26a5ff6154f819",
+                "url": "https://api.github.com/repos/jordanmiguel/laravel-popular/zipball/f50ccb92b3c8a066f01b62e3a616890ea44d9cd2",
+                "reference": "f50ccb92b3c8a066f01b62e3a616890ea44d9cd2",
                 "shasum": ""
             },
             "require": {
@@ -1274,22 +1274,7 @@
                     "JordanMiguel\\LaravelPopular\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "JordanMiguel\\LaravelPopular\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "check-style": [
-                    "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
-                ],
-                "fix-style": [
-                    "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1304,15 +1289,12 @@
             "homepage": "https://github.com/jordanmiguel/laravel-popular",
             "keywords": [
                 "JordanMiguel",
-                "Laravel",
                 "Laravel Popular",
-                "Popular",
-                "laravel-popular"
+                "laravel",
+                "laravel-popular",
+                "popular"
             ],
-            "support": {
-                "source": "https://github.com/nawhas/laravel-popular/tree/v1.0.4"
-            },
-            "time": "2017-09-17T02:50:47+00:00"
+            "time": "2017-09-07T21:54:17+00:00"
         },
         {
             "name": "laravel/framework",
@@ -4106,7 +4088,7 @@
             ],
             "authors": [
                 {
-                    "name": "Pádraic Brady",
+                    "name": "Padraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
