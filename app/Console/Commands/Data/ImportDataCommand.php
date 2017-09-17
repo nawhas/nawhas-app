@@ -188,7 +188,7 @@ class ImportDataCommand extends Command
                 $audioFilePathMD5 = md5_file($audioFilePath) . '.' . $this->filesystem->extension($audioFilePath);
                 if (!$track->audio === null) {
                     $uploadedAudioFile = end(preg_split('/',$track->audio));
-                    if ($uploadedAudioFile === $audioFilePath) {
+                    if ($uploadedAudioFile == $audioFilePathMD5) {
                         $this->info("'" . $audio . "'" . 'already uploaded');
                     } else {
                         Storage::delete($track->audio);
