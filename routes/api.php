@@ -57,7 +57,7 @@ Route::namespace('Api')->group(function () {
 
     Route::prefix('popular')->group(function () {
         Route::get('/reciters', 'PopularEntitiesController@reciters');
-//        Route::get('/albums', 'PopularEntitiesController@albums');
-//        Route::get('/tracks', 'PopularEntitiesController@tracks');
+        Route::get('/albums', 'PopularEntitiesController@albums');
+        Route::get('/tracks', 'PopularEntitiesController@tracks');
     });
 });
