@@ -59,7 +59,7 @@ class RecitersController extends Controller
         $reciter->name = $request->get('name');
         $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
-        $reciter->image_path = $request->get('image_path');
+        $reciter->avatar = $request->get('avatar');
         $reciter->created_by = Auth::user()->id;
         $reciter->save();
 
@@ -93,7 +93,7 @@ class RecitersController extends Controller
         $reciter->name = $request->get('name');
         $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
-        $reciter->image_path = $request->get('image_path');
+        $reciter->avatar = $request->get('avatar');
         $reciter->created_by = Auth::user()->id;
         $reciter->save();
 

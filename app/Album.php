@@ -10,6 +10,10 @@ class Album extends Model
 {
     use Visitable, Searchable;
 
+    protected $fillable = [
+        'year', 'name',
+    ];
+
     public function reciters()
     {
         return $this->belongsTo(Reciter::class, 'reciter_id', 'id');

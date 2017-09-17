@@ -8,15 +8,18 @@
         "php": ">=7.0.0",
         "algolia/algoliasearch-client-php": "^1.18",
         "barryvdh/laravel-cors": "^0.9.2",
+        "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
         "jordanmiguel/laravel-popular": "^1.0",
         "laravel/framework": "5.5.*",
         "laravel/passport": "^3.0",
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "league/fractal": "^0.16.0"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.4",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~6.0"
@@ -50,6 +53,12 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
+            "php artisan optimize"
         ]
     },
     "config": {

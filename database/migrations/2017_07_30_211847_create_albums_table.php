@@ -20,14 +20,12 @@ class CreateAlbumsTable extends Migration
             $table->foreign('reciter_id')->references('id')->on('reciters')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->integer('year');
-            $table->integer('hijri_year');
-            $table->string('hijri_month');
-            $table->string('image_path');
+            $table->string('year', 7);
+            $table->string('artwork')->nullable();
             $table->smallInteger('status')->default(0);
             $table->dateTime('moderated_at')->nullable();
             $table->integer('moderated_by')->nullable()->unsigned();
-            $table->integer('created_by')->unsigned()->index();
+            $table->integer('created_by')->nullable()->unsigned()->index();
             $table->foreign('created_by')->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

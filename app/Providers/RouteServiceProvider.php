@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('track', function ($value, $route) {
             if ($album = $route->parameter('album')) {
-                return $album->tracks()->where('id', $value)->orWhere('slug', $value)->orWhere('track_number', $value)->firstOrFail();
+                return $album->tracks()->where('id', $value)->orWhere('slug', $value)->orWhere('number', $value)->firstOrFail();
             } else {
                 throw new ModelNotFoundException();
             }

@@ -10,6 +10,8 @@ class Track extends Model
 {
     use Visitable, Searchable;
 
+    protected $fillable = ['name'];
+
     public function albums()
     {
         return $this->belongsTo(Album::class, 'album_id', 'id');
