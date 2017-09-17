@@ -191,7 +191,7 @@ class ImportDataCommand extends Command
                     if ($uploadedAudioFile === $audioFilePath) {
                         $this->info("'" . $audio . "'" . 'already uploaded');
                     } else {
-                        $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath), 'public/' . $audioFilePathMD5));
+                        $uploadedAudioPath = Storage::putFile('tracks', new ExplicitExtensionFile($audioFilePath), 'public/' . $audioFilePathMD5);
                         $track->audio = Storage::url($uploadedAudioPath);
                     }
                 } else {
