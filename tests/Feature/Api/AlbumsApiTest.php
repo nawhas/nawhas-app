@@ -22,6 +22,8 @@ class AlbumsApiTest extends TestCase
     public function testGetAlbumByYear()
     {
         /** @var Album $album */
+        $user = factory(User::class)->create();
+        $reciter = factory(Reciter::class)->create();
         $album = factory(Album::class)->create();
         $this->get('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year)->assertStatus(200)->assertJsonStructure([
             'data' => [
@@ -67,6 +69,7 @@ class AlbumsApiTest extends TestCase
         Passport::actingAs($user);
 
         /** @var Reciter $reciter */
+        $reciter = factory(Reciter::class)->create();
         $album = factory(Album::class)->create();
         $faker = Faker\Factory::create();
 

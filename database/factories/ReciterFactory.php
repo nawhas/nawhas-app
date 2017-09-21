@@ -5,7 +5,6 @@ use App\Reciter;
 use Faker\Generator as Faker;
 
 $factory->define(Reciter::class, function (Faker $faker) {
-	$user = factory(User::class)->create();
     return [
         'name' => $name = $faker->name,
         'slug' => str_slug($name),
