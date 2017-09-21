@@ -11,7 +11,6 @@ $factory->define(Album::class, function (Faker $faker) {
         'reciter_id' => Reciter::all()->random()->id,
         'year' => $faker->year(),
         'artwork' => $faker->imageUrl(640, 480, 'people'),
-        'status' => 0,
         'created_by' => User::all()->random()->id,
     ];
 });

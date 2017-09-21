@@ -22,6 +22,7 @@ class RecitersApiTest extends TestCase
     {
         /** @var Reciter $reciter */
         $reciter = factory(Reciter::class)->create();
+
         $this->get('/v1/reciters/' . $reciter->id)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'name', 'slug', 'description', 'avatar',
@@ -38,7 +39,7 @@ class RecitersApiTest extends TestCase
     public function testGetReciterBySlug()
     {
         /** @var Reciter $reciter */
-        $reciter = factory(Reciter::class)->create();
+        $reciter = factory(\App\Reciter::class)->create();
 
         $this->get('/v1/reciters/' . $reciter->slug)->assertStatus(200)->assertJsonStructure([
             'data' => [
