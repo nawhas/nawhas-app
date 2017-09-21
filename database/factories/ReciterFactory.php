@@ -11,6 +11,8 @@ $factory->define(Reciter::class, function (Faker $faker) {
         'description' => $faker->paragraph,
         'avatar' => $faker->imageUrl(640, 480, 'people'),
         'status' => 0,
-        'created_by' => User::all()->random()->id,
+        'created_by' => function () {
+        	return factory(User::class)->create()->id;
+        },
     ];
 });

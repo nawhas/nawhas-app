@@ -96,6 +96,7 @@ class AlbumsApiTest extends TestCase
         Passport::actingAs($user);
 
         /** @var Reciter $reciter */
+        $reciter = factory(Reciter::class)->create();
         $album = factory(Album::class)->create();
 
         $this->delete('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year)
