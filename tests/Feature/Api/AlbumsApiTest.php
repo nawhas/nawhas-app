@@ -22,15 +22,12 @@ class AlbumsApiTest extends TestCase
     public function testGetAlbumByYear()
     {
         /** @var Album $album */
-        //$reciter = factory(Reciter::class)->create();
-        //$album = factory(Album::class)->create();
-        /*
-        $this->get('/v1/reciters/' . $reciter->id . '/albums/' . $album->year)->assertStatus(200)->assertJsonStructure([
+        $album = factory(Album::class)->create();
+        $this->get('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year)->assertStatus(200)->assertJsonStructure([
             'data' => [
-                'id', 'reciter_id', 'name', 'year', 'artwork', 'created_by', 'created_at', 'updated_at',
+                'id', 'reciter_id', 'name', 'year', 'artwork', 'created_at', 'updated_at',
             ]
         ]);
-        */
     }
 
     /**
@@ -70,11 +67,10 @@ class AlbumsApiTest extends TestCase
         Passport::actingAs($user);
 
         /** @var Reciter $reciter */
-        $reciter = factory(Reciter::class)->create();
         $album = factory(Album::class)->create();
         $faker = Faker\Factory::create();
 
-        $this->putJson('/v1/reciters/' . $reciter->id . '/albums/' . $album->year, $data = [
+        $this->putJson('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year, $data = [
             'name' => $faker->name,
             'year' => $faker->year(),
             'artwork' => $faker->imageUrl(640, 480, 'people'),
@@ -97,10 +93,9 @@ class AlbumsApiTest extends TestCase
         Passport::actingAs($user);
 
         /** @var Reciter $reciter */
-        $reciter = factory(Reciter::class)->create();
         $album = factory(Album::class)->create();
 
-        $this->delete('/v1/reciters/' . $reciter->id . '/albums/' . $album->id)
+        $this->delete('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year)
             ->assertStatus(204);
     }
 }
