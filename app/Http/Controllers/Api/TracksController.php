@@ -63,7 +63,7 @@ class TracksController extends Controller
         $track = new Track();
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
-        $track->reciter_id = $reciter->id
+        $track->reciter_id = $reciter->id;
         $track->album_id = $album->id;
         $track->video = $request->get('video');
         $track->audio = $request->get('audio');
