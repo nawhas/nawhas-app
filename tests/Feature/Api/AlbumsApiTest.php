@@ -23,8 +23,8 @@ class AlbumsApiTest extends TestCase
     {
         /** @var Album $album */
         $user = factory(User::class)->create();
-        $reciter = factory(Reciter::class)->create();
-        $album = factory(Album::class)->create();
+        $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
+        $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $this->get('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'reciter_id', 'name', 'year', 'artwork', 'created_at', 'updated_at',
@@ -43,7 +43,7 @@ class AlbumsApiTest extends TestCase
         Passport::actingAs($user);
 
         $faker = Faker\Factory::create();
-        $reciter = factory(Reciter::class)->create();
+        $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
 
         $this->postJson('/v1/reciters/' . $reciter->id . '/albums', $data = [
             'name' => $faker->name,
@@ -69,8 +69,8 @@ class AlbumsApiTest extends TestCase
         Passport::actingAs($user);
 
         /** @var Reciter $reciter */
-        $reciter = factory(Reciter::class)->create();
-        $album = factory(Album::class)->create();
+        $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
+        $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $faker = Faker\Factory::create();
 
         $this->putJson('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year, $data = [
@@ -96,8 +96,8 @@ class AlbumsApiTest extends TestCase
         Passport::actingAs($user);
 
         /** @var Reciter $reciter */
-        $reciter = factory(Reciter::class)->create();
-        $album = factory(Album::class)->create();
+        $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
+        $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
 
         $this->delete('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year)
             ->assertStatus(204);
