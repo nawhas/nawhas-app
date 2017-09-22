@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Lyric::class, function (Faker $faker) {
     return [
-    	'text' => $faker->text,
-    	'track_id' => function () {
+        'text' => $faker->text,
+        'track_id' => function () {
             return factory(Track::class)->create();
         },
         'created_by' => function () {

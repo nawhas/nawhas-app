@@ -12,7 +12,7 @@ $factory->define(Reciter::class, function (Faker $faker) {
         'avatar' => $faker->imageUrl(640, 480, 'people'),
         'status' => 0,
         'created_by' => function () {
-        	return factory(User::class)->create()->id;
+            return factory(User::class)->create()->id;
         },
     ];
 });
