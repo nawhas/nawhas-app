@@ -16,6 +16,7 @@ class LyricTransformer extends Transformer
             'id' => $lyric->id,
             'track_id' => $lyric->track_id,
             'text' => $lyric->text,
+            'created_by' => $lyric->created_by,
             'created_at' => $lyric->created_at->toDateTimeString(),
             'updated_at' => $lyric->updated_at->toDateTimeString(),
         ];

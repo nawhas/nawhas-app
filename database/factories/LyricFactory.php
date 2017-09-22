@@ -1,8 +1,6 @@
 <?php
 
 use App\User;
-use App\Reciter;
-use App\Album;
 use App\Track;
 use App\Lyric;
 use Faker\Generator as Faker;
