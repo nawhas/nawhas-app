@@ -21,6 +21,7 @@ class TrackTransformer extends Transformer
             'audio' => $track->audio,
             'video' => $track->video,
             'number' => $track->number,
+            'created_by' => $track->created_by,
             'created_at' => $track->created_at->toDateTimeString(),
             'updated_at' => $track->updated_at->toDateTimeString(),
         ];
