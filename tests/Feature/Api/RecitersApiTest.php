@@ -22,6 +22,7 @@ class RecitersApiTest extends TestCase
     {
         /** @var Reciter $reciter */
         $reciter = factory(Reciter::class)->create();
+
         $this->get('/v1/reciters/' . $reciter->id)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'name', 'slug', 'description', 'avatar',
@@ -83,7 +84,7 @@ class RecitersApiTest extends TestCase
         Passport::actingAs($user);
 
         /** @var Reciter $reciter */
-        $reciter = factory(Reciter::class)->create();
+        $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $faker = Faker\Factory::create();
 
         $this->putJson('/v1/reciters/' . $reciter->id, $data = [
@@ -109,7 +110,7 @@ class RecitersApiTest extends TestCase
         Passport::actingAs($user);
 
         /** @var Reciter $reciter */
-        $reciter = factory(Reciter::class)->create();
+        $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
 
         $this->delete('/v1/reciters/' . $reciter->id)
             ->assertStatus(204);

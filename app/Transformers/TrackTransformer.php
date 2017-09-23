@@ -15,12 +15,13 @@ class TrackTransformer extends Transformer
         return [
             'id' => $track->id,
             'slug' => $track->slug,
+            'reciter_id' => $track->reciter_id,
             'album_id' => $track->album_id,
             'name' => $track->name,
             'audio' => $track->audio,
             'video' => $track->video,
             'number' => $track->number,
-            'language' => $track->language,
+            'created_by' => $track->created_by,
             'created_at' => $track->created_at->toDateTimeString(),
             'updated_at' => $track->updated_at->toDateTimeString(),
         ];
