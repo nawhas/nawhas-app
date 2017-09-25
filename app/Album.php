@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\DefaultSortScope;
 use JordanMiguel\LaravelPopular\Traits\Visitable;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
@@ -10,11 +11,16 @@ class Album extends Model
 {
     use Visitable, Searchable;
 
-    protected $fillable = [
-        'year', 'name',
-    ];
+    const DEFAULT_ARTWORK_URL = 'https://s3.us-east-2.amazonaws.com/nawhas/defaults/album.png';
 
-    public function reciters()
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new DefaultSortScope('year', 'desc'));
+    }
+
+    public function reciter()
     {
         return $this->belongsTo(Reciter::class, 'reciter_id', 'id');
     }

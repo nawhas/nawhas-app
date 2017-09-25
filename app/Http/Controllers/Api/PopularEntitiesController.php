@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Album;
 use App\Http\Controllers\TransformsResponses;
 use App\Reciter;
+use App\Scopes\DefaultSortScope;
 use App\Track;
 use App\Transformers\AlbumTransformer;
 use App\Transformers\ReciterTransformer;
@@ -27,7 +28,10 @@ class PopularEntitiesController extends Controller
         $period = $request->get('period', 30);
         $limit = $request->get('limit', 10);
 
-        $reciters = Reciter::query()->popularLast($period)->limit($limit)->get();
+        $reciters = Reciter::query()
+            ->withoutGlobalScope(DefaultSortScope::class)
+            ->popularLast($period)->limit($limit)
+            ->get();
 
         return $this->respondWithCollection($reciters, $transformer);
     }
@@ -37,7 +41,9 @@ class PopularEntitiesController extends Controller
         $period = $request->get('period', 30);
         $limit = $request->get('limit', 10);
 
-        $albums = Album::query()->popularLast($period)->limit($limit)->get();
+        $albums = Album::query()
+            ->withoutGlobalScope(DefaultSortScope::class)
+            ->popularLast($period)->limit($limit)->get();
 
         return $this->respondWithCollection($albums, $transformer);
     }
@@ -47,8 +53,16 @@ class PopularEntitiesController extends Controller
         $period = $request->get('period', 30);
         $limit = $request->get('limit', 10);
 
-        $track = Track::query()->popularLast($period)->limit($limit)->get();
+        $query = Track::query()
+            ->withoutGlobalScope(DefaultSortScope::class);
 
-        return $this->respondWithCollection($track, $transformer);
+        $query->popularLast($period)
+            ->limit($limit);
+
+        if ($request->get('reciterId')) {
+            $query->where('reciter_id', $request->get('reciterId'));
+        }
+
+        return $this->respondWithCollection($query->get(), $transformer);
     }
 }

@@ -16,11 +16,21 @@ class ReciterTransformer extends Transformer
             'id' => $reciter->id,
             'name' => $reciter->name,
             'slug' => $reciter->slug,
-            'avatar' => $reciter->avatar,
+            'avatar' => $reciter->avatar ?: Reciter::DEFAULT_AVATAR_URL,
             'description' => $reciter->description,
-            'created_by' => $reciter->created_by,
-            'created_at' => $reciter->created_at->toDateTimeString(),
-            'updated_at' => $reciter->updated_at->toDateTimeString(),
+            'albumCount' => $reciter->albums()->count(),
+            'createdAt' => $reciter->created_at->toDateTimeString(),
+            'updatedAt' => $reciter->updated_at->toDateTimeString(),
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'url' => '/v1/reciters/' . $reciter->slug,
+                ],
+                [
+                    'rel' => 'albums',
+                    'url' => '/v1/reciters/' . $reciter->slug . '/albums',
+                ],
+            ]
         ];
     }
 }

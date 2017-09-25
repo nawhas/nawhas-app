@@ -35,7 +35,8 @@ class AlbumsController extends Controller
      */
     public function index(Request $request, Reciter $reciter) : JsonResponse
     {
-        $query = Album::query()->where('reciter_id', $reciter->id);
+        $query = Album::query()->with(['reciter', 'tracks'])
+            ->where('reciter_id', $reciter->id);
 
         if ($request->get('per_page')) {
             $paginate = $query->paginate(
