@@ -167,6 +167,10 @@ return [
 
         'widgets' => [
             'TCG\\Voyager\\Widgets\\UserDimmer',
+            'App\Widgets\Reciters',
+            'App\Widgets\Albums',
+            'App\Widgets\Tracks',
+            'App\Widgets\Lyrics',
         ],
 
     ],
