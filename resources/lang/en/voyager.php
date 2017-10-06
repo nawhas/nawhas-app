@@ -147,18 +147,18 @@ return [
         'destination_folder'     => 'Destination Folder',
         'drag_drop_info'         => 'Drag and drop files or click below to upload',
         'error_already_exists'   => 'Sorry there is already a file/folder with that existing name in that folder.',
-        'error_creating_dir'     => 'Sorry something seems to have gone wrong with creating the directory, '.
+        'error_creating_dir'     => 'Sorry something seems to have gone wrong with creating the directory, ' .
                                     'please check your permissions',
-        'error_deleting_file'    => 'Sorry something seems to have gone wrong deleting this file, please check your '.
+        'error_deleting_file'    => 'Sorry something seems to have gone wrong deleting this file, please check your ' .
                                     'permissions',
-        'error_deleting_folder'  => 'Sorry something seems to have gone wrong when deleting this folder, '.
+        'error_deleting_folder'  => 'Sorry something seems to have gone wrong when deleting this folder, ' .
                                     'please check your permissions',
-        'error_may_exist'        => 'File or Folder may already exist with that name. Please choose another name or '.
+        'error_may_exist'        => 'File or Folder may already exist with that name. Please choose another name or ' .
                                     'delete the other file.',
-        'error_moving'           => 'Sorry there seems to be a problem moving that file/folder, please make '.
+        'error_moving'           => 'Sorry there seems to be a problem moving that file/folder, please make ' .
                                     'sure you have the correct permissions.',
         'error_uploading'        => 'Upload Fail: Unknown error occurred!',
-        'folder_exists_already'  => 'Sorry that folder already exists, please delete that folder if you wish '.
+        'folder_exists_already'  => 'Sorry that folder already exists, please delete that folder if you wish ' .
                                     'to re-create it',
         'image_does_not_exist'   => 'Image does not exist',
         'image_removed'          => 'Image removed',
@@ -210,7 +210,7 @@ return [
         'successfully_updated' => 'Successfully Updated Menu Item.',
         'updated_order'        => 'Successfully updated menu order.',
         'url'                  => 'URL for the Menu Item',
-        'usage_hint'           => 'You can output a menu anywhere on your site by calling|You can output '.
+        'usage_hint'           => 'You can output a menu anywhere on your site by calling|You can output ' .
                                   'this menu anywhere on your site by calling',
     ],
 
@@ -286,7 +286,7 @@ return [
         'model_name'                => 'Model Name',
         'model_name_ph'             => 'ex. \App\User, if left empty will try and use the table name',
         'name_warning'              => 'Please name the column before adding an index',
-        'no_composites_warning'     => 'This table has composite indexes. Please note that they are not supported '.
+        'no_composites_warning'     => 'This table has composite indexes. Please note that they are not supported ' .
                                       'at the moment. Be careful when trying to add/remove indexes.',
         'null'                     => 'Null',
         'optional_details'         => 'Optional Details',
@@ -330,7 +330,7 @@ return [
 
     'form' => [
         'field_password_keep'          => 'Leave empty to keep the same',
-        'field_select_dd_relationship' => 'Make sure to setup the appropriate relationship in the :method method of '.
+        'field_select_dd_relationship' => 'Make sure to setup the appropriate relationship in the :method method of ' .
                                           'the :class class.',
         'type_checkbox'                => 'Check Box',
         'type_codeeditor'              => 'Code Editor',
@@ -384,8 +384,8 @@ return [
         'by_pageview'             => 'By pageview',
         'by_sessions'             => 'By sessions',
         'by_users'                => 'By users',
-        'no_client_id'            => 'To view analytics you\'ll need to get a google analytics client id and '.
-                                     'add it to your settings for the key <code>google_analytics_client_id'.
+        'no_client_id'            => 'To view analytics you\'ll need to get a google analytics client id and ' .
+                                     'add it to your settings for the key <code>google_analytics_client_id' .
                                      '</code>. Get your key in your Google developer console:',
         'set_view'                => 'Select a View',
         'this_vs_last_week'       => 'This Week vs Last Week',
@@ -398,11 +398,11 @@ return [
     'error' => [
         'symlink_created_text'   => 'We just created the missing symlink for you.',
         'symlink_created_title'  => 'Missing storage symlink created',
-        'symlink_failed_text'    => 'We failed to generate the missing symlink for your application. '.
+        'symlink_failed_text'    => 'We failed to generate the missing symlink for your application. ' .
                                     'It seems like your hosting provider does not support it.',
         'symlink_failed_title'   => 'Could not create missing storage symlink',
         'symlink_missing_button' => 'Fix it',
-        'symlink_missing_text'   => 'We could not find a storage symlink. This could cause problems with '.
+        'symlink_missing_text'   => 'We could not find a storage symlink. This could cause problems with ' .
                                     'loading media files from the browser.',
         'symlink_missing_title'  => 'Missing storage symlink',
     ],

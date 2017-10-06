@@ -147,18 +147,18 @@ return [
         'destination_folder'     => 'Ziel Ordner',
         'drag_drop_info'         => 'Dateien mit Drag und Drop hineinziehen oder unten klicken um hochzuladen',
         'error_already_exists'   => 'Es ist bereits eine Datei bzw. ein Ordner mit diesem Namen in diesem Ordner enthalten.',
-        'error_creating_dir'     => 'Beim Versuch das Verzeichnis Anzulegen ist ein Fehler aufgetreten. '.
+        'error_creating_dir'     => 'Beim Versuch das Verzeichnis Anzulegen ist ein Fehler aufgetreten. ' .
                                     'Stellen Sie sicher, dass Sie ausreichende Zugriffsrechte dafür haben.',
-        'error_deleting_file'    => 'Beim Versuch diese Datei zu Löschen ist ein Fehler aufgetreten. '.
+        'error_deleting_file'    => 'Beim Versuch diese Datei zu Löschen ist ein Fehler aufgetreten. ' .
                                     'Stellen Sie sicher, dass Sie ausreichende Zugriffsrechte dafür haben.',
-        'error_deleting_folder'  => 'Beim Versuch diesen Ordner zu Löschen ist ein Fehler aufgetreten. Stellen Sie'.
+        'error_deleting_folder'  => 'Beim Versuch diesen Ordner zu Löschen ist ein Fehler aufgetreten. Stellen Sie' .
                                     'sicher, dass Sie ausreichende Zugriffsrechte dafür haben.',
-        'error_may_exist'        => 'Datei oder Ordner unter diesem Namen können bereits existieren. Wählen Sie '.
+        'error_may_exist'        => 'Datei oder Ordner unter diesem Namen können bereits existieren. Wählen Sie ' .
                                     'einen anderen Namen oder Löschen Sie die andere Datei.',
-        'error_moving'           => 'Beim Versuch diese Datei bzw. Ordner zu Verschieben ist ein Fehler aufgetreten. '.
+        'error_moving'           => 'Beim Versuch diese Datei bzw. Ordner zu Verschieben ist ein Fehler aufgetreten. ' .
                                     'Stellen Sie sicher, dass Sie ausreichende Zugriffsrechte dafür haben.',
         'error_uploading'        => 'Hochladen Fehlgeschlagen: Unbekannter Fehler aufgetreten!',
-        'folder_exists_already'  => 'Dieser Ordner existiert bereits. Bitte Löschen Sie diesen Ordner falls Sie ihn '.
+        'folder_exists_already'  => 'Dieser Ordner existiert bereits. Bitte Löschen Sie diesen Ordner falls Sie ihn ' .
                                     'neu Anlegen möchten',
         'image_does_not_exist'   => 'Bild existiert nicht',
         'image_removed'          => 'Bild entfernt',
@@ -173,7 +173,7 @@ return [
         'rename_file_folder'     => 'Datei/Ordner Umbenennen',
         'success_uploaded_file'  => 'Neue Datei erfolgreich hochgeladen!',
         'success_uploading'      => 'Bild erfolgreich hochgeladen!',
-        'uploading_wrong_type'   => 'Fehler beim Hochladen: Nicht unterstütztes Dateiformat oder Datei zu groß '.
+        'uploading_wrong_type'   => 'Fehler beim Hochladen: Nicht unterstütztes Dateiformat oder Datei zu groß ' .
                                     'zum Hochladen',
         'video_support'          => 'Ihr Browser unterstützt den Video Tag nicht.',
     ],
@@ -184,7 +184,7 @@ return [
         'create_new_item'      => 'Erstelle einen neues Menü Element',
         'delete_item_confirm'  => 'Ja, Lösche dieses Menü Element',
         'delete_item_question' => 'Sind Sie sicher dass Sie dieses Menü Element Löschen möchten?',
-        'drag_drop_info'       => 'Sie können die Reihenfolge der untenstehenden Menü Elemente durch Drag und Drop '.
+        'drag_drop_info'       => 'Sie können die Reihenfolge der untenstehenden Menü Elemente durch Drag und Drop ' .
                                   'um Ihre Reihenfolge zu verändern.',
         'dynamic_route'        => 'Dynamische Route',
         'edit_item'            => 'Menü Element Editieren',
@@ -205,7 +205,7 @@ return [
         'successfully_updated' => 'Menü Element erfolgreich aktualisiert.',
         'updated_order'        => 'Menü Reihenfolge erfolgreich aktualisiert.',
         'url'                  => 'URL des Menü Elements',
-        'usage_hint'           => 'Sie können ein Menü überall auf der Seite ausgeben durch den Aufruf|'.
+        'usage_hint'           => 'Sie können ein Menü überall auf der Seite ausgeben durch den Aufruf|' .
                                   'Sie können dieses Menü überall auf der Seite ausgeben durch den Aufruf',
     ],
 
@@ -250,7 +250,7 @@ return [
         'create_your_new_table'     => 'Erstellen Sie Ihre neue Tabelle',
         'default'                   => 'Default',
         'delete_bread'              => 'BREAD Löschen',
-        'delete_bread_before_table' => 'Sie müssen zuerst das BREAD von dieser Tabelle Entfernen '.
+        'delete_bread_before_table' => 'Sie müssen zuerst das BREAD von dieser Tabelle Entfernen ' .
                                        'bevor Sie die Tabelle Löschen können.',
         'delete_table_bread_conf'   => 'Ja, BREAD Entfernen',
         'delete_table_bread_quest'  => 'Sind Sie sicher, dass Sie das BREAD für Tabelle :table Löschen möchten?',
@@ -280,18 +280,18 @@ return [
         'key'                       => 'Key',
         'model_class'               => 'Name der Model Klasse',
         'model_name'                => 'Model Name',
-        'model_name_ph'             => 'z. B. \App\User, falls leer gelassen wird versucht den Namen der Tabelle '.
+        'model_name_ph'             => 'z. B. \App\User, falls leer gelassen wird versucht den Namen der Tabelle ' .
                                        'zu verwenden',
-        'name_warning'              => 'Sie müssen einen Namen für die Spalte vergeben, '.
+        'name_warning'              => 'Sie müssen einen Namen für die Spalte vergeben, ' .
                                        ' bevor Sie einen Index hinzufügen',
-        'no_composites_warning'     => 'Hinweis: Diese Tabelle hat zusammengesetzte Indexe. '.
-                                       'Diese werden momentan nicht unterstützt. '.
+        'no_composites_warning'     => 'Hinweis: Diese Tabelle hat zusammengesetzte Indexe. ' .
+                                       'Diese werden momentan nicht unterstützt. ' .
                                        'Seien Sie vorsichtig beim Hinzufügen/Ändern von Indexen.',
         'null'                     => 'Null',
         'optional_details'         => 'Optionale Details',
         'policy_class'             => 'Policy Klassenname',
         'policy_name'              => 'Policy Name',
-        'policy_name_ph'           => 'Bspw. \App\Policies\UserPolicy, falls leer gelassen wird versucht '.
+        'policy_name_ph'           => 'Bspw. \App\Policies\UserPolicy, falls leer gelassen wird versucht ' .
                                       'den Default Wert zu Verwenden.',
         'primary'                  => 'PRIMARY',
         'server_pagination'        => 'Serverseitige Pagination',
@@ -319,7 +319,7 @@ return [
     'dimmer' => [
         'page'           => 'Seite|Seiten',
         'page_link_text' => 'Alle Seiten Anzeigen',
-        'page_text'      => 'Sie haben:count :string in Ihrer Datenbank. Klicken Sie auf untenstehenden Button '.
+        'page_text'      => 'Sie haben:count :string in Ihrer Datenbank. Klicken Sie auf untenstehenden Button ' .
                             'um alle Seiten zu sehen.',
         'post'           => 'Post|Posts',
         'post_link_text' => 'Alle Posts Anzeigen',
@@ -333,7 +333,7 @@ return [
 
     'form' => [
         'field_password_keep'          => 'Leer lassen um das aktuelle zu Behalten',
-        'field_select_dd_relationship' => 'Stellen Sie sicher, dass Sie die entsprechende Relation in der '.
+        'field_select_dd_relationship' => 'Stellen Sie sicher, dass Sie die entsprechende Relation in der ' .
                                           ':method Methode der :class Klasse setzen.',
         'type_checkbox'                => 'Check Box',
         'type_codeeditor'              => 'Code Editor',
@@ -387,9 +387,9 @@ return [
         'by_pageview'             => 'nach pageview',
         'by_sessions'             => 'nach sessions',
         'by_users'                => 'nach users',
-        'no_client_id'            => 'Um Analytics zu sehen müssen Sie im Besitz einer google Analytics client id '.
-                                     'sein und diese zu Ihren Settings hinzufügen für den Key '.
-                                     '<code>google_analytics_client_id</code>. '.
+        'no_client_id'            => 'Um Analytics zu sehen müssen Sie im Besitz einer google Analytics client id ' .
+                                     'sein und diese zu Ihren Settings hinzufügen für den Key ' .
+                                     '<code>google_analytics_client_id</code>. ' .
                                      'Holen Sie sich Ihren Key in Ihrer Google developer console:',
         'set_view'                => 'eine Ansicht wählen',
         'this_vs_last_week'       => 'Diese Woche im Vergleich zu letzter Woche',
@@ -402,11 +402,11 @@ return [
     'error' => [
         'symlink_created_text'   => 'Wir haben soeben den fehlenden Symlink für Sie angelegt.',
         'symlink_created_title'  => 'Fehlenden Storage Symlink angelegt',
-        'symlink_failed_text'    => 'Fehlender Symlink für Ihre Applikation konnte nicht angelegt werden. '.
+        'symlink_failed_text'    => 'Fehlender Symlink für Ihre Applikation konnte nicht angelegt werden. ' .
                                     'Es scheint so als würde Ihr Hosting Provider dies nicht anbieten.',
         'symlink_failed_title'   => 'Fehlender Storage Symlink konnte nicht angelegt werden',
         'symlink_missing_button' => 'Bereinigen',
-        'symlink_missing_text'   => 'Wir konnten keinen Storage Symlink finden. Dies könnte zu Problemen führen '.
+        'symlink_missing_text'   => 'Wir konnten keinen Storage Symlink finden. Dies könnte zu Problemen führen ' .
                                     'beim Laden von Medien Dateien aus dem Browser.',
         'symlink_missing_title'  => 'Fehlender Storage Symlink',
     ],

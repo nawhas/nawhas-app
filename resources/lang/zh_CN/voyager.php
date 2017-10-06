@@ -190,7 +190,7 @@ return [
         'successfully_updated' => '成功更新菜单项。',
         'updated_order'        => '成功更新菜单顺序。',
         'url'                  => '菜单项的 URL',
-        'usage_hint'           => 'You can output a menu anywhere on your site by calling|You can output '.
+        'usage_hint'           => 'You can output a menu anywhere on your site by calling|You can output ' .
                                    'this menu anywhere on your site by calling',
     ],
     'post' => [
@@ -351,8 +351,8 @@ return [
         'by_pageview'             => 'By pageview',
         'by_sessions'             => 'By sessions',
         'by_users'                => 'By users',
-        'no_client_id'            => 'To view analytics you\'ll need to get a google analytics client id and '.
-                                     'add it to your settings for the key <code>google_analytics_client_id'.
+        'no_client_id'            => 'To view analytics you\'ll need to get a google analytics client id and ' .
+                                     'add it to your settings for the key <code>google_analytics_client_id' .
                                      '</code>. Get your key in your Google developer console:',
         'set_view'                => 'Select a View',
         'this_vs_last_week'       => 'This Week vs Last Week',
@@ -367,7 +367,7 @@ return [
         'symlink_failed_text'    => '我们未能为您的应用程序生成缺失的软连接，似乎您的主机提供商不支持它。',
         'symlink_failed_title'   => '无法创建丢失的存储软连接',
         'symlink_missing_button' => '修复',
-        'symlink_missing_text'   => '我们找不到一个存储软连接，这可能会导致'.
+        'symlink_missing_text'   => '我们找不到一个存储软连接，这可能会导致' .
                                     '从浏览器加载媒体文件的问题。',
         'symlink_missing_title' => '缺失的存储软连接',
     ],

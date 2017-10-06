@@ -147,18 +147,18 @@ return [
         'destination_folder'     => 'Carpeta de destino',
         'drag_drop_info'         => 'Arrastre y suelte archivos o haga clic abajo para cargar',
         'error_already_exists'   => 'Lo siento, ya hay un archivo/carpeta existente con ese nombre en esa carpeta.',
-        'error_creating_dir'     => 'Lo siento, algo parece haber ido mal con la creación del directorio,'.
+        'error_creating_dir'     => 'Lo siento, algo parece haber ido mal con la creación del directorio,' .
             'por favor revise sus permisos',
-        'error_deleting_file' => 'Lo siento, algo parece haber ido mal con en el borrado del archivo,'.
+        'error_deleting_file' => 'Lo siento, algo parece haber ido mal con en el borrado del archivo,' .
             'por favor revise sus permisos',
-        'error_deleting_folder' => 'Lo siento, algo parece haber fallado al eliminar esta carpeta,'.
+        'error_deleting_folder' => 'Lo siento, algo parece haber fallado al eliminar esta carpeta,' .
             'por favor revise sus permisos',
-        'error_may_exist' => 'Puede que ya exista un archivo o carpeta con ese nombre. Por favor, elige otro nombre o '.
+        'error_may_exist' => 'Puede que ya exista un archivo o carpeta con ese nombre. Por favor, elige otro nombre o ' .
             'borre el otro archivo.',
-        'error_moving' => 'Lo siento, parece que hay un problema al mover ese archivo/carpeta, por favor '.
+        'error_moving' => 'Lo siento, parece que hay un problema al mover ese archivo/carpeta, por favor ' .
             'asegúrese de tener los permisos correctos.',
         'error_uploading'       => 'Carga Fallida: Ocurrió un error desconocido!',
-        'folder_exists_already' => 'Lo siento, la carpeta ya existe, por favor, elimine esa carpeta si desea '.
+        'folder_exists_already' => 'Lo siento, la carpeta ya existe, por favor, elimine esa carpeta si desea ' .
             'crearla nuevamente',
         'image_does_not_exist'  => 'La imagen no existe',
         'image_removed'         => 'Imagen eliminada',
@@ -278,7 +278,7 @@ return [
         'model_name'                => 'Nombre del modelo',
         'model_name_ph'             => 'ej. \App\User, si se deja vacío intentará usar el nombre de la tabla ',
         'name_warning'              => 'Por favor, nombre la columna antes de añadir un índice',
-        'no_composites_warning'     => 'Esta tabla tiene índices compuestos. Tenga en cuenta que en este momento'.
+        'no_composites_warning'     => 'Esta tabla tiene índices compuestos. Tenga en cuenta que en este momento' .
             'no se admiten. Tenga cuidado al intentar agregar/quitar índices.',
         'null'                      => 'Nulo',
         'optional_details'          => 'Detalles opcionales',
@@ -322,7 +322,7 @@ return [
 
     'form' => [
         'field_password_keep'          => 'Dejar vacío para mantener el mismo',
-        'field_select_dd_relationship' => 'Asegúrese de configurar la relación apropiada en el método :method de'.
+        'field_select_dd_relationship' => 'Asegúrese de configurar la relación apropiada en el método :method de' .
             'la clase :class.',
         'type_checkbox'       => 'Casilla de verificación',
         'type_codeeditor'     => 'Editor de código',
@@ -376,8 +376,8 @@ return [
         'by_pageview'  => 'Por página',
         'by_sessions'  => 'Por sesiones',
         'by_users'     => 'Por usuarios',
-        'no_client_id' => 'Para ver los análisis, necesitará obtener una ID de cliente de Google Analytics y'.
-            'añadirla a su configuración para la clave <code>google_analytics_client_id'.
+        'no_client_id' => 'Para ver los análisis, necesitará obtener una ID de cliente de Google Analytics y' .
+            'añadirla a su configuración para la clave <code>google_analytics_client_id' .
             '</code>. Obtenga su clave en la consola de desarrolladores de Google: ',
         'set_view'               => 'Seleccionar una vista',
         'this_vs_last_week'      => 'Esta semana vs la semana pasada',
@@ -390,11 +390,11 @@ return [
     'error' => [
         'symlink_created_text'  => 'Acabamos de crear el enlace simbólico que faltaba para usted.',
         'symlink_created_title' => 'Enlace simbólico de almacenamiento faltante creado',
-        'symlink_failed_text'   => 'No hemos podido generar el enlace simbólico perdido para su aplicación. '.
+        'symlink_failed_text'   => 'No hemos podido generar el enlace simbólico perdido para su aplicación. ' .
             'Parece que su proveedor de alojamiento no lo admite.',
         'symlink_failed_title'   => 'No se pudo crear un enlace simbólico de almacenamiento faltante',
         'symlink_missing_button' => 'Arréglalo',
-        'symlink_missing_text'   => 'No pudimos encontrar un enlace simbólico de almacenamiento. Esto podría causar problemas con '.
+        'symlink_missing_text'   => 'No pudimos encontrar un enlace simbólico de almacenamiento. Esto podría causar problemas con ' .
             'la carga de archivos multimedia desde el navegador.',
         'symlink_missing_title' => 'Falta el enlace simbólico de almacenamiento',
     ],

@@ -112,13 +112,13 @@ return [
     ],
 
     'settings' => [
-        'usage_help'           => 'Vous pouvez obtenir la valeur de chaque paramètre n\'importe où sur votre site en '.
+        'usage_help'           => 'Vous pouvez obtenir la valeur de chaque paramètre n\'importe où sur votre site en ' .
                                   'appelant',
         'save'                 => 'Enregistrer les paramètres',
         'new'                  => 'Nouveau paramètre',
         'help_name'            => 'Nom du paramètre, exemple : Titre de l\'espace d\'administration',
         'help_key'             => 'Clé de paramètre, exemple : titre_admin',
-        'help_option'          => '(en option. S\'applique uniquement à certains types, comme un menu déroulant ou un '.
+        'help_option'          => '(en option. S\'applique uniquement à certains types, comme un menu déroulant ou un ' .
                                   'bouton radio)',
         'add_new'              => 'Ajouter un nouveau paramètre',
         'delete_question'      => 'Êtes-vous sûr de vouloir supprimer le paramètre : :setting ?',
@@ -141,18 +141,18 @@ return [
         'destination_folder'     => 'Dossier de destination',
         'drag_drop_info'         => 'Glissez/déposez des fichiers ou cliquez ci-dessous pour télécharger',
         'error_already_exists'   => 'Désolé, il existe déjà un fichier/dossier avec ce nom dans ce dossier.',
-        'error_creating_dir'     => 'Désolé, quelque chose n\'a pas fonctionné lors de la création du dossier, '.
+        'error_creating_dir'     => 'Désolé, quelque chose n\'a pas fonctionné lors de la création du dossier, ' .
                                     'vérifiez les autorisations SVP',
-        'error_deleting_file'    => 'Désolé, quelque chose n\'a pas fonctionné lors de la suppression du fichier, '.
+        'error_deleting_file'    => 'Désolé, quelque chose n\'a pas fonctionné lors de la suppression du fichier, ' .
                                     'vérifiez les autorisations SVP',
-        'error_deleting_folder'  => 'Désolé, quelque chose n\'a pas fonctionné lors de la suppression du dossier, '.
+        'error_deleting_folder'  => 'Désolé, quelque chose n\'a pas fonctionné lors de la suppression du dossier, ' .
                                     'vérifiez les autorisations SVP',
-        'error_may_exist'        => 'Un fichier ou un dossier avec ce nom existe déjà. Choisissez un autre nom '.
+        'error_may_exist'        => 'Un fichier ou un dossier avec ce nom existe déjà. Choisissez un autre nom ' .
                                     'ou supprimez le fichier/dossier existant.',
-        'error_moving'           => 'Désolé, il y a un problème pour déplacer ce fichier/dossier, '.
+        'error_moving'           => 'Désolé, il y a un problème pour déplacer ce fichier/dossier, ' .
                                     'vérifiez les autorisations SVP',
         'error_uploading'        => 'Échec du téléchargement : une erreur inconnue s\'est produite !',
-        'folder_exists_already'  => 'Désolé, ce dossier existe déjà. Supprimez-le pour le récréer ou '.
+        'folder_exists_already'  => 'Désolé, ce dossier existe déjà. Supprimez-le pour le récréer ou ' .
                                     'choisissez un autre nom',
         'image_does_not_exist'   => 'L\'image n\'existe pas',
         'image_removed'          => 'Image supprimée',
@@ -167,7 +167,7 @@ return [
         'rename_file_folder'     => 'renommer le fichier/dossier',
         'success_uploaded_file'  => 'Téléchargement du fichier réussi !',
         'success_uploading'      => 'Image téléchargée avec succès !',
-        'uploading_wrong_type'   => 'Échec du téléchargement : format de fichier non pris en charge ou volume trop '.
+        'uploading_wrong_type'   => 'Échec du téléchargement : format de fichier non pris en charge ou volume trop ' .
                                     'important !',
         'video_support'          => 'Votre navigateur ne prend pas en charge la balise vidéo.',
     ],
@@ -198,7 +198,7 @@ return [
         'successfully_updated' => 'Elément de menu édité avec succès.',
         'updated_order'        => 'Elément de menu réordonné avec succès.',
         'url'                  => 'URL pour l\'élément de menu',
-        'usage_hint'           => 'Vous pouvez afficher un menu n\'importe où sur le site en appelant|Vous '.
+        'usage_hint'           => 'Vous pouvez afficher un menu n\'importe où sur le site en appelant|Vous ' .
                                   'pouvez afficher ce menu n\'importe où sur le site en appelant',
     ],
 
@@ -233,7 +233,7 @@ return [
         'bread_crud_actions'        => 'Actions du BREAD/CRUD',
         'bread_info'                => 'Information du BREAD',
         'column'                    => 'Colonne',
-        'composite_warning'         => 'Avertissement : cette colonne fait partie d\'un indice composite '.
+        'composite_warning'         => 'Avertissement : cette colonne fait partie d\'un indice composite ' .
                                        '(composite index)',
         'controller_name'           => 'Nom du controleur',
         'controller_name_hint'      => 'exemple : PageController. Si laissé vide, utilisera le contrôleur BREAD',
@@ -275,8 +275,8 @@ return [
         'model_name'                => 'Nom du modèle (model)',
         'model_name_ph'             => 'exemple : \App\User. Si laissé vide, essayera d\'utiliser le nom de la table',
         'name_warning'              => 'Nommez la colonne avant d\'ajouter un index SVP',
-        'no_composites_warning'     => 'Cette table comporte des index composites. Notez qu\'ils ne sont pas pris en '.
-                                       'charge pour le moment. Faites attention lorsque vous essayez '.
+        'no_composites_warning'     => 'Cette table comporte des index composites. Notez qu\'ils ne sont pas pris en ' .
+                                       'charge pour le moment. Faites attention lorsque vous essayez ' .
                                        'd\'ajouter/supprimer des index.',
         'null'                      => 'Null',
         'optional_details'          => 'Détails facultatifs',
@@ -306,21 +306,21 @@ return [
     'dimmer' => [
         'page'           => 'Page|Pages',
         'page_link_text' => 'Voir toutes les pages',
-        'page_text'      => 'Vous avez :count :string enregistrées. Cliquez sur le bouton ci-dessous pour afficher '.
+        'page_text'      => 'Vous avez :count :string enregistrées. Cliquez sur le bouton ci-dessous pour afficher ' .
                             'toutes les pages.',
         'post'           => 'Article|Articles',
         'post_link_text' => 'Voir tous les articles',
-        'post_text'      => 'Vous avez :count :string enregistrés. Cliquez sur le bouton ci-dessous pour afficher '.
+        'post_text'      => 'Vous avez :count :string enregistrés. Cliquez sur le bouton ci-dessous pour afficher ' .
                             'tous les articles.',
         'user'           => 'Utilisateur|Utilisateur',
         'user_link_text' => 'Voir tous les utilisateurs',
-        'user_text'      => 'Vous avez :count :string enregistrés. Cliquez sur le bouton ci-dessous pour afficher '.
+        'user_text'      => 'Vous avez :count :string enregistrés. Cliquez sur le bouton ci-dessous pour afficher ' .
                             'tous les utilisateurs.',
     ],
 
     'form' => [
         'field_password_keep'          => 'Laissez vide pour garder le même',
-        'field_select_dd_relationship' => 'Assurez-vous de configurer la relation appropriée dans la méthode :method '.
+        'field_select_dd_relationship' => 'Assurez-vous de configurer la relation appropriée dans la méthode :method ' .
                                           'de la classe :class.',
         'type_checkbox'                => 'Case à cocher',
         'type_codeeditor'              => 'Editeur de code',
@@ -374,8 +374,8 @@ return [
         'by_pageview'            => 'Par pages vues',
         'by_sessions'            => 'Par sessions',
         'by_users'               => 'Par utilisateurs',
-        'no_client_id'           => 'Pour afficher Google Analytics, vous devrez obtenir un identifiant et  '.
-                                    'l\'ajouter à vos paramètres clé : <code>google_analytics_client_id</code>. '.
+        'no_client_id'           => 'Pour afficher Google Analytics, vous devrez obtenir un identifiant et  ' .
+                                    'l\'ajouter à vos paramètres clé : <code>google_analytics_client_id</code>. ' .
                                     'Obtenez une clé dans l\'espace développeur Google :',
         'set_view'               => 'Sélectionner une vue',
         'this_vs_last_week'      => 'Cette semaine contre la semaine dernière',
@@ -388,11 +388,11 @@ return [
     'error' => [
         'symlink_created_text'   => 'Nous avons créé le lien symbolique manquant pour vous.',
         'symlink_created_title'  => 'Le lien symbolique de stockage manquant a été créé',
-        'symlink_failed_text'    => 'Nous n\'avons pu généré le lien symbolique manquant pour votre application. '.
+        'symlink_failed_text'    => 'Nous n\'avons pu généré le lien symbolique manquant pour votre application. ' .
                                     'Il semble que votre hébergeur ne supporte pas cette fonction.',
         'symlink_failed_title'   => 'Impossible de créer un lien symbolique de stockage manquant',
         'symlink_missing_button' => 'Le réparer !',
-        'symlink_missing_text'   => 'Nous n\'avons pu trouver le lien symbolique de stockage. '.
+        'symlink_missing_text'   => 'Nous n\'avons pu trouver le lien symbolique de stockage. ' .
                                     'Cela pourrait causer des problèmes de chargement des fichiers multimédias.',
         'symlink_missing_title'  => 'Le lien symbolique de stockage est manquant',
     ],

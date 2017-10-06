@@ -140,7 +140,7 @@ return [
         'destination_folder'     => 'Dosya konumu',
         'drag_drop_info'         => 'Sürükle bırakla hızlıca resim yükle',
         'error_already_exists'   => 'Malesef dosya/dizin ile aynı isimde bulunan bir kayıt var',
-        'error_creating_dir'     => 'Malesef dizin oluşturuken bir şeyler yolunda girmedi, '.'Lütfen izinlerinizi kontrol ediniz',
+        'error_creating_dir'     => 'Malesef dizin oluşturuken bir şeyler yolunda girmedi, ' . 'Lütfen izinlerinizi kontrol ediniz',
         'error_deleting_file'    => 'Bu dosyayı silerken bir sorun oluştu, lütfen izinlerinizi kontrol ediniz ',
         'error_deleting_folder'  => 'Malesef bu dizini silerken bir sorun oluştur, lütfen izinlerinizi kontrol ediniz',
         'error_may_exist'        => 'Malesef dosya/dizin ile aynı isimde bulunan bir kayıt olabilir lütfen ismini değiştirn',
@@ -190,7 +190,7 @@ return [
         'successfully_updated' => 'Menü kaydı başarılı bir şekilde güncellendi',
         'updated_order'        => 'Menü kaydı başarılı bir şekilde sıralandı',
         'url'                  => 'Menü kaydının linki',
-        'usage_hint'           => 'Bu menüyü istediğiniz yerde çağra bilirsiniz|Şu şekilde '.
+        'usage_hint'           => 'Bu menüyü istediğiniz yerde çağra bilirsiniz|Şu şekilde ' .
             'Bu menüyü sitenin istediğiniz yerinde çağırmak için',
     ],
 
@@ -266,7 +266,7 @@ return [
         'model_name'                => 'Model Adı',
         'model_name_ph'             => 'ex. \App\User, Eğer boş ise tablo adını deneyin',
         'name_warning'              => 'Lütfen indeks eklemden önce kolon adı belirleyin',
-        'no_composites_warning'     => 'This table has composite indexes. Please note that they are not supported '.
+        'no_composites_warning'     => 'This table has composite indexes. Please note that they are not supported ' .
             'at the moment. Be careful when trying to add/remove indexes.',
         'null'                  => 'Boş',
         'optional_details'      => 'İsteğe Bağlı Ayrıntılar',
@@ -307,7 +307,7 @@ return [
 
     'form' => [
         'field_password_keep'          => 'Aynı kalamsı için boş bırakın',
-        'field_select_dd_relationship' => 'Şurada uygun ilişkiyi kurduğunuzdan emin olun. :method methodu ile '.
+        'field_select_dd_relationship' => 'Şurada uygun ilişkiyi kurduğunuzdan emin olun. :method methodu ile ' .
             ':class sınıfı içinde.',
         'type_checkbox'       => 'Çoklu seçim kutuları',
         'type_codeeditor'     => 'Kod Editörü',
@@ -361,8 +361,8 @@ return [
         'by_pageview'  => 'Sayfa görüntülenmeye göre',
         'by_sessions'  => 'Oturuma göre',
         'by_users'     => 'Kullanıcıya göre',
-        'no_client_id' => 'To view analytics you\'ll need to get a google analytics client id and '.
-            'add it to your settings for the key <code>google_analytics_client_id'.
+        'no_client_id' => 'To view analytics you\'ll need to get a google analytics client id and ' .
+            'add it to your settings for the key <code>google_analytics_client_id' .
             '</code>. Get your key in your Google developer console:',
         'set_view'               => 'Görünüm seçin',
         'this_vs_last_week'      => 'Bu Hafta vs Geçen Hafta',
@@ -375,11 +375,11 @@ return [
     'error' => [
         'symlink_created_text'  => 'Kayıp depolama alanı sembolik bağlantısı sizin için onardık',
         'symlink_created_title' => 'Kayıp depolama alanı sembolik bağlantısı oluşturuldu',
-        'symlink_failed_text'   => 'Kayıp depolama alanı sembolik bağlantısını sizin için oluştururken sorun alıyoruz'.
+        'symlink_failed_text'   => 'Kayıp depolama alanı sembolik bağlantısını sizin için oluştururken sorun alıyoruz' .
             'Sunucunuz bunu desteklemiyor görünüyor.',
         'symlink_failed_title'   => 'Depolama alanı sembolik bağlantısı oluşturulamadı',
         'symlink_missing_button' => 'Düzelt',
-        'symlink_missing_text'   => 'Depolama alanı sembolik bağlantısı bulamadık. Şunun yüzünden olabilir '.
+        'symlink_missing_text'   => 'Depolama alanı sembolik bağlantısı bulamadık. Şunun yüzünden olabilir ' .
             'Medya dosyalarını tarayıcıdan yüklerken',
         'symlink_missing_title' => 'Depolama alanı sembolik bağlantısı eksik',
     ],

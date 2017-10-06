@@ -147,18 +147,18 @@ return [
         'destination_folder'     => 'Cartella di Destinazione',
         'drag_drop_info'         => 'Trascina e rilascia i file o premi sotto per caricare',
         'error_already_exists'   => 'Spiacenti esiste già un file o una cartella con questo nome in questa cartella.',
-        'error_creating_dir'     => 'Spiacenti qualcosa è andato storto nella creazione della cartella, '.
+        'error_creating_dir'     => 'Spiacenti qualcosa è andato storto nella creazione della cartella, ' .
                                     'per favore controllate i vostri permessi',
-        'error_deleting_file'    => 'Spiacenti qualcosa è andato storto nella cancellazione di questo file, per favore controllate i vostri '.
+        'error_deleting_file'    => 'Spiacenti qualcosa è andato storto nella cancellazione di questo file, per favore controllate i vostri ' .
                                     'permessi',
-        'error_deleting_folder'  => 'Spiacenti qualcosa è andato storto nella cancellazione di questa cartella, '.
+        'error_deleting_folder'  => 'Spiacenti qualcosa è andato storto nella cancellazione di questa cartella, ' .
                                     'per favore controllate i vostri permessi',
-        'error_may_exist'        => 'Un File o una cartella potrebbero già esistere con quel nome. Scegli un altro nome oppure '.
+        'error_may_exist'        => 'Un File o una cartella potrebbero già esistere con quel nome. Scegli un altro nome oppure ' .
                                     'elimina l\'altro file.',
-        'error_moving'           => 'Spiacenti, sembra che ci sia un problema nello spostare quel file / cartella, per favore '.
+        'error_moving'           => 'Spiacenti, sembra che ci sia un problema nello spostare quel file / cartella, per favore ' .
                                     'controllate di avere i permessi corretti.',
         'error_uploading'        => 'Caricamento Fallito: Errore sconosciuto!',
-        'folder_exists_already'  => 'Spiacenti questa cartella è già esistente, si prega di eliminarla se si desira '.
+        'folder_exists_already'  => 'Spiacenti questa cartella è già esistente, si prega di eliminarla se si desira ' .
                                     'ricrearla',
         'image_does_not_exist'   => 'L\'immagine non esiste',
         'image_removed'          => 'Immagine rimossa',
@@ -203,7 +203,7 @@ return [
         'successfully_updated' => 'Elemento del Menù Aggiornato con Successo.',
         'updated_order'        => 'Ordine menù aggiornato con successo.',
         'url'                  => 'URL per l\'Elemento del Menù',
-        'usage_hint'           => 'È possibile stampare un menu ovunque nel tuo sito chiamando|Puoi stampare '.
+        'usage_hint'           => 'È possibile stampare un menu ovunque nel tuo sito chiamando|Puoi stampare ' .
                                   'questo menu ovunque nel tuo sito chiamando',
     ],
 
@@ -279,7 +279,7 @@ return [
         'model_name'                => 'Nome Model',
         'model_name_ph'             => 'es. \App\User, se lasciato vuoto proverà ad utilizzare il nome della tabella',
         'name_warning'              => 'Per favore dare un nome alla colonna prima di inserire un indice',
-        'no_composites_warning'     => 'Questa tabella ha indici compositi. Si prega di notare che non sono supportati '.
+        'no_composites_warning'     => 'Questa tabella ha indici compositi. Si prega di notare che non sono supportati ' .
                                       'al momento. Fare attenzione quando si tenta di aggiungere/rimuovere gli indici.',
         'null'                     => 'Null',
         'optional_details'         => 'Dettagli Opzionali',
@@ -323,7 +323,7 @@ return [
 
     'form' => [
         'field_password_keep'          => 'Lasciare vuoto per mantenere lo stesso',
-        'field_select_dd_relationship' => 'Assicurarsi di impostare la relazione appropriata nel metodo :method della'.
+        'field_select_dd_relationship' => 'Assicurarsi di impostare la relazione appropriata nel metodo :method della' .
                                           'classe :class .',
         'type_checkbox'                => 'Check Box',
         'type_codeeditor'              => 'Editore del Codice',
@@ -377,8 +377,8 @@ return [
         'by_pageview'             => 'Per pageview',
         'by_sessions'             => 'Per sessioni',
         'by_users'                => 'Per utenti',
-        'no_client_id'            => 'Per visualizzare le analisi, dovrai ottenere un client ID per Google Analytics e'.
-                                     'aggiungerlo alle tue impostazioni per la chiave <code>google_analytics_client_id'.
+        'no_client_id'            => 'Per visualizzare le analisi, dovrai ottenere un client ID per Google Analytics e' .
+                                     'aggiungerlo alle tue impostazioni per la chiave <code>google_analytics_client_id' .
                                      '</code>. ottieni una chiave su Google developer console:',
         'set_view'                => 'Seleziona una Vista',
         'this_vs_last_week'       => 'Questa settimana vs la scorsa settimana',
@@ -391,11 +391,11 @@ return [
     'error' => [
         'symlink_created_text'   => 'Abbiamo appena creato il symlink mancante per te.',
         'symlink_created_title'  => 'Il symlink per lo storage mancante è stato creato',
-        'symlink_failed_text'    => 'Non siamo riusciti a generare il symlink mancante per l\'applicazione. '.
+        'symlink_failed_text'    => 'Non siamo riusciti a generare il symlink mancante per l\'applicazione. ' .
                                     'Sembra che il tuo provider di hosting non lo supporti.',
         'symlink_failed_title'   => 'Non è possibile creare il symlink per lo storage mancante',
         'symlink_missing_button' => 'Riparalo',
-        'symlink_missing_text'   => 'Non abbiamo trovato un symlink per lo storage. Questo potrebbe causare problemi '.
+        'symlink_missing_text'   => 'Non abbiamo trovato un symlink per lo storage. Questo potrebbe causare problemi ' .
                                     'nel caricare file multimediali dal browser.',
         'symlink_missing_title'  => 'Symlink per lo storage mancante',
     ],
