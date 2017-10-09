@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,4 +28,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isAdmin()
+    {
+        if(Auth::user()->role == 'admin') {
+            return true;
+        }
+    }
 }
