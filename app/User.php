@@ -33,6 +33,8 @@ class User extends Authenticatable
     {
         if(Auth::user()->role == 'admin') {
             return true;
+        } else {
+            return false;
         }
     }
 }
