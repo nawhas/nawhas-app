@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('Api')->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::get('/', 'UsersController@show');
+    });
     Route::prefix('reciters')->group(function () {
         Route::get('/', 'RecitersController@index');
         Route::post('/', 'RecitersController@store');
