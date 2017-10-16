@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\TransformsResponses;
 use App\Transformers\UsersTransformer;
-use Illuminate\Http\Request;
+use Auth;
 use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
+    use TransformsResponses;
+
     /**
      * UsersController constructor.
      * @param UsersTransformer $transformer
@@ -22,6 +25,6 @@ class UsersController extends Controller
      */
     public function show()
     {
-        return $this->respondWithItem(Auth::user()->id);
+        return $this->respondWithItem(Auth::user());
     }
 }
