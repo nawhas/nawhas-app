@@ -7,8 +7,10 @@ use App\Reciter;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Filesystem\Filesystem;
 use App\Transformers\ReciterTransformer;
 use App\Http\Controllers\TransformsResponses;
+use Illuminate\Support\Facades\Storage;
 
 class RecitersController extends Controller
 {
@@ -17,11 +19,13 @@ class RecitersController extends Controller
     /**
      * RecitersController constructor.
      * @param ReciterTransformer $transformer
+     * @param Filesystem $filesystem
      */
-    public function __construct(ReciterTransformer $transformer)
+    public function __construct(ReciterTransformer $transformer, Filesystem $filesystem)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -53,13 +57,25 @@ class RecitersController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request) : JsonResponse
+    public function store(Request $request)// : JsonResponse
     {
+        return $request;
+        $file = $request->rawImage;
+        $extension = $this->filesystem->extension($file);
+        $md5 = $this->filesystem->hash($file);
+        $filename = $md5 . '.' . $extension;
+        $path = 'reciters' . '/' . $filename;
+        if (Storage::exists($path)) {
+            $imageURL = Storage::url($path);
+        } else{
+            $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+            $imageURL = Storage::url($uploadedFilePath);
+        }
         $reciter = new Reciter();
         $reciter->name = $request->get('name');
         $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
-        $reciter->avatar = $request->get('avatar');
+        $reciter->avatar = $imageURL;
         $reciter->created_by = Auth::user()->id;
         $reciter->save();
 
