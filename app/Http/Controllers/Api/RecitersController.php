@@ -104,13 +104,24 @@ class RecitersController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter) : JsonResponse
+    public function update(Request $request, Reciter $reciter)
     {
+        if ($request->updatedAvatar) {
+            $file = $request->updatedAvatar;
+            $extension = $this->filesystem->extension($file);
+            $md5 = $this->filesystem->hash($file);
+            $filename = $md5 . '.' . $extension;
+            $path = 'reciters' . '/' . $filename;
+            if (Storage::exists($path)) {
+                $imageURL = Storage::url($path);
+            } else{
+                $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+                $imageURL = Storage::url($uploadedFilePath);
+            }
+            $reciter->avatar = $imageURL;
+        }
         $reciter->name = $request->get('name');
-        $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
-        $reciter->avatar = $request->get('avatar');
-        $reciter->created_by = Auth::user()->id;
         $reciter->save();
 
         return $this->respondWithItem(Reciter::find($reciter->id));
@@ -128,5 +139,9 @@ class RecitersController extends Controller
         $reciter->delete();
 
         return response(null, 204);
+    }
+
+    private function fileUpload() {
+
     }
 }

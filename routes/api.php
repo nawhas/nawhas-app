@@ -25,7 +25,7 @@ Route::namespace('Api')->group(function () {
         Route::get('/', 'RecitersController@index');
         Route::post('/', 'RecitersController@store');
         Route::get('/{reciter}', 'RecitersController@show');
-        Route::put('/{reciter}', 'RecitersController@update');
+        Route::post('/{reciter}', 'RecitersController@update');
         Route::patch('/{reciter}', 'RecitersController@update');
         Route::delete('/{reciter}', 'RecitersController@destroy');
     });
