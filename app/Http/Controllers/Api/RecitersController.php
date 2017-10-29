@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Support\File\ExplicitExtensionFile;
 use Auth;
 use App\Reciter;
 use Illuminate\Http\Request;
@@ -59,8 +60,7 @@ class RecitersController extends Controller
      */
     public function store(Request $request)// : JsonResponse
     {
-        return $request;
-        $file = $request->rawImage;
+        $file = $request->avatar;
         $extension = $this->filesystem->extension($file);
         $md5 = $this->filesystem->hash($file);
         $filename = $md5 . '.' . $extension;
