@@ -113,10 +113,22 @@ class AlbumsController extends Controller
      */
     public function update(Request $request, Reciter $reciter, Album $album) : JsonResponse
     {
+        if ($request->updateArtwork) {
+            $file = $request->updateArtwork;
+            $extension = $this->filesystem->extension($file);
+            $md5 = $this->filesystem->hash($file);
+            $filename = $md5 . '.' . $extension;
+            $path = 'albums' . '/' . $filename;
+            if (Storage::exists($path)) {
+                $imageURL = Storage::url($path);
+            } else{
+                $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+                $imageURL = Storage::url($uploadedFilePath);
+            }
+            $album->artwork = $imageURL;
+        }
         $album->name = $request->get('name');
         $album->year = $request->get('year');
-        $album->artwork = $request->get('artwork');
-        $album->created_by = Auth::user()->id;
         $album->save();
 
         return $this->respondWithItem(Album::find($album->id));
