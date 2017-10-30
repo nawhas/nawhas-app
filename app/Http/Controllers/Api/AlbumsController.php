@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Support\File\ExplicitExtensionFile;
 use Auth;
 use App\Album;
 use App\Reciter;
@@ -9,8 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Filesystem\Filesystem;
 use App\Transformers\AlbumTransformer;
 use App\Http\Controllers\TransformsResponses;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumsController extends Controller
 {
@@ -20,10 +23,11 @@ class AlbumsController extends Controller
      * AlbumsController constructor.
      * @param AlbumTransformer $transformer
      */
-    public function __construct(AlbumTransformer $transformer)
+    public function __construct(AlbumTransformer $transformer, Filesystem $filesystem)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -57,13 +61,26 @@ class AlbumsController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Reciter $reciter) : JsonResponse
+    public function store(Request $request, Reciter $reciter)// : JsonResponse
     {
+        if ($request->artwork) {
+            $file = $request->artwork;
+            $extension = $this->filesystem->extension($file);
+            $md5 = $this->filesystem->hash($file);
+            $filename = $md5 . '.' . $extension;
+            $path = 'albums' . '/' . $filename;
+            if (Storage::exists($path)) {
+                $imageURL = Storage::url($path);
+            } else{
+                $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+                $imageURL = Storage::url($uploadedFilePath);
+            }
+        }
         $album = new Album();
         $album->name = $request->get('name');
         $album->reciter_id = $reciter->id;
         $album->year = $request->get('year');
-        $album->artwork = $request->get('artwork');
+        $album->artwork = $imageURL;
         $album->created_by = Auth::user()->id;
         $album->save();
 
