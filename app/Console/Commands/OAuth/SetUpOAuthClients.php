@@ -76,7 +76,7 @@ class SetUpOAuthClients extends Command
 
             $permissions = $this->fs->chmod($keyFile);
 
-            if ($permissions !== '0660') {
+            if ($permissions !== '0777') {
                 throw new UnreadableFileException($keyFile . ' reads as ' . $permissions . ' instead of 0660');
             }
         }

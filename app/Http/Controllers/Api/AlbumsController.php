@@ -61,7 +61,7 @@ class AlbumsController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Reciter $reciter)// : JsonResponse
+    public function store(Request $request, Reciter $reciter) : JsonResponse
     {
         if ($request->artwork) {
             $file = $request->artwork;
@@ -111,10 +111,10 @@ class AlbumsController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter, Album $album) : JsonResponse
+    public function update(Request $request, Reciter $reciter, Album $album)// : JsonResponse
     {
-        if ($request->updateArtwork) {
-            $file = $request->updateArtwork;
+        if ($request->updatedArtwork) {
+            $file = $request->updatedArtwork;
             $extension = $this->filesystem->extension($file);
             $md5 = $this->filesystem->hash($file);
             $filename = $md5 . '.' . $extension;

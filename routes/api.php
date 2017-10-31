@@ -35,7 +35,7 @@ Route::namespace('Api')->group(function () {
         Route::get('/', 'AlbumsController@index');
         Route::post('/', 'AlbumsController@store');
         Route::get('/{album}', 'AlbumsController@show');
-        Route::put('/{album}', 'AlbumsController@update');
+        Route::post('/{album}', 'AlbumsController@update');
         Route::patch('/{album}', 'AlbumsController@update');
         Route::delete('/{album}', 'AlbumsController@destroy');
     });
