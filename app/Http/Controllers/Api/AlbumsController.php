@@ -111,7 +111,7 @@ class AlbumsController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter, Album $album)// : JsonResponse
+    public function update(Request $request, Reciter $reciter, Album $album) : JsonResponse
     {
         if ($request->updatedArtwork) {
             $file = $request->updatedArtwork;
