@@ -40,8 +40,12 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('track', function ($value, $route) {
+            if ($reciter = $route->parameter('reciter')) {
+            } else {
+                throw new ModelNotFoundException();
+            }
             if ($album = $route->parameter('album')) {
-                return $album->tracks()->where('id', $value)->orWhere('slug', $value)->orWhere('number', $value)->firstOrFail();
+                return $album->tracks()->where('reciter_id', $reciter->id)->where('id', $value)->orWhere('slug', $value)->orWhere('number', $value)->firstOrFail();
             } else {
                 throw new ModelNotFoundException();
             }
