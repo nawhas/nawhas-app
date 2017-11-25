@@ -38,7 +38,7 @@ class TracksController extends Controller
     public function index(Request $request, Reciter $reciter, Album $album) : JsonResponse
     {
         $query = Track::query()
-            ->where('reciter_id', $reciter)
+            ->where('reciter_id', $reciter->id)
             ->where('album_id', $album->id);
 
         if ($request->get('per_page')) {
