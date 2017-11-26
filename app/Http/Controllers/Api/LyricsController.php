@@ -58,7 +58,6 @@ class LyricsController extends Controller
         $lyric = new Lyric();
         $lyric->track_id = $track->id;
         $lyric->text = $request->get('text');
-        $lyric->language = $request->get('language');
         $lyric->created_by = Auth::user()->id;
         $lyric->save();
 
@@ -94,7 +93,6 @@ class LyricsController extends Controller
     public function update(Request $request, Reciter $reciter, Album $album, Track $track, Lyric $lyric) : JsonResponse
     {
         $lyric->text = $request->get('text');
-        $lyric->language = $request->get('language');
         $lyric->save();
 
         return $this->respondWithItem(Lyric::find($lyric->id));
