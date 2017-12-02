@@ -128,7 +128,6 @@ class AlbumsController extends Controller
             $album->artwork = $imageURL;
         }
         $album->name = $request->get('name');
-        $album->year = $request->get('year');
         $album->save();
 
         return $this->respondWithItem(Album::find($album->id));
