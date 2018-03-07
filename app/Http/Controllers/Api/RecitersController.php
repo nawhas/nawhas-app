@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Auth;
 use App\Reciter;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Transformers\ReciterTransformer;
 use App\Http\Controllers\TransformsResponses;
+use Illuminate\Support\Facades\Auth;
 
 class RecitersController extends Controller
 {
@@ -59,7 +59,11 @@ class RecitersController extends Controller
         $reciter->name = $request->get('name');
         $reciter->slug = str_slug($reciter->name);
         $reciter->description = $request->get('description');
-        $reciter->avatar = $request->get('avatar');
+        if ($request->get('avatar') != "null") {
+            $reciter->avatar = $request->get('avatar');
+        } else {
+            $reciter->avatar = 'https://s3.us-east-2.amazonaws.com/nawhas/defaults/reciter.png';
+        }
         $reciter->created_by = Auth::user()->id;
         $reciter->save();
 
