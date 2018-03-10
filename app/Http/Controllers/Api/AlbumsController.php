@@ -65,7 +65,8 @@ class AlbumsController extends Controller
     {
         if ($request->artwork) {
             $file = $request->artwork;
-            $extension = $this->filesystem->extension($file);
+            $extension = $file->getClientOriginalName();
+            $extension = $this->filesystem->extension($extension);
             $md5 = $this->filesystem->hash($file);
             $filename = $md5 . '.' . $extension;
             $path = 'albums' . '/' . $filename;

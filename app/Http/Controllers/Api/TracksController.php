@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Support\File\ExplicitExtensionFile;
 use Auth;
 use App\Album;
 use App\Track;
@@ -11,6 +12,9 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Transformers\TrackTransformer;
 use App\Http\Controllers\TransformsResponses;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\Filesystem;
+
 
 class TracksController extends Controller
 {
@@ -19,11 +23,13 @@ class TracksController extends Controller
     /**
      * TracksController constructor.
      * @param TrackTransformer $transformer
+     * @param Filesystem $filesystem
      */
-    public function __construct(TrackTransformer $transformer)
+    public function __construct(TrackTransformer $transformer, Filesystem $filesystem)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -59,16 +65,30 @@ class TracksController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Reciter $reciter, Album $album) : JsonResponse
+    public function store(Request $request, Reciter $reciter, Album $album)
     {
+        // Uploading the file
+        $file = $request->audio;
+        $extension = $file->getClientOriginalName();
+        $extension = $this->filesystem->extension($extension);
+        $md5 = $this->filesystem->hash($file);
+        $filename = $md5 . '.' . $extension;
+        $path = "tracks/$filename";
+        if (Storage::exists($path)) {
+            $audio = Storage::url($path);
+        } else{
+            $uploadedFilePath = Storage::putFileAs('tracks', new ExplicitExtensionFile($file), $filename, 'public');
+            $audio = Storage::url($uploadedFilePath);
+        }
+
+        // storing data into database
         $track = new Track();
         $track->name = $request->get('name');
         $track->slug = str_slug($request->get('name'));
+        $track->reciter_id = $reciter->id;
         $track->album_id = $album->id;
-        $track->video = $request->get('video');
-        $track->audio = $request->get('audio');
+        $track->audio = $audio;
         $track->number = $request->get('number');
-        $track->language = 'en';
         $track->created_by = Auth::user()->id;
         $track->save();
 

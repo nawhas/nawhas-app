@@ -21,6 +21,8 @@ Route::namespace('Api')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', 'UsersController@show');
     });
+
+    // reciter routes
     Route::prefix('reciters')->group(function () {
         Route::get('/', 'RecitersController@index');
         Route::post('/', 'RecitersController@store');
@@ -40,6 +42,7 @@ Route::namespace('Api')->group(function () {
         Route::delete('/{album}', 'AlbumsController@destroy');
     });
 
+    // tracks routes
     Route::prefix('reciters/{reciter}/albums/{album}/tracks')->group(function () {
         Route::get('/', 'TracksController@index');
         Route::post('/', 'TracksController@store');
@@ -49,6 +52,7 @@ Route::namespace('Api')->group(function () {
         Route::delete('/{track}', 'TracksController@destroy');
     });
 
+    // lyrics routes
     Route::prefix('reciters/{reciter}/albums/{album}/tracks/{track}/lyrics')->group(function () {
         Route::get('/', 'LyricsController@index');
         Route::post('/', 'LyricsController@store');

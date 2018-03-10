@@ -61,7 +61,8 @@ class RecitersController extends Controller
     public function store(Request $request)// : JsonResponse
     {
         $file = $request->avatar;
-        $extension = $this->filesystem->extension($file);
+        $extension = $file->getClientOriginalName();
+        $extension = $this->filesystem->extension($extension);
         $md5 = $this->filesystem->hash($file);
         $filename = $md5 . '.' . $extension;
         $path = 'reciters' . '/' . $filename;
