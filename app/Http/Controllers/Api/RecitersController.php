@@ -60,17 +60,21 @@ class RecitersController extends Controller
      */
     public function store(Request $request)// : JsonResponse
     {
-        $file = $request->avatar;
-        $extension = $file->getClientOriginalName();
-        $extension = $this->filesystem->extension($extension);
-        $md5 = $this->filesystem->hash($file);
-        $filename = $md5 . '.' . $extension;
-        $path = 'reciters' . '/' . $filename;
-        if (Storage::exists($path)) {
-            $imageURL = Storage::url($path);
-        } else{
-            $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
-            $imageURL = Storage::url($uploadedFilePath);
+        if ($request->avatar != "null") {
+            $file = $request->avatar;
+            $extension = $file->getClientOriginalName();
+            $extension = $this->filesystem->extension($extension);
+            $md5 = $this->filesystem->hash($file);
+            $filename = $md5 . '.' . $extension;
+            $path = 'reciters' . '/' . $filename;
+            if (Storage::exists($path)) {
+                $imageURL = Storage::url($path);
+            } else{
+                $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+                $imageURL = Storage::url($uploadedFilePath);
+            }
+        } else {
+            $imageURL = null;
         }
         $reciter = new Reciter();
         $reciter->name = $request->get('name');

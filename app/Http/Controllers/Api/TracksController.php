@@ -88,6 +88,7 @@ class TracksController extends Controller
         $track->reciter_id = $reciter->id;
         $track->album_id = $album->id;
         $track->audio = $audio;
+        $track->video = $request->get('video');
         $track->number = $request->get('number');
         $track->created_by = Auth::user()->id;
         $track->save();
