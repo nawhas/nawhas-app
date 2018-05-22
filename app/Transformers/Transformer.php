@@ -19,6 +19,7 @@ abstract class Transformer extends TransformerAbstract
         $transformer->setDefaultIncludes(
             array_diff($transformer->getDefaultIncludes(), $excludes)
         );
+
         return $transformer;
     }
 }

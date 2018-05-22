@@ -15,7 +15,6 @@ use App\Http\Controllers\TransformsResponses;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Filesystem\Filesystem;
 
-
 class TracksController extends Controller
 {
     use TransformsResponses;
@@ -76,7 +75,7 @@ class TracksController extends Controller
         $path = "tracks/$filename";
         if (Storage::exists($path)) {
             $audio = Storage::url($path);
-        } else{
+        } else {
             $uploadedFilePath = Storage::putFileAs('tracks', new ExplicitExtensionFile($file), $filename, 'public');
             $audio = Storage::url($uploadedFilePath);
         }

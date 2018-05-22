@@ -22,6 +22,7 @@ class TrackTransformer extends Transformer
     public function transform(Track $track)
     {
         $lyrics = $track->lyrics()->latest()->first();
+
         return [
             'id' => $track->id,
             'slug' => $track->slug,
@@ -45,7 +46,7 @@ class TrackTransformer extends Transformer
                     'rel' => 'reciter',
                     'url' => '/v1/reciters/' . $track->reciter->slug,
                 ],
-            ]
+            ],
         ];
     }
 

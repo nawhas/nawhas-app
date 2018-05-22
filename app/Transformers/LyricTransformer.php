@@ -10,7 +10,6 @@ class LyricTransformer extends Transformer
      * @param Lyric $lyric
      * @return array
      * @internal param Track $track
-     *
      */
     public function transform(Lyric $lyric)
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console\Commands\Database;
 
 use Carbon\Carbon;
@@ -9,11 +10,11 @@ use Illuminate\Console\Command;
 class SyncDatabase extends Command
 {
     /**
-     * Ignore these tables
+     * Ignore these tables.
      * @var array
      */
     const IGNORE = [
-        'migrations'
+        'migrations',
     ];
 
     /**
@@ -21,7 +22,7 @@ class SyncDatabase extends Command
      *
      * @var string
      */
-    protected $signature= 'db:sync';
+    protected $signature = 'db:sync';
 
     /**
      * The console command description.
@@ -58,7 +59,7 @@ class SyncDatabase extends Command
 
         // If no tables were specified, grab all tables from the local db.
         $result = DB::select('SHOW TABLES');
-        array_map(function($item) use (&$tables, $ignored) {
+        array_map(function ($item) use (&$tables, $ignored) {
             $db = env('DB_DATABASE');
             $table = $item->{'Tables_in_' . $db};
 
@@ -100,6 +101,7 @@ class SyncDatabase extends Command
         // Check if the export has already run to prevent running it again.
         if ($this->fileExportExists($file)) {
             $this->comment('Export already exists. To re-export the database, delete the file at ' . $file);
+
             return $file;
         }
 
@@ -109,7 +111,7 @@ class SyncDatabase extends Command
         }
 
         $cmd = "ssh $ssh@$host mysqldump --user=$user --password=$password --host=$dbhost --port=$dbport "
-            . "--skip-lock-tables --skip-disable-keys --skip-add-locks --no-create-db --no-create-info --skip-comments "
+            . '--skip-lock-tables --skip-disable-keys --skip-add-locks --no-create-db --no-create-info --skip-comments '
             . $ignore . "$database $tables > $file";
 
         $this->comment('Exporting the production database...');
@@ -120,6 +122,7 @@ class SyncDatabase extends Command
         }
 
         $this->info('Export completed.');
+
         return $file;
     }
 
@@ -184,8 +187,11 @@ class SyncDatabase extends Command
     private function validateArgs(...$args)
     {
         foreach ($args as $arg) {
-            if (is_null($arg)) return false;
+            if (is_null($arg)) {
+                return false;
+            }
         }
+
         return true;
     }
 

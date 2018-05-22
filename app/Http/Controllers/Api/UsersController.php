@@ -20,6 +20,7 @@ class UsersController extends Controller
         $this->middleware('auth:api');
         $this->transformer = $transformer;
     }
+
     /**
      * @return mixed
      */

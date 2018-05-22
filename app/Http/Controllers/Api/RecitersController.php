@@ -60,7 +60,7 @@ class RecitersController extends Controller
      */
     public function store(Request $request)// : JsonResponse
     {
-        if ($request->avatar != "null") {
+        if ($request->avatar != 'null') {
             $file = $request->avatar;
             $extension = $file->getClientOriginalName();
             $extension = $this->filesystem->extension($extension);
@@ -69,7 +69,7 @@ class RecitersController extends Controller
             $path = 'reciters' . '/' . $filename;
             if (Storage::exists($path)) {
                 $imageURL = Storage::url($path);
-            } else{
+            } else {
                 $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
                 $imageURL = Storage::url($uploadedFilePath);
             }
@@ -119,7 +119,7 @@ class RecitersController extends Controller
             $path = 'reciters' . '/' . $filename;
             if (Storage::exists($path)) {
                 $imageURL = Storage::url($path);
-            } else{
+            } else {
                 $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
                 $imageURL = Storage::url($uploadedFilePath);
             }
@@ -146,7 +146,7 @@ class RecitersController extends Controller
         return response(null, 204);
     }
 
-    private function fileUpload() {
-
+    private function fileUpload()
+    {
     }
 }

@@ -30,7 +30,7 @@ class ReciterTransformer extends Transformer
                     'rel' => 'albums',
                     'url' => '/v1/reciters/' . $reciter->slug . '/albums',
                 ],
-            ]
+            ],
         ];
     }
 }

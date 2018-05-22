@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
             $fractal = new Fractal();
             $fractal->setRecursionLimit(1);
             $fractal->setSerializer(new ArraySerializer());
+
             return $fractal;
         });
     }

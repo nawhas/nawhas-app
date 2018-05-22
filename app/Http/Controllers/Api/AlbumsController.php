@@ -63,7 +63,7 @@ class AlbumsController extends Controller
      */
     public function store(Request $request, Reciter $reciter) : JsonResponse
     {
-        if ($request->artwork != "null") {
+        if ($request->artwork != 'null') {
             $file = $request->artwork;
             $extension = $file->getClientOriginalName();
             $extension = $this->filesystem->extension($extension);
@@ -72,14 +72,14 @@ class AlbumsController extends Controller
             $path = 'albums' . '/' . $filename;
             if (Storage::exists($path)) {
                 $imageURL = Storage::url($path);
-            } else{
+            } else {
                 $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
                 $imageURL = Storage::url($uploadedFilePath);
             }
         } else {
             $imageURL = null;
         }
-        
+
         $album = new Album();
         $album->name = $request->get('name');
         $album->reciter_id = $reciter->id;
@@ -125,7 +125,7 @@ class AlbumsController extends Controller
             $path = 'albums' . '/' . $filename;
             if (Storage::exists($path)) {
                 $imageURL = Storage::url($path);
-            } else{
+            } else {
                 $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
                 $imageURL = Storage::url($uploadedFilePath);
             }
