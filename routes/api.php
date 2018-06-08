@@ -49,6 +49,7 @@ Route::namespace('Api')->group(function () {
         Route::get('/{track}', 'TracksController@show');
         Route::put('/{track}', 'TracksController@update');
         Route::patch('/{track}', 'TracksController@update');
+        Route::post('/{track}', 'TracksController@update');
         Route::delete('/{track}', 'TracksController@destroy');
     });
 

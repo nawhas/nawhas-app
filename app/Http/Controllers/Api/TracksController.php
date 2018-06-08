@@ -66,19 +66,7 @@ class TracksController extends Controller
      */
     public function store(Request $request, Reciter $reciter, Album $album)
     {
-        // Uploading the file
-        $file = $request->audio;
-        $extension = $file->getClientOriginalName();
-        $extension = $this->filesystem->extension($extension);
-        $md5 = $this->filesystem->hash($file);
-        $filename = $md5 . '.' . $extension;
-        $path = "tracks/$filename";
-        if (Storage::exists($path)) {
-            $audio = Storage::url($path);
-        } else {
-            $uploadedFilePath = Storage::putFileAs('tracks', new ExplicitExtensionFile($file), $filename, 'public');
-            $audio = Storage::url($uploadedFilePath);
-        }
+        $audio = $this->upload_audio($request->audio);
 
         // storing data into database
         $track = new Track();
@@ -123,12 +111,21 @@ class TracksController extends Controller
      */
     public function update(Request $request, Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
+        $updated_audio = $this->checkIfNull($request->updated_audio);
+        if ($updated_audio)
+        {
+            $audio = $this->upload_audio($request->updated_audio);
+            $track->audio = $audio;
+        }
+
+        $video = $this->checkIfNull($request->get('video'));
+        if ($video)
+        {
+            $track->video = $video;
+        }
+
         $track->name = $request->get('name');
-        $track->slug = str_slug($request->get('name'));
-        $track->video = $request->get('video');
-        $track->audio = $request->get('audio');
         $track->number = $request->get('number');
-        $track->language = 'en';
         $track->save();
 
         return $this->respondWithItem(Track::find($track->id));
@@ -142,11 +139,49 @@ class TracksController extends Controller
      * @param Track $track
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Reciter $reciter, Album $album, Track $track)
     {
         $track->delete();
 
         return response(null, 204);
+    }
+
+    public function upload_audio($audioFile)
+    {
+        if ($audioFile)
+        {
+            // Uploading the file
+            $file = $audioFile;
+            $extension = $file->getClientOriginalName();
+            $extension = $this->filesystem->extension($extension);
+            $md5 = $this->filesystem->hash($file);
+            $filename = $md5 . '.' . $extension;
+            $path = "tracks/$filename";
+            if (Storage::exists($path)) {
+                $audio = Storage::url($path);
+            } else {
+                $uploadedFilePath = Storage::putFileAs('tracks', new ExplicitExtensionFile($file), $filename, 'public');
+                $audio = Storage::url($uploadedFilePath);
+            }
+            return $audio;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function checkIfNull($variable)
+    {
+        if ($variable === 'null' | null)
+        {
+            return null;
+        }
+        else
+        {
+            return $variable;
+        }
     }
 }
