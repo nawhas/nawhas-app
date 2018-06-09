@@ -112,15 +112,13 @@ class TracksController extends Controller
     public function update(Request $request, Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
         $updated_audio = $this->checkIfNull($request->updated_audio);
-        if ($updated_audio)
-        {
+        if ($updated_audio) {
             $audio = $this->upload_audio($request->updated_audio);
             $track->audio = $audio;
         }
 
         $video = $this->checkIfNull($request->get('video'));
-        if ($video)
-        {
+        if ($video) {
             $track->video = $video;
         }
 
@@ -150,8 +148,7 @@ class TracksController extends Controller
 
     public function upload_audio($audioFile)
     {
-        if ($audioFile)
-        {
+        if ($audioFile) {
             // Uploading the file
             $file = $audioFile;
             $extension = $file->getClientOriginalName();
@@ -165,22 +162,18 @@ class TracksController extends Controller
                 $uploadedFilePath = Storage::putFileAs('tracks', new ExplicitExtensionFile($file), $filename, 'public');
                 $audio = Storage::url($uploadedFilePath);
             }
+
             return $audio;
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
 
     public function checkIfNull($variable)
     {
-        if ($variable === 'null' | null)
-        {
+        if ($variable === 'null' | null) {
             return null;
-        }
-        else
-        {
+        } else {
             return $variable;
         }
     }
