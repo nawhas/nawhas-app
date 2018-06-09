@@ -107,6 +107,7 @@ class LyricsController extends Controller
      * @param Lyric $lyric
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Reciter $reciter, Album $album, Track $track, Lyric $lyric)
     {

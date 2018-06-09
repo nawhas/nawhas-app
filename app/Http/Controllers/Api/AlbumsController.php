@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Support\File\ExplicitExtensionFile;
 use Auth;
 use App\Album;
 use App\Reciter;
@@ -9,8 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Filesystem\Filesystem;
 use App\Transformers\AlbumTransformer;
 use App\Http\Controllers\TransformsResponses;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumsController extends Controller
 {
@@ -20,10 +23,11 @@ class AlbumsController extends Controller
      * AlbumsController constructor.
      * @param AlbumTransformer $transformer
      */
-    public function __construct(AlbumTransformer $transformer)
+    public function __construct(AlbumTransformer $transformer, Filesystem $filesystem)
     {
         $this->middleware('auth:api')->except(['index', 'show']);
         $this->transformer = $transformer;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -35,7 +39,8 @@ class AlbumsController extends Controller
      */
     public function index(Request $request, Reciter $reciter) : JsonResponse
     {
-        $query = Album::query()->where('reciter_id', $reciter->id);
+        $query = Album::query()->with(['reciter', 'tracks'])
+            ->where('reciter_id', $reciter->id);
 
         if ($request->get('per_page')) {
             $paginate = $query->paginate(
@@ -58,11 +63,28 @@ class AlbumsController extends Controller
      */
     public function store(Request $request, Reciter $reciter) : JsonResponse
     {
+        if ($request->artwork != 'null') {
+            $file = $request->artwork;
+            $extension = $file->getClientOriginalName();
+            $extension = $this->filesystem->extension($extension);
+            $md5 = $this->filesystem->hash($file);
+            $filename = $md5 . '.' . $extension;
+            $path = 'albums' . '/' . $filename;
+            if (Storage::exists($path)) {
+                $imageURL = Storage::url($path);
+            } else {
+                $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+                $imageURL = Storage::url($uploadedFilePath);
+            }
+        } else {
+            $imageURL = null;
+        }
+
         $album = new Album();
         $album->name = $request->get('name');
         $album->reciter_id = $reciter->id;
         $album->year = $request->get('year');
-        $album->artwork = $request->get('artwork');
+        $album->artwork = $imageURL;
         $album->created_by = Auth::user()->id;
         $album->save();
 
@@ -95,10 +117,21 @@ class AlbumsController extends Controller
      */
     public function update(Request $request, Reciter $reciter, Album $album) : JsonResponse
     {
+        if ($request->updatedArtwork) {
+            $file = $request->updatedArtwork;
+            $extension = $this->filesystem->extension($file);
+            $md5 = $this->filesystem->hash($file);
+            $filename = $md5 . '.' . $extension;
+            $path = 'albums' . '/' . $filename;
+            if (Storage::exists($path)) {
+                $imageURL = Storage::url($path);
+            } else {
+                $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+                $imageURL = Storage::url($uploadedFilePath);
+            }
+            $album->artwork = $imageURL;
+        }
         $album->name = $request->get('name');
-        $album->year = $request->get('year');
-        $album->artwork = $request->get('artwork');
-        $album->created_by = Auth::user()->id;
         $album->save();
 
         return $this->respondWithItem(Album::find($album->id));
