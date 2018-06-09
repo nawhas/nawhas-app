@@ -60,6 +60,7 @@ Route::namespace('Api')->group(function () {
         Route::get('/{lyric}', 'LyricsController@show');
         Route::put('/{lyric}', 'LyricsController@update');
         Route::patch('/{lyric}', 'LyricsController@update');
+        Route::post('/{lyric}', 'LyricsController@update');
         Route::delete('/{lyric}', 'LyricsController@destroy');
     });
 
