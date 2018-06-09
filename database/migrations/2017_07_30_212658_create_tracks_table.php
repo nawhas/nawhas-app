@@ -35,7 +35,6 @@ class CreateTracksTable extends Migration
             $table->foreign('created_by')->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
             $table->unique(['album_id', 'slug']);
             $table->timestamps();
         });
