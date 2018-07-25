@@ -73,7 +73,7 @@ class AlbumsController extends Controller
             if (Storage::exists($path)) {
                 $imageURL = Storage::url($path);
             } else {
-                $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+                $uploadedFilePath = Storage::putFileAs('albums', new ExplicitExtensionFile($file), $filename, 'public');
                 $imageURL = Storage::url($uploadedFilePath);
             }
         } else {
@@ -126,7 +126,7 @@ class AlbumsController extends Controller
             if (Storage::exists($path)) {
                 $imageURL = Storage::url($path);
             } else {
-                $uploadedFilePath = Storage::putFileAs('reciters', new ExplicitExtensionFile($file), $filename, 'public');
+                $uploadedFilePath = Storage::putFileAs('albums', new ExplicitExtensionFile($file), $filename, 'public');
                 $imageURL = Storage::url($uploadedFilePath);
             }
             $album->artwork = $imageURL;

@@ -34,4 +34,9 @@ class Track extends Model
     {
         return $this->hasOne(Lyric::class, 'track_id', 'id');
     }
+
+    public function language()
+    {
+        return $this->hasOne(Language::class, 'id', 'language_id');
+    }
 }

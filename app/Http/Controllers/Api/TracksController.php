@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Language;
 use App\Support\File\ExplicitExtensionFile;
 use Auth;
 use App\Album;
@@ -66,6 +67,7 @@ class TracksController extends Controller
      */
     public function store(Request $request, Reciter $reciter, Album $album)
     {
+        $language = Language::where('slug', $request->language)->first();
         $audio = $this->upload_audio($request->audio);
 
         // storing data into database
@@ -77,6 +79,7 @@ class TracksController extends Controller
         $track->audio = $audio;
         $track->video = $request->get('video');
         $track->number = $request->get('number');
+        $track->language_id = $language->id;
         $track->created_by = Auth::user()->id;
         $track->save();
 
@@ -111,6 +114,7 @@ class TracksController extends Controller
      */
     public function update(Request $request, Reciter $reciter, Album $album, Track $track) : JsonResponse
     {
+        $language = Language::where('slug', $request->language)->first();
         $updated_audio = $this->checkIfNull($request->updated_audio);
         if ($updated_audio) {
             $audio = $this->upload_audio($request->updated_audio);
@@ -124,6 +128,7 @@ class TracksController extends Controller
 
         $track->name = $request->get('name');
         $track->number = $request->get('number');
+        $track->language_id = $language->id;
         $track->save();
 
         return $this->respondWithItem(Track::find($track->id));

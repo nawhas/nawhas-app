@@ -12,6 +12,7 @@ class TrackTransformer extends Transformer
     protected $defaultIncludes = [
         'album',
         'reciter',
+        'language',
     ];
 
     /**
@@ -68,5 +69,15 @@ class TrackTransformer extends Transformer
     public function includeReciter(Track $track)
     {
         return $this->item($track->reciter, new ReciterTransformer());
+    }
+
+    /**
+     * @param \App\Track $track
+     *
+     * @return \League\Fractal\Resource\Item
+     */
+    public function includeLanguage(Track $track)
+    {
+        return $this->item($track->language, new LanguagesTransformer());
     }
 }

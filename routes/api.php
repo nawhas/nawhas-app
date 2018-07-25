@@ -64,6 +64,12 @@ Route::namespace('Api')->group(function () {
         Route::delete('/{lyric}', 'LyricsController@destroy');
     });
 
+    // Language Routes
+    Route::prefix('languages')->group(function () {
+        Route::get('/', 'LanguagesController@index');
+    });
+
+    // Popular Routes
     Route::prefix('popular')->group(function () {
         Route::get('/reciters', 'PopularEntitiesController@reciters');
         Route::get('/albums', 'PopularEntitiesController@albums');
