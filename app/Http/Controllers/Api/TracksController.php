@@ -82,8 +82,9 @@ class TracksController extends Controller
         $track->created_by = Auth::user()->id;
         $track->save();
 
-        foreach ($request->language as $language) {
-            $language = Language::where('slug', $language['slug'])->first();
+        $languages = explode(',', $request->language);
+        foreach ($languages as $language) {
+            $language = Language::where('slug', $language)->first();
             $trackLanguage = new TrackLanguages;
             $trackLanguage->track_id = $track->id;
             $trackLanguage->language_id = $language->id;
@@ -121,13 +122,14 @@ class TracksController extends Controller
      */
     public function update(Request $request, Reciter $reciter, Album $album, Track $track)
     {
+        $languages = explode(',', $request->language);
         $deleteTrackLanguage = TrackLanguages::where('track_id', $track->id)->get();
         foreach ($deleteTrackLanguage as $item) {
             $item->delete();
         }
 
-        foreach ($request->language as $item) {
-            $language = Language::where('slug', $item['slug'])->first();
+        foreach ($languages as $item) {
+            $language = Language::where('slug', $item)->first();
             $trackLanguage = new TrackLanguages;
             $trackLanguage->track_id = $track->id;
             $trackLanguage->language_id = $language->id;
