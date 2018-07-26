@@ -74,10 +74,10 @@ class TrackTransformer extends Transformer
     /**
      * @param \App\Track $track
      *
-     * @return \League\Fractal\Resource\Item
+     * @return \League\Fractal\Resource\Collection
      */
     public function includeLanguage(Track $track)
     {
-        return $this->item($track->language, new LanguagesTransformer());
+        return $this->collection($track->language, new LanguagesTransformer());
     }
 }

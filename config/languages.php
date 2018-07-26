@@ -10,7 +10,6 @@ return [
       'English',
       'Urdu',
       'Punjabi',
-      'Multi-Language',
       'Arabic',
       'Farsi',
       'Sindhi',

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Language;
 use App\Support\File\ExplicitExtensionFile;
+use App\TrackLanguages;
 use Auth;
 use App\Album;
 use App\Track;
@@ -76,9 +78,17 @@ class TracksController extends Controller
         $track->album_id = $album->id;
         $track->audio = $audio;
         $track->video = $request->get('video');
-        $track->number = $request->get('number');
+        $track->number = $request->get('trackNumber');
         $track->created_by = Auth::user()->id;
         $track->save();
+
+        foreach ($request->language as $language) {
+            $language = Language::where('slug', $language['slug'])->first();
+            $trackLanguage = new TrackLanguages;
+            $trackLanguage->track_id = $track->id;
+            $trackLanguage->language_id = $language->id;
+            $trackLanguage->save();
+        }
 
         return $this->respondWithItem(Track::find($track->id));
     }
@@ -109,11 +119,24 @@ class TracksController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Reciter $reciter, Album $album, Track $track) : JsonResponse
+    public function update(Request $request, Reciter $reciter, Album $album, Track $track)
     {
-        $updated_audio = $this->checkIfNull($request->updated_audio);
+        $deleteTrackLanguage = TrackLanguages::where('track_id', $track->id)->get();
+        foreach ($deleteTrackLanguage as $item) {
+            $item->delete();
+        }
+
+        foreach ($request->language as $item) {
+            $language = Language::where('slug', $item['slug'])->first();
+            $trackLanguage = new TrackLanguages;
+            $trackLanguage->track_id = $track->id;
+            $trackLanguage->language_id = $language->id;
+            $trackLanguage->save();
+        }
+
+        $updated_audio = $this->checkIfNull($request->updatedAudio);
         if ($updated_audio) {
-            $audio = $this->upload_audio($request->updated_audio);
+            $audio = $this->upload_audio($request->updatedAudio);
             $track->audio = $audio;
         }
 
@@ -123,7 +146,7 @@ class TracksController extends Controller
         }
 
         $track->name = $request->get('name');
-        $track->number = $request->get('number');
+        $track->number = $request->get('trackNumber');
         $track->save();
 
         return $this->respondWithItem(Track::find($track->id));

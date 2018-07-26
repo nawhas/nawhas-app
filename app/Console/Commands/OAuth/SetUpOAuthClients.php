@@ -37,7 +37,6 @@ class SetUpOAuthClients extends Command
      * Create a new command instance.
      *
      * @param \Laravel\Passport\ClientRepository $clients
-     * @param Filesystem $fs
      */
     public function __construct(ClientRepository $clients, Filesystem $fs)
     {
@@ -78,6 +77,9 @@ class SetUpOAuthClients extends Command
 
             $permissions = $this->fs->chmod($keyFile);
 
+            if ($permissions !== '0660') {
+                throw new UnreadableFileException($keyFile . ' reads as ' . $permissions . ' instead of 0660');
+            }
         }
 
         $this->comment('Creating clients...');
