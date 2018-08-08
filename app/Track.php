@@ -32,7 +32,7 @@ class Track extends Model
 
     public function lyrics()
     {
-        return $this->hasOne(Lyric::class, 'track_id', 'id');
+        return $this->hasMany(Lyric::class, 'track_id', 'id');
     }
 
     public function language()

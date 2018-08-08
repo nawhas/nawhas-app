@@ -13,6 +13,7 @@ class TrackTransformer extends Transformer
         'album',
         'reciter',
         'language',
+        'lyric',
     ];
 
     /**
@@ -22,8 +23,6 @@ class TrackTransformer extends Transformer
      */
     public function transform(Track $track)
     {
-        $lyrics = $track->lyrics()->latest()->first();
-
         return [
             'id' => $track->id,
             'slug' => $track->slug,
@@ -31,7 +30,6 @@ class TrackTransformer extends Transformer
             'audio' => $track->audio,
             'video' => $track->video,
             'number' => $track->number,
-            'lyrics' => $lyrics ? nl2br($lyrics->text) : null,
             'created_at' => $track->created_at->toDateTimeString(),
             'updated_at' => $track->updated_at->toDateTimeString(),
             'links' => [
@@ -79,5 +77,15 @@ class TrackTransformer extends Transformer
     public function includeLanguage(Track $track)
     {
         return $this->collection($track->language, new LanguagesTransformer());
+    }
+
+    /**
+     * @param \App\Track $track
+     *
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeLyric(Track $track)
+    {
+        return $this->collection($track->lyrics, new LyricTransformer());
     }
 }
