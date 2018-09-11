@@ -101,7 +101,7 @@ class LyricsController extends Controller
     public function update(Request $request, Reciter $reciter, Album $album, Track $track, Lyric $lyric) : JsonResponse
     {
         $lyric->text = $request->get('text');
-        $lyric->native_language = $request->get('native_language');
+        //$lyric->native_language = $request->get('native_language');
         $lyric->save();
 
         return $this->respondWithItem(Lyric::find($lyric->id));
