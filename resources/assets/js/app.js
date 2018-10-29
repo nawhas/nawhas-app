@@ -1,22 +1,43 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css'
+import VueProgressBar from 'vue-progressbar';
+import VueRouter from 'vue-router';
+import Vuex from 'vuex';
+import App from './App.vue';
+import {routes} from './routes';
+import store from './store';
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.use(VueProgressBar, {
+  color: '#ff5a00',
+  failedColor: '#c90800',
+  thickness: '2px',
+  transition: {
+    speed: '0.3s',
+    opacity: '0.6s',
+    termination: 0
+  },
+  autoRevert: false,
+  location: 'top',
+  inverse: false
+});
+
+Vue.use(Vuetify);
+Vue.use(VueRouter);
+Vue.use(Vuex);
+
+const router = new VueRouter({
+  routes,
+  mode: 'history'
+});
 
 const app = new Vue({
-    el: '#app'
+  el: '#app',
+  router,
+  store,
+  components: {'main-app': App}
 });
