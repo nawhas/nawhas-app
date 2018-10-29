@@ -1,11 +1,12 @@
-import router from '../../routes'
-
 const state = {
-  token: null,
+  /*
+  token: getAccessToken(),
   user: null,
+  */
 };
 
 const mutations = {
+  /*
   LOGIN(state, {token}) {
     state.token = token;
   },
@@ -15,22 +16,27 @@ const mutations = {
   FETCH_USER_SUCCESS(state, {user}) {
     state.user = user;
   },
+  */
 };
 
 const actions = {
+  fetchUser({commit, state}) {
+    return null;
+  }
+  /*
   redirectToLogin() {
-    const url = null;
+    const url = getLoginUrl();
     window.location.replace(url);
   },
   redirectToSignup() {
-    const url = null;
+    const url = getSignupUrl();
     window.location.replace(url);
   },
   login({commit, dispatch}) {
-    const token = null;
-    const expiration = null;
+    const token = getParameterByName('access_token');
+    const expiration = getParameterByName('expires_in');
 
-    // setAccessToken(token, expiration);
+    setAccessToken(token, expiration);
     commit('LOGIN', {token});
     dispatch('fetchUser').then(() => {
       router.push('/');
@@ -60,9 +66,11 @@ const actions = {
       });
     });
   },
+  */
 };
 
 const getters = {
+  /*
   authenticated(state) {
     return !!state.token;
   },
@@ -75,6 +83,7 @@ const getters = {
     }
     return null;
   }
+  */
 };
 
 export default {

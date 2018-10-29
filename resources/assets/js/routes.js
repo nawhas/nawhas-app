@@ -6,7 +6,7 @@ export const routes = [
       {
         path: '',
         name: 'Home',
-        component: require('./components/Home.vue')
+        component: require('./pages/Home/Index.vue')
       }
     ]
   }
