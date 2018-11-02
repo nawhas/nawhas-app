@@ -25,6 +25,11 @@ export const routes = [
         path: 'reciters/create',
         name: 'reciters-create',
         component: require('./pages/reciters/Create.vue')
+      },
+      {
+        path: 'reciters/:reciter',
+        name: 'reciters-show',
+        component: require('./pages/reciters/Show.vue')
       }
     ]
   }

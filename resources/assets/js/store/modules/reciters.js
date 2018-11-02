@@ -52,9 +52,9 @@ const actions = {
       });
       });
   },
-  fetchReciter({commit}, {id}) {
+  fetchReciter({commit}, payload) {
     return new Promise((resolve, reject) => {
-      axios.get(`/v1/reciters/${id}`)
+      axios.get(`/v1/reciters/${payload.reciter}`)
         .then((response) => {
           commit('FETCH_RECITER', {
             data: response.data

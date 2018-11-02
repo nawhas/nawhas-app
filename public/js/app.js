@@ -65706,6 +65706,10 @@ var routes = [{
     path: 'reciters/create',
     name: 'reciters-create',
     component: __webpack_require__(283)
+  }, {
+    path: 'reciters/:reciter',
+    name: 'reciters-show',
+    component: __webpack_require__(290)
   }]
 }];
 
@@ -66424,7 +66428,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66439,6 +66443,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HeroBanner_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_HeroBanner_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_HeroQuote_vue__ = __webpack_require__(139);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_HeroQuote_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_HeroQuote_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_reciters_ReciterCard_vue__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_reciters_ReciterCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_reciters_ReciterCard_vue__);
 //
 //
 //
@@ -66449,6 +66455,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -66457,7 +66474,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: 'home-index',
   components: {
     HeroBanner: __WEBPACK_IMPORTED_MODULE_0__components_HeroBanner_vue___default.a,
-    HeroQuote: __WEBPACK_IMPORTED_MODULE_1__components_HeroQuote_vue___default.a
+    HeroQuote: __WEBPACK_IMPORTED_MODULE_1__components_HeroQuote_vue___default.a,
+    ReciterCard: __WEBPACK_IMPORTED_MODULE_2__components_reciters_ReciterCard_vue___default.a
+  },
+  created: function created() {
+    this.$store.dispatch('reciters/fetchPopularReciters');
+  },
+
+  computed: {
+    popularReciters: function popularReciters() {
+      return this.$store.getters['reciters/popularReciters'];
+    }
   }
 });
 
@@ -66781,6 +66808,45 @@ var render = function() {
           ])
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "page-section", attrs: { id: "top-reciters-section" } },
+        [
+          _c("h2", [_vm._v("Top Reciters")]),
+          _vm._v(" "),
+          _c(
+            "v-container",
+            { staticClass: "pa-0", attrs: { "grid-list-lg": "", fluid: "" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                _vm._l(_vm.popularReciters, function(reciter) {
+                  return _c(
+                    "v-flex",
+                    { key: reciter.id, attrs: { xs12: "", sm6: "", md4: "" } },
+                    [
+                      _c(
+                        "reciter-card",
+                        _vm._b(
+                          { attrs: { featured: "" } },
+                          "reciter-card",
+                          reciter,
+                          false
+                        )
+                      )
+                    ],
+                    1
+                  )
+                })
+              )
+            ],
+            1
+          )
+        ],
+        1
       )
     ],
     1
@@ -67067,6 +67133,14 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -73200,89 +73274,117 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { attrs: { id: "top-reciters-section" } },
-      [
-        _c("h5", [_vm._v("Top Reciters")]),
-        _vm._v(" "),
-        _c(
-          "v-container",
-          { staticClass: "pa-0", attrs: { "grid-list-lg": "", fluid: "" } },
-          [
+  return _c(
+    "div",
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c("v-flex", { attrs: { xs12: "" } }, [
             _c(
-              "v-layout",
-              { attrs: { row: "", wrap: "" } },
-              _vm._l(_vm.popularReciters, function(reciter) {
-                return _c(
-                  "v-flex",
-                  { key: reciter.id, attrs: { xs12: "", sm6: "", md4: "" } },
+              "div",
+              { attrs: { id: "top-reciters-section" } },
+              [
+                _c("h2", [_vm._v("Top Reciters")]),
+                _vm._v(" "),
+                _c(
+                  "v-container",
+                  {
+                    staticClass: "pa-0",
+                    attrs: { "grid-list-lg": "", fluid: "" }
+                  },
                   [
                     _c(
-                      "reciter-card",
-                      _vm._b(
-                        { attrs: { featured: "" } },
-                        "reciter-card",
-                        reciter,
-                        false
-                      )
+                      "v-layout",
+                      { attrs: { row: "", wrap: "" } },
+                      _vm._l(_vm.popularReciters, function(reciter) {
+                        return _c(
+                          "v-flex",
+                          {
+                            key: reciter.id,
+                            attrs: { xs12: "", sm6: "", md4: "" }
+                          },
+                          [
+                            _c(
+                              "reciter-card",
+                              _vm._b(
+                                { attrs: { featured: "" } },
+                                "reciter-card",
+                                reciter,
+                                false
+                              )
+                            )
+                          ],
+                          1
+                        )
+                      })
                     )
                   ],
                   1
                 )
-              })
+              ],
+              1
             )
-          ],
-          1
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { attrs: { id: "all-reciters-section" } },
-      [
-        _c("h5", [_vm._v("All Reciters")]),
-        _vm._v(" "),
-        _c(
-          "v-card",
-          [
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "" } },
+        [
+          _c("v-flex", { attrs: { xs12: "" } }, [
             _c(
-              "v-container",
-              { staticClass: "pa-0", attrs: { fluid: "" } },
+              "div",
+              { attrs: { id: "all-reciters-section" } },
               [
+                _c("h2", [_vm._v("All Reciters")]),
+                _vm._v(" "),
                 _c(
-                  "v-layout",
-                  { attrs: { row: "", wrap: "" } },
-                  _vm._l(_vm.reciters, function(reciter) {
-                    return _c(
-                      "v-flex",
-                      {
-                        key: reciter.id,
-                        attrs: { xs12: "", sm6: "", md4: "", lg3: "" }
-                      },
+                  "v-card",
+                  [
+                    _c(
+                      "v-container",
+                      { staticClass: "pa-0", attrs: { fluid: "" } },
                       [
                         _c(
-                          "reciter-card",
-                          _vm._b({}, "reciter-card", reciter, false)
+                          "v-layout",
+                          { attrs: { row: "", wrap: "" } },
+                          _vm._l(_vm.reciters, function(reciter) {
+                            return _c(
+                              "v-flex",
+                              {
+                                key: reciter.id,
+                                attrs: { xs12: "", sm6: "", md4: "", lg3: "" }
+                              },
+                              [
+                                _c(
+                                  "reciter-card",
+                                  _vm._b({}, "reciter-card", reciter, false)
+                                )
+                              ],
+                              1
+                            )
+                          })
                         )
                       ],
                       1
                     )
-                  })
+                  ],
+                  1
                 )
               ],
               1
             )
-          ],
-          1
-        )
-      ],
-      1
-    )
-  ])
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -73719,12 +73821,11 @@ var actions = {
       });
     });
   },
-  fetchReciter: function fetchReciter(_ref3, _ref4) {
+  fetchReciter: function fetchReciter(_ref3, payload) {
     var commit = _ref3.commit;
-    var id = _ref4.id;
 
     return new Promise(function (resolve, reject) {
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/v1/reciters/' + id).then(function (response) {
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/v1/reciters/' + payload.reciter).then(function (response) {
         commit('FETCH_RECITER', {
           data: response.data
         });
@@ -73732,8 +73833,8 @@ var actions = {
       }).catch(reject);
     });
   },
-  storeReciter: function storeReciter(_ref5, payload) {
-    var commit = _ref5.commit;
+  storeReciter: function storeReciter(_ref4, payload) {
+    var commit = _ref4.commit;
 
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/v1/reciters', payload).then(function (response) {
       commit('STORE_RECITER', {
@@ -73750,6 +73851,199 @@ var actions = {
   getters: getters,
   namespaced: true
 });
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(293)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(291)
+/* template */
+var __vue_template__ = __webpack_require__(295)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-74411cd8"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/reciters/Show.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-74411cd8", Component.options)
+  } else {
+    hotAPI.reload("data-v-74411cd8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 291 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'reciters-show',
+  components: {
+    ReciterCard: __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue___default.a
+  },
+  created: function created() {
+    this.$store.dispatch('reciters/fetchReciter', { reciter: this.$route.params.reciter });
+  },
+
+  computed: {
+    reciter: function reciter() {
+      return this.$store.getters['reciters/reciter'];
+    }
+  }
+});
+
+/***/ }),
+/* 292 */,
+/* 293 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(294);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("5323940c", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-74411cd8\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/stylus-loader/index.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Show.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-74411cd8\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/stylus-loader/index.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Show.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.reciter-hero .reciter-hero__ribbon[data-v-74411cd8] {\n  width: 100%;\n  height: 220px;\n  margin-bottom: -220px;\n  background: linear-gradient(to bottom right, #e90500, #fa6000);\n}\n.reciter-hero .reciter-hero__content[data-v-74411cd8] {\n  padding: 80px 120px 24px 120px;\n}\n.reciter-hero .reciter-hero__avatar[data-v-74411cd8] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  top: -80px;\n  margin-bottom: -56px;\n}\n.reciter-hero .reciter-hero__avatar .avatar[data-v-74411cd8] {\n  box-sizing: content-box;\n  border: 5px solid #fff;\n}\n.reciter-hero .reciter-hero__card[data-v-74411cd8] {\n  margin-top: 36px;\n  width: 100%;\n  min-height: 20px;\n  position: relative;\n  padding: 0 36px 24px 36px;\n}\n.reciter-hero .reciter-hero__title[data-v-74411cd8] {\n  font-family: 'Roboto Slab', sans-serif;\n  font-weight: 600;\n  color: #2e2e2e;\n  text-align: center;\n  margin: 0;\n  padding: 0;\n}\n.reciter-hero .reciter-hero__social[data-v-74411cd8] {\n  font-size: 140%;\n  list-style: none;\n  margin: 16px 0;\n  padding: 0;\n  text-align: center;\n}\n.reciter-hero .reciter-hero__social li[data-v-74411cd8] {\n  display: inline;\n}\n.reciter-hero .reciter-hero__social li a[data-v-74411cd8] {\n  color: inherit;\n  padding: 8px;\n  will-change: color;\n  transition: color 280ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n.reciter-hero .reciter-hero__social li a[data-v-74411cd8]:hover {\n  color: #ff9100;\n}\n.reciter-hero .reciter-hero__bio[data-v-74411cd8] {\n  margin: 16px 0 0 0;\n  padding: 0;\n  max-height: 108px;\n  overflow: hidden;\n  position: relative;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "reciter-hero" }, [
+      _c("div", { staticClass: "reciter-hero__ribbon" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "reciter-hero__content" },
+        [
+          _c("v-card", { staticClass: "reciter-hero__card" }, [
+            _c(
+              "div",
+              { staticClass: "reciter-hero__avatar" },
+              [
+                _c(
+                  "v-avatar",
+                  { staticClass: "white", attrs: { size: "152px" } },
+                  [
+                    _c("img", {
+                      attrs: { src: _vm.reciter.avatar, alt: _vm.reciter.name }
+                    })
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("h4", { staticClass: "reciter-hero__title" }, [
+              _vm._v("\n          " + _vm._s(_vm.reciter.name) + "\n        ")
+            ])
+          ])
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-74411cd8", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
