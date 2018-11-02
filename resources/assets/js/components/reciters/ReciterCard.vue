@@ -1,19 +1,21 @@
 <template>
-  <v-card :class="classObject" :style="{ 'background-color': background }" @click="goToReciter()">
-    <div class="reciter-card__avatar">
-      <v-avatar size="48px">
-        <img crossorigin ref="avatarElement" :src="avatar" :alt="name">
-      </v-avatar>
-    </div>
-    <div class="reciter-card__text" :style="{ 'color': textColor }">
-      <div class="reciter-card__name body-2" :title="name">
-        {{ name }}
+  <div @click="goToReciter()">
+    <v-card :class="classObject" :style="{ 'background-color': background }">
+      <div class="reciter-card__avatar">
+        <v-avatar size="48px">
+          <img crossorigin ref="avatarElement" :src="avatar" :alt="name">
+        </v-avatar>
       </div>
-      <div class="reciter-card__albums caption" :title="albumCount + ' Albums'">
-        {{ albumCount }} Albums
+      <div class="reciter-card__text" :style="{ 'color': textColor }">
+        <div class="reciter-card__name body-2" :title="name">
+          {{ name }}
+        </div>
+        <div class="reciter-card__albums caption" :title="albumCount + ' Albums'">
+          {{ albumCount }} Albums
+        </div>
       </div>
-    </div>
-  </v-card>
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -34,7 +36,7 @@
     },
     methods: {
       goToReciter() {
-        this.$router.push(`/reciters/${this.slug}`);
+        this.$router.push({ name: 'reciters-show', params: { reciter: this.slug }})
       },
       setBackgroundFromImage(image) {
         Vibrant.from(image.src).getPalette().then((palette) => {

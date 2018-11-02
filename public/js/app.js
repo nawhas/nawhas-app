@@ -67308,6 +67308,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -67325,7 +67327,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     goToReciter: function goToReciter() {
-      this.$router.push('/reciters/' + this.slug);
+      this.$router.push({ name: 'reciters-show', params: { reciter: this.slug } });
     },
     setBackgroundFromImage: function setBackgroundFromImage(image) {
       var _this = this;
@@ -73205,10 +73207,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
+    "div",
     {
-      class: _vm.classObject,
-      style: { "background-color": _vm.background },
       on: {
         click: function($event) {
           _vm.goToReciter()
@@ -73217,43 +73217,60 @@ var render = function() {
     },
     [
       _c(
-        "div",
-        { staticClass: "reciter-card__avatar" },
-        [
-          _c("v-avatar", { attrs: { size: "48px" } }, [
-            _c("img", {
-              ref: "avatarElement",
-              attrs: { crossorigin: "", src: _vm.avatar, alt: _vm.name }
-            })
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "reciter-card__text", style: { color: _vm.textColor } },
+        "v-card",
+        {
+          class: _vm.classObject,
+          style: { "background-color": _vm.background }
+        },
         [
           _c(
             "div",
-            {
-              staticClass: "reciter-card__name body-2",
-              attrs: { title: _vm.name }
-            },
-            [_vm._v("\n      " + _vm._s(_vm.name) + "\n    ")]
+            { staticClass: "reciter-card__avatar" },
+            [
+              _c("v-avatar", { attrs: { size: "48px" } }, [
+                _c("img", {
+                  ref: "avatarElement",
+                  attrs: { crossorigin: "", src: _vm.avatar, alt: _vm.name }
+                })
+              ])
+            ],
+            1
           ),
           _vm._v(" "),
           _c(
             "div",
             {
-              staticClass: "reciter-card__albums caption",
-              attrs: { title: _vm.albumCount + " Albums" }
+              staticClass: "reciter-card__text",
+              style: { color: _vm.textColor }
             },
-            [_vm._v("\n      " + _vm._s(_vm.albumCount) + " Albums\n    ")]
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "reciter-card__name body-2",
+                  attrs: { title: _vm.name }
+                },
+                [_vm._v("\n        " + _vm._s(_vm.name) + "\n      ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "reciter-card__albums caption",
+                  attrs: { title: _vm.albumCount + " Albums" }
+                },
+                [
+                  _vm._v(
+                    "\n        " + _vm._s(_vm.albumCount) + " Albums\n      "
+                  )
+                ]
+              )
+            ]
           )
         ]
       )
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = []
