@@ -6,7 +6,25 @@ export const routes = [
       {
         path: '',
         name: 'Home',
-        component: require('./pages/Home/Index.vue')
+        component: require('./pages/Home/Index.vue'),
+        meta: {
+          requiresAuth: true
+        }
+      },
+      {
+        path: 'login',
+        name: 'login',
+        component: require('./components/auth/Login.vue')
+      },
+      {
+        path: 'reciters',
+        name: 'reciters-index',
+        component: require('./pages/reciters/Index.vue')
+      },
+      {
+        path: 'reciters/create',
+        name: 'reciters-create',
+        component: require('./pages/reciters/Create.vue')
       }
     ]
   }

@@ -1,11 +1,71 @@
+import { getLocalUser } from "./../../helpers/auth"
+const user = getLocalUser();
+
 const state = {
+  currentUser: user,
+  isLoggedIn: !!user,
+  loading: null,
+  auth_error: null,
   /*
   token: getAccessToken(),
   user: null,
   */
 };
 
+const getters = {
+  isLoading(state) {
+    return state.loading;
+  },
+  isLoggedIn(state) {
+    return state.isLoggedIn;
+  },
+  currentUser(state) {
+    return state.currentUser;
+  },
+  authError(state) {
+    return state.auth_error;
+  },
+  /*
+   authenticated(state) {
+   return !!state.token;
+   },
+   isAdmin(state) {
+   return state.user && state.user.role === 'admin';
+   },
+   userRole(state) {
+   if (state.user) {
+   return state.user.role;
+   }
+   return null;
+   }
+   */
+};
+
 const mutations = {
+  login(state) {
+    state.loading = true;
+    state.auth_error = null;
+  },
+  loginSuccess(state, payload) {
+    state.auth_error = null;
+    state.isLoggedIn = true;
+    state.loading = false;
+    state.currentUser = Object.assign({}, payload.user, {token: payload.access_token});
+    localStorage.setItem('user', JSON.stringify(state.currentUser));
+  },
+  loginFailed(state, payload) {
+    state.auth_error = null;
+    state.loading = false;
+    state.auth_error = payload.error;
+    state.isLoggedIn = null;
+  },
+  logout(state) {
+    state.loading = true;
+    localStorage.removeItem('user');
+    state.isLoggedIn = null;
+    state.currentUser = null;
+    state.loading = false;
+  }
   /*
   LOGIN(state, {token}) {
     state.token = token;
@@ -22,6 +82,9 @@ const mutations = {
 const actions = {
   fetchUser({commit, state}) {
     return null;
+  },
+  login(context) {
+    context.commit('login');
   }
   /*
   redirectToLogin() {
@@ -66,23 +129,6 @@ const actions = {
       });
     });
   },
-  */
-};
-
-const getters = {
-  /*
-  authenticated(state) {
-    return !!state.token;
-  },
-  isAdmin(state) {
-    return state.user && state.user.role === 'admin';
-  },
-  userRole(state) {
-    if (state.user) {
-      return state.user.role;
-    }
-    return null;
-  }
   */
 };
 

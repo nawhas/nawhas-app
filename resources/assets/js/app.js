@@ -11,6 +11,7 @@ import Vuex from 'vuex';
 import App from './App.vue';
 import {routes} from './routes';
 import store from './store';
+import axios from 'axios';
 
 Vue.use(VueProgressBar, {
   color: '#ff5a00',
@@ -34,6 +35,20 @@ const router = new VueRouter({
   routes,
   mode: 'history'
 });
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const currentUser = store.state['auth/currentUser'];
+  if (requiresAuth && currentUser) {
+    next('/login');
+  } else if (to.path === '/login' && currentUser) {
+    next("//");
+  } else {
+    next();
+  }
+});
+
+axios.defaults.headers.common['Authorization'] = `Bearer ${store.getters['auth/currentUser'].token}`;
 
 const app = new Vue({
   el: '#app',

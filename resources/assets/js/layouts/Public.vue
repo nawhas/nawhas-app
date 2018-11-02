@@ -30,6 +30,16 @@
       <v-toolbar-side-icon
         class="hidden-md-and-up"
         @click="drawer = !drawer"></v-toolbar-side-icon>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <template v-if="currentUser">
+          <v-btn flat @click="logout()">Logout</v-btn>
+        </template>
+        <template v-else>
+          <v-btn flat @click="$router.push({ name: 'login'})">Login</v-btn>
+          <v-btn flat>Sign Up</v-btn>
+        </template>
+      </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <v-container fluid>
@@ -48,6 +58,9 @@
       NprogressContainer
     },
     computed: {
+      currentUser() {
+        return this.$store.getters['auth/currentUser'];
+      },
       navigation() {
         // return filtered nav list based on role
         const items = [];
@@ -75,6 +88,12 @@
         });
 
         return items;
+      }
+    },
+    methods: {
+      logout() {
+        this.$store.commit('auth/logout');
+        this.$router.push('/login');
       }
     },
     data() {

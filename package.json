@@ -17,6 +17,7 @@
     "vue": "^2.5.17"
   },
   "dependencies": {
+    "node-vibrant": "^3.0.0",
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
