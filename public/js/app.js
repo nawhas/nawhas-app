@@ -21361,8 +21361,9 @@ router.beforeEach(function (to, from, next) {
     next();
   }
 });
-
-__WEBPACK_IMPORTED_MODULE_9_axios___default.a.defaults.headers.common['Authorization'] = 'Bearer ' + __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].getters['auth/currentUser'].token;
+if (__WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].getters['auth/currentUser']) {
+  __WEBPACK_IMPORTED_MODULE_9_axios___default.a.defaults.headers.common['Authorization'] = 'Bearer ' + __WEBPACK_IMPORTED_MODULE_8__store__["a" /* default */].getters['auth/currentUser'].token;
+}
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',

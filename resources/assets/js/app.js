@@ -47,8 +47,9 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-
-axios.defaults.headers.common['Authorization'] = `Bearer ${store.getters['auth/currentUser'].token}`;
+if (store.getters['auth/currentUser']) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${store.getters['auth/currentUser'].token}`;
+}
 
 const app = new Vue({
   el: '#app',
