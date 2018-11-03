@@ -12,19 +12,28 @@
           <h4 class="reciter-hero__title">
             {{ reciter.name }}
           </h4>
+          <p class="reciter-hero__bio">{{ reciter.description }}</p>
         </v-card>
       </div>
     </div>
+    <section class="page-section" id="all-reciters-section">
+      <h3>Albums</h3>
+      <template v-for="album in reciter.albums.data">
+        <album v-bind="album" :reciterSlug="reciter.slug" v-bind:key="album.id"></album>
+      </template>
+    </section>
   </div>
 </template>
 
 <script>
   import ReciterCard from '../../components/reciters/ReciterCard.vue';
+  import Album from '../../components/reciters/Album.vue';
 
   export default {
     name: 'reciters-show',
     components: {
-      ReciterCard
+      ReciterCard,
+      Album
     },
     created() {
       this.$store.dispatch('reciters/fetchReciter', { reciter: this.$route.params.reciter });

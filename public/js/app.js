@@ -73928,6 +73928,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_reciters_Album_vue__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_reciters_Album_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_reciters_Album_vue__);
 //
 //
 //
@@ -73948,13 +73950,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'reciters-show',
   components: {
-    ReciterCard: __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue___default.a
+    ReciterCard: __WEBPACK_IMPORTED_MODULE_0__components_reciters_ReciterCard_vue___default.a,
+    Album: __WEBPACK_IMPORTED_MODULE_1__components_reciters_Album_vue___default.a
   },
   created: function created() {
     this.$store.dispatch('reciters/fetchReciter', { reciter: this.$route.params.reciter });
@@ -74044,12 +74055,39 @@ var render = function() {
             _vm._v(" "),
             _c("h4", { staticClass: "reciter-hero__title" }, [
               _vm._v("\n          " + _vm._s(_vm.reciter.name) + "\n        ")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "reciter-hero__bio" }, [
+              _vm._v(_vm._s(_vm.reciter.description))
             ])
           ])
         ],
         1
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "section",
+      { staticClass: "page-section", attrs: { id: "all-reciters-section" } },
+      [
+        _c("h3", [_vm._v("Albums")]),
+        _vm._v(" "),
+        _vm._l(_vm.reciter.albums.data, function(album) {
+          return [
+            _c(
+              "album",
+              _vm._b(
+                { key: album.id, attrs: { reciterSlug: _vm.reciter.slug } },
+                "album",
+                album,
+                false
+              )
+            )
+          ]
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []
@@ -74059,6 +74097,284 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-74411cd8", module.exports)
+  }
+}
+
+/***/ }),
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(297)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(299)
+/* template */
+var __vue_template__ = __webpack_require__(300)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/reciters/Album.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8de9b53c", Component.options)
+  } else {
+    hotAPI.reload("data-v-8de9b53c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(298);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("a5c0755c", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8de9b53c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/stylus-loader/index.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Album.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8de9b53c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/stylus-loader/index.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Album.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 298 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.album {\n  margin-top: 90px;\n}\n.album .album__header {\n  position: relative;\n}\n.album .album__header .album__artwork {\n  margin-top: -48px;\n  margin-left: 24px;\n  border: 5px solid #fff;\n  float: left;\n  overflow: hidden;\n  box-sizing: content-box;\n  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);\n}\n.album .album__header .album__details {\n  margin-left: 152px;\n  padding: 24px 32px;\n  color: #fff;\n}\n.album .album__header .album__details .album__title {\n  margin: 0 0 8px 0;\n  padding: 0;\n  font-weight: 700;\n  font-size: 24px;\n}\n.album .album__header .album__details .album__release-date {\n  margin: 0;\n  padding: 0;\n  font-weight: 400;\n  font-size: 20px;\n}\n.album .album__tracks .datatable th:focus,\n.album .album__tracks .datatable td:focus {\n  outline: none !important;\n}\n.album .album__tracks .datatable .album__track {\n  cursor: pointer;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 299 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_node_vibrant__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_node_vibrant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_node_vibrant__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'album',
+  props: ['name', 'album', 'year', 'tracks', 'artwork', 'reciterSlug'],
+  mounted: function mounted() {
+    this.setBackgroundFromImage();
+  },
+
+  methods: {
+    setBackgroundFromImage: function setBackgroundFromImage() {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_node_vibrant___default.a.from(this.artwork).getPalette().then(function (palette) {
+        var swatch = palette.DarkMuted;
+        if (!swatch) {
+          return;
+        }
+        _this.background = swatch.getHex();
+        _this.textColor = swatch.getBodyTextColor();
+      });
+    }
+  },
+  data: function data() {
+    return {
+      headers: [{
+        text: '#',
+        value: 'number'
+      }, {
+        text: 'Name',
+        align: 'left',
+        value: 'name'
+      }, {
+        text: 'Reciter',
+        align: 'left',
+        value: 'reciter.name'
+      }],
+      background: '#444444',
+      textColor: 'white'
+    };
+  },
+
+  computed: {
+    reciterYear: function reciterYear() {
+      if (this.showReciter) {
+        return this.reciter + ' \u2022 ' + this.year;
+      }
+      return this.year;
+    },
+    gradient: function gradient() {
+      var rgb = __WEBPACK_IMPORTED_MODULE_0_node_vibrant___default.a.Util.hexToRgb(this.background);
+      return 'linear-gradient(to right, rgba(' + rgb.join(', ') + ', 1), rgba(' + rgb.join(', ') + ', 0)';
+    },
+    artworkBackground: function artworkBackground() {
+      return 'url(' + this.artwork + ')';
+    }
+  }
+});
+
+/***/ }),
+/* 300 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-card",
+    { staticClass: "album" },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "album__header",
+          style: { "background-color": _vm.background }
+        },
+        [
+          _c(
+            "v-avatar",
+            {
+              staticClass: "album__artwork white",
+              attrs: { tile: "", size: "128px" }
+            },
+            [
+              _c("img", {
+                ref: "artwork",
+                attrs: { src: _vm.artwork, alt: _vm.name }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "album__details", style: { color: _vm.textColor } },
+            [
+              _c("h5", { staticClass: "album__title" }, [
+                _vm._v(_vm._s(_vm.name))
+              ]),
+              _vm._v(" "),
+              _c("h6", { staticClass: "album__release-date" }, [
+                _c("strong", [_vm._v(_vm._s(_vm.year))]),
+                _vm._v(" • " + _vm._s(_vm.tracks.data.length) + " tracks")
+              ])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-data-table", {
+        staticClass: "album__tracks",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.tracks.data,
+          "hide-actions": ""
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("tr", { staticClass: "album__track" }, [
+                  _c("td", { staticClass: "text-xs-right" }, [
+                    _vm._v(_vm._s(props.item.number))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(props.item.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(props.item.reciter.name))])
+                ])
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8de9b53c", module.exports)
   }
 }
 
