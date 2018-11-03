@@ -39,7 +39,7 @@
         this.$store.dispatch('reciters/storeReciter', form)
           .then(() => {
             this.$router.push('/reciters');
-          })
+          });
       },
       clear() {
         this.reciter.name = null;

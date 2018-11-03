@@ -70,6 +70,9 @@ const actions = {
         data: response.data
       });
       });
+  },
+  updateReciter({commit}, payload) {
+    axios.post(`/v1/reciters/${payload.reciter.slug}`, payload.form);
   }
 };
 

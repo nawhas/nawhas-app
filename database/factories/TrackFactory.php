@@ -19,8 +19,6 @@ $factory->define(Track::class, function (Faker $faker) {
         'video' => $faker->imageUrl(640, 480, 'people'),
         'audio' => $faker->imageUrl(640, 480, 'people'),
         'number' => $faker->randomDigit,
-        'created_by' => function () {
-            return factory(User::class)->create()->id;
-        },
+        'created_by' => 1
     ];
 });

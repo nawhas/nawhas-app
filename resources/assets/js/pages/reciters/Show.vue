@@ -18,7 +18,7 @@
     </div>
     <section class="page-section" id="all-reciters-section">
       <h3>Albums</h3>
-      <template v-for="album in reciter.albums.data">
+      <template v-for="album in albums">
         <album v-bind="album" :reciterSlug="reciter.slug" v-bind:key="album.id"></album>
       </template>
     </section>
@@ -37,10 +37,14 @@
     },
     created() {
       this.$store.dispatch('reciters/fetchReciter', { reciter: this.$route.params.reciter });
+      this.$store.dispatch('albums/fetchAlbums', { reciter: this.$route.params.reciter });
     },
     computed: {
       reciter() {
         return this.$store.getters['reciters/reciter'];
+      },
+      albums() {
+        return this.$store.getters['albums/albums'];
       }
     }
   }

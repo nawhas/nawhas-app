@@ -63,7 +63,15 @@ class AlbumsController extends Controller
      */
     public function store(Request $request, Reciter $reciter) : JsonResponse
     {
-        if ($request->artwork != 'null') {
+        $isArtwork = null;
+        if ($request->get('artwork') == 'null') {
+            $isArtwork = false;
+        } else if($request->get('artwork') == null) {
+            $isArtwork = false;
+        } else {
+            $isArtwork = true;
+        }
+        if ($isArtwork) {
             $file = $request->artwork;
             $extension = $file->getClientOriginalName();
             $extension = $this->filesystem->extension($extension);

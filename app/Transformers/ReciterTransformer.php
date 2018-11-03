@@ -7,12 +7,6 @@ use App\Reciter;
 class ReciterTransformer extends Transformer
 {
     /**
-     * @var array
-     */
-    protected $defaultIncludes = [
-        'albums',
-    ];
-    /**
      * @param Reciter $reciter
      * @return array
      */
@@ -38,16 +32,5 @@ class ReciterTransformer extends Transformer
                 ],
             ],
         ];
-    }
-
-    /**
-     * @param Reciter $reciter
-     * @return \League\Fractal\Resource\Collection
-     * @internal param \App\Track $track
-     *
-     */
-    public function includeAlbums(Reciter $reciter)
-    {
-        return $this->collection($reciter->albums, AlbumTransformer::excluding('reciters'));
     }
 }
