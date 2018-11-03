@@ -20,6 +20,7 @@ const mutations = {
   },
   FETCH_TRACK(state, payload) {
     state.track = payload.data;
+    state.track.lyric = payload.data.lyric.data;
   },
   STORE_TRACK(state, payload) {
     state.tracks.push(payload.data);
@@ -27,6 +28,14 @@ const mutations = {
 };
 
 const actions = {
+  fetchTrack({commit}, payload) {
+    axios.get(`/v1/reciters/${payload.reciter}/albums/${payload.album}/tracks/${payload.track}`)
+      .then((response) => {
+        commit('FETCH_TRACK', {
+          data: response.data
+        });
+      });
+  },
   storeTrack({commit}, payload) {
     axios.post(`/v1/reciters/${payload.reciter}/albums/${payload.album}/tracks`, payload.form)
       .then((response) => {

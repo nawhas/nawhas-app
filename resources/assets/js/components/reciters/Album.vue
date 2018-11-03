@@ -16,7 +16,7 @@
       class="album__tracks"
     >
       <template slot="items" slot-scope="props">
-        <tr class="album__track">
+        <tr @click="goToTrack(props.item)" class="album__track">
           <td class="text-xs-right">{{ props.item.number }}</td>
           <td>{{ props.item.name }}</td>
           <td>{{ props.item.reciter.name }}</td>
@@ -36,6 +36,9 @@
       this.setBackgroundFromImage();
     },
     methods: {
+      goToTrack(track) {
+        this.$router.push({ name: 'track-show', params: { reciter: track.reciter.slug, album: this.year, track: track.slug} });
+      },
       setBackgroundFromImage() {
         Vibrant.from(this.artwork).getPalette().then((palette) => {
           const swatch = palette.DarkMuted;

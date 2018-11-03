@@ -16,7 +16,7 @@ const getters = {
 
 const mutations = {
   FETCH_ALBUMS(state, payload) {
-    state.albums = payload.data;
+    state.albums = payload.data.data;
   },
   FETCH_ALBUM(state, payload) {
     state.album = payload.data;

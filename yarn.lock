@@ -3034,6 +3034,13 @@ he@1.1.x, he@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+hls.js@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-0.11.0.tgz#a205fb61725d9d69bf6258984be3dc2ee829fa9e"
+  dependencies:
+    string.prototype.endswith "^0.2.0"
+    url-toolkit "^2.1.2"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -6109,6 +6116,10 @@ string-width@^2.0.0:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
 
+string.prototype.endswith@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/string.prototype.endswith/-/string.prototype.endswith-0.2.0.tgz#a19c20dee51a98777e9a47e10f09be393b9bba75"
+
 string_decoder@^0.10.25:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
@@ -6528,6 +6539,10 @@ url-regex@^3.0.0:
   dependencies:
     ip-regex "^1.0.1"
 
+url-toolkit@^2.1.2:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/url-toolkit/-/url-toolkit-2.1.6.tgz#6d03246499e519aad224c44044a4ae20544154f2"
+
 url@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
@@ -6598,6 +6613,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-aplayer@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/vue-aplayer/-/vue-aplayer-1.6.1.tgz#17fd419b091e09425bc737fa9e84f55565160df6"
+
 vue-hot-reload-api@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
@@ -6651,6 +6670,10 @@ vue-template-compiler@^2.5.13:
 vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
+
+vue-youtube-embed@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/vue-youtube-embed/-/vue-youtube-embed-2.2.1.tgz#a3be445d2c8e647be2608c90993d5e8791107207"
 
 vue@^2.5.17:
   version "2.5.17"

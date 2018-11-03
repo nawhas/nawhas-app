@@ -16,6 +16,7 @@ export const routes = [
       { path: 'reciters/:reciter/albums/create', name: 'album-create', component: require('./pages/albums/Create.vue') },
       { path: 'reciters/:reciter/albums/:album/edit', name: 'album-create', component: require('./pages/albums/Create.vue') },
       { path: 'reciters/:reciter/albums/:album/tracks/create', name: 'track-create', component: require('./pages/tracks/Create.vue') },
+      { path: 'reciters/:reciter/albums/:album/tracks/:track', name: 'track-show', component: require('./pages/tracks/Show.vue') },
     ]
   }
 ];

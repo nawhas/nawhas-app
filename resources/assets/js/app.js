@@ -6,6 +6,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css'
 import VueProgressBar from 'vue-progressbar';
+import VueYouTubeEmbed from 'vue-youtube-embed';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import App from './App.vue';
@@ -27,6 +28,7 @@ Vue.use(VueProgressBar, {
   inverse: false
 });
 
+Vue.use(VueYouTubeEmbed);
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 Vue.use(Vuex);
