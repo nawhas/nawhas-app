@@ -29,7 +29,7 @@ const mutations = {
 
 const actions = {
   fetchTrack({commit}, payload) {
-    axios.get(`/v1/reciters/${payload.reciter}/albums/${payload.album}/tracks/${payload.track}`)
+    axios.get(`/api/reciters/${payload.reciter}/albums/${payload.album}/tracks/${payload.track}`)
       .then((response) => {
         commit('FETCH_TRACK', {
           data: response.data
@@ -37,7 +37,7 @@ const actions = {
       });
   },
   storeTrack({commit}, payload) {
-    axios.post(`/v1/reciters/${payload.reciter}/albums/${payload.album}/tracks`, payload.form)
+    axios.post(`/api/reciters/${payload.reciter}/albums/${payload.album}/tracks`, payload.form)
       .then((response) => {
         commit('STORE_TRACK', {
           data: response.data
@@ -45,7 +45,7 @@ const actions = {
       });
   },
   updateTrack({commit}, payload) {
-    axios.post(`/v1/reciters/${payload.reciter}/albums/${payload.album}/tracks/${payload.track}`, payload.form);
+    axios.post(`/api/reciters/${payload.reciter}/albums/${payload.album}/tracks/${payload.track}`, payload.form);
   }
 };
 

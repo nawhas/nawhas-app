@@ -36,8 +36,8 @@
           <v-btn flat @click="logout()">Logout</v-btn>
         </template>
         <template v-else>
-          <v-btn flat @click="$router.push({ name: 'login'})">Login</v-btn>
-          <v-btn flat>Sign Up</v-btn>
+          <v-btn flat href="/login">Login</v-btn>
+          <v-btn flat href="/register">Sign Up</v-btn>
         </template>
       </v-toolbar-items>
     </v-toolbar>

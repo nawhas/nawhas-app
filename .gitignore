@@ -4,6 +4,10 @@
 /vendor
 /.idea
 /.vagrant
+/public/css
+/public/fonts
+/public/js
+/public/mix-manifest.json
 Homestead.json
 Homestead.yaml
 npm-debug.log

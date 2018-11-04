@@ -36,7 +36,7 @@ const mutations = {
 const actions = {
   fetchReciters({commit}) {
     return new Promise((resolve, reject) => {
-      axios.get('/v1/reciters').then((response) => {
+      axios.get('/api/reciters').then((response) => {
         commit('FETCH_RECITERS', {
           data: response.data.data
         });
@@ -45,7 +45,7 @@ const actions = {
     });
   },
   fetchPopularReciters({commit}) {
-    axios.get('/v1/popular/reciters')
+    axios.get('/api/popular/reciters')
       .then((response) => {
       commit('FETCH_POPULAR_RECITERS', {
         data: response.data.data
@@ -54,7 +54,7 @@ const actions = {
   },
   fetchReciter({commit}, payload) {
     return new Promise((resolve, reject) => {
-      axios.get(`/v1/reciters/${payload.reciter}`)
+      axios.get(`/api/reciters/${payload.reciter}`)
         .then((response) => {
           commit('FETCH_RECITER', {
             data: response.data
@@ -64,7 +64,7 @@ const actions = {
     });
   },
   storeReciter({commit}, payload) {
-    axios.post('/v1/reciters', payload)
+    axios.post('/api/reciters', payload)
       .then((response) => {
       commit('STORE_RECITER', {
         data: response.data
@@ -72,7 +72,7 @@ const actions = {
       });
   },
   updateReciter({commit}, payload) {
-    axios.post(`/v1/reciters/${payload.reciter.slug}`, payload.form);
+    axios.post(`/api/reciters/${payload.reciter.slug}`, payload.form);
   }
 };
 
