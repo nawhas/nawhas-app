@@ -77,7 +77,7 @@
     created() {
       this.$store.dispatch('reciters/fetchReciter', { reciter: this.$route.params.reciter });
       this.$store.dispatch('albums/fetchAlbum', { reciter: this.$route.params.reciter, album: this.$route.params.album } );
-      axios.get('/v1/languages')
+      axios.get('/api/languages')
         .then((response) => {
           this.languages = response.data.data;
         });

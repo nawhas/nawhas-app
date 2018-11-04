@@ -28,7 +28,7 @@ const mutations = {
 
 const actions = {
   fetchAlbums({commit}, payload) {
-    axios.get(`/v1/reciters/${payload.reciter}/albums`)
+    axios.get(`/api/reciters/${payload.reciter}/albums`)
       .then((response) => {
         commit('FETCH_ALBUMS', {
           data: response.data
@@ -36,7 +36,7 @@ const actions = {
       });
   },
   fetchAlbum({commit}, payload) {
-    axios.get(`/v1/reciters/${payload.reciter}/albums/${payload.album}`)
+    axios.get(`/api/reciters/${payload.reciter}/albums/${payload.album}`)
       .then((response) => {
         commit('FETCH_ALBUM', {
           data: response.data
@@ -44,7 +44,7 @@ const actions = {
       });
   },
   storeAlbum({commit}, payload) {
-    axios.post(`/v1/reciters/${payload.reciter}/albums`, payload.form)
+    axios.post(`/api/reciters/${payload.reciter}/albums`, payload.form)
       .then((response) => {
         commit('STORE_ALBUM', {
           data: response.data
@@ -52,7 +52,7 @@ const actions = {
       });
   },
   updateAlbum({commit}, payload) {
-    axios.post(`/v1/reciters/${payload.reciter.slug}/albums/${payload.album.year}`, payload.form);
+    axios.post(`/api/reciters/${payload.reciter.slug}/albums/${payload.album.year}`, payload.form);
   }
 };
 

@@ -25,7 +25,7 @@ class AlbumsApiTest extends TestCase
         $user = factory(User::class)->create();
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
-        $this->get('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year)->assertStatus(200)->assertJsonStructure([
+        $this->get('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'reciter_id', 'name', 'year', 'artwork', 'created_at', 'updated_at',
             ]
@@ -45,7 +45,7 @@ class AlbumsApiTest extends TestCase
         $faker = Faker\Factory::create();
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
 
-        $this->postJson('/v1/reciters/' . $reciter->id . '/albums', $data = [
+        $this->postJson('/api/reciters/' . $reciter->id . '/albums', $data = [
             'name' => $faker->name,
             'reciter_id' => $reciter->id,
             'year' => $faker->year(),
@@ -73,7 +73,7 @@ class AlbumsApiTest extends TestCase
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $faker = Faker\Factory::create();
 
-        $this->putJson('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year, $data = [
+        $this->putJson('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year, $data = [
             'name' => $faker->name,
             'year' => $faker->year(),
             'artwork' => $faker->imageUrl(640, 480, 'people'),
@@ -99,7 +99,7 @@ class AlbumsApiTest extends TestCase
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
 
-        $this->delete('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year)
+        $this->delete('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year)
             ->assertStatus(204);
     }
 }

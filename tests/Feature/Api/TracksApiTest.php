@@ -30,7 +30,7 @@ class TracksApiTest extends TestCase
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $track = factory(Track::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id, 'album_id' => $album->id]);
-        $this->get('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->id)->assertStatus(200)->assertJsonStructure([
+        $this->get('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->id)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'slug', 'reciter_id', 'album_id', 'name', 'audio', 'video', 'number', 'created_by', 'created_at', 'updated_at',
             ]
@@ -47,7 +47,7 @@ class TracksApiTest extends TestCase
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $track = factory(Track::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id, 'album_id' => $album->id]);
-        $this->get('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->slug)->assertStatus(200)->assertJsonStructure([
+        $this->get('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->slug)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'slug', 'reciter_id', 'album_id', 'name', 'audio', 'video', 'number', 'created_by', 'created_at', 'updated_at',
             ]
@@ -64,7 +64,7 @@ class TracksApiTest extends TestCase
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $track = factory(Track::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id, 'album_id' => $album->id]);
-        $this->get('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number)->assertStatus(200)->assertJsonStructure([
+        $this->get('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'slug', 'reciter_id', 'album_id', 'name', 'audio', 'video', 'number', 'created_by', 'created_at', 'updated_at',
             ]
@@ -84,7 +84,7 @@ class TracksApiTest extends TestCase
         $faker = Faker\Factory::create();
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
-        $this->postJson('/v1/reciters/' . $reciter->id . '/albums/' . $album->year . '/tracks', $data = [
+        $this->postJson('/api/reciters/' . $reciter->id . '/albums/' . $album->year . '/tracks', $data = [
             'name' => $name = $faker->name,
             'slug' => str_slug($name),
             'reciter_id' => $reciter->id,
@@ -118,7 +118,7 @@ class TracksApiTest extends TestCase
         $track = factory(Track::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id, 'album_id' => $album->id]);
         $faker = Faker\Factory::create();
 
-        $this->putJson('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number, $data = [
+        $this->putJson('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number, $data = [
             'name' => $name = $faker->name,
             'slug' => str_slug($name),
             'number' => $faker->randomDigit,
@@ -148,7 +148,7 @@ class TracksApiTest extends TestCase
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $track = factory(Track::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id, 'album_id' => $album->id]);
 
-        $this->delete('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number)
+        $this->delete('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number)
             ->assertStatus(204);
     }
 }

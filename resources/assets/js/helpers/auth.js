@@ -1,6 +1,6 @@
 export function login(credentials) {
   return new Promise((res, rej) => {
-    axios.post('/v1/auth/login', credentials)
+    axios.post('/api/auth/login', credentials)
       .then(response => {
         res(response.data);
       })

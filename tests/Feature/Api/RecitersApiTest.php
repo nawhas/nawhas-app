@@ -23,7 +23,7 @@ class RecitersApiTest extends TestCase
         /** @var Reciter $reciter */
         $reciter = factory(Reciter::class)->create();
 
-        $this->get('/v1/reciters/' . $reciter->id)->assertStatus(200)->assertJsonStructure([
+        $this->get('/api/reciters/' . $reciter->id)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'name', 'slug', 'description', 'avatar',
                 'created_by', 'created_at', 'updated_at',
@@ -41,7 +41,7 @@ class RecitersApiTest extends TestCase
         /** @var Reciter $reciter */
         $reciter = factory(Reciter::class)->create();
 
-        $this->get('/v1/reciters/' . $reciter->slug)->assertStatus(200)->assertJsonStructure([
+        $this->get('/api/reciters/' . $reciter->slug)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'name', 'slug', 'description', 'avatar',
                 'created_by', 'created_at', 'updated_at',
@@ -61,7 +61,7 @@ class RecitersApiTest extends TestCase
 
         $faker = Faker\Factory::create();
 
-        $this->postJson('/v1/reciters/', $data = [
+        $this->postJson('/api/reciters/', $data = [
             'name' => $faker->name,
             'description' => $faker->paragraph,
             'avatar' => $faker->imageUrl(640, 480, 'people'),
@@ -87,7 +87,7 @@ class RecitersApiTest extends TestCase
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $faker = Faker\Factory::create();
 
-        $this->putJson('/v1/reciters/' . $reciter->id, $data = [
+        $this->putJson('/api/reciters/' . $reciter->id, $data = [
             'name' => $faker->name,
             'description' => $faker->paragraph,
             'avatar' => $faker->imageUrl(640, 480, 'people'),
@@ -112,7 +112,7 @@ class RecitersApiTest extends TestCase
         /** @var Reciter $reciter */
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
 
-        $this->delete('/v1/reciters/' . $reciter->id)
+        $this->delete('/api/reciters/' . $reciter->id)
             ->assertStatus(204);
     }
 }

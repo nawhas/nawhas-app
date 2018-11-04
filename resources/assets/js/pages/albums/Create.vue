@@ -64,7 +64,7 @@
         }
         form.append('year', this.album.year);
         this.$store.dispatch('albums/storeAlbum', { reciter: this.$route.params.reciter, form: form });
-        /*client.post(`/v1/reciters/${this.reciter.slug}/albums`, form).then(() => {
+        /*client.post(`/api/reciters/${this.reciter.slug}/albums`, form).then(() => {
           this.$router.push(`/reciters/${this.reciter.slug}`);
         });*/
       },

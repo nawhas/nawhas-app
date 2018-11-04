@@ -33,7 +33,7 @@ class LyricsApiTest extends TestCase
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $track = factory(Track::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id, 'album_id' => $album->id]);
         $lyric = factory(Lyric::class)->create(['created_by' => $user->id, 'track_id' => $track->id]);
-        $this->get('/v1/reciters/' . $reciter->id . '/albums/' . $album->year . '/tracks/' . $track->id . '/lyrics/' . $lyric->id)->assertStatus(200)->assertJsonStructure([
+        $this->get('/api/reciters/' . $reciter->id . '/albums/' . $album->year . '/tracks/' . $track->id . '/lyrics/' . $lyric->id)->assertStatus(200)->assertJsonStructure([
             'data' => [
                 'id', 'text', 'track_id',
                 'created_by', 'created_at', 'updated_at',
@@ -55,7 +55,7 @@ class LyricsApiTest extends TestCase
         $reciter = factory(Reciter::class)->create(['created_by' => $user->id]);
         $album = factory(Album::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id]);
         $track = factory(Track::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id, 'album_id' => $album->id]);
-        $this->postJson('/v1/reciters/' . $reciter->id . '/albums/' . $album->year . '/tracks/' . $track->number . '/lyrics', $data = [
+        $this->postJson('/api/reciters/' . $reciter->id . '/albums/' . $album->year . '/tracks/' . $track->number . '/lyrics', $data = [
             'text' => $faker->text(),
             'track_id' => $track->id,
             'created_by' => $user->id,
@@ -84,7 +84,7 @@ class LyricsApiTest extends TestCase
         $lyric = factory(Lyric::class)->create(['created_by' => $user->id, 'track_id' => $track->id]);
         $faker = Faker\Factory::create();
 
-        $this->putJson('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number . '/lyrics/' . $lyric->id, $data = [
+        $this->putJson('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number . '/lyrics/' . $lyric->id, $data = [
             'text' => $faker->text(),
         ])->assertStatus(200)->assertJsonStructure([
             'data' => [
@@ -110,7 +110,7 @@ class LyricsApiTest extends TestCase
         $track = factory(Track::class)->create(['created_by' => $user->id, 'reciter_id' => $reciter->id, 'album_id' => $album->id]);
         $lyric = factory(Lyric::class)->create(['created_by' => $user->id, 'track_id' => $track->id]);
 
-        $this->delete('/v1/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number . '/lyrics/' . $lyric->id)
+        $this->delete('/api/reciters/' . $album->reciter_id . '/albums/' . $album->year . '/tracks/' . $track->number . '/lyrics/' . $lyric->id)
             ->assertStatus(204);
     }
 }
