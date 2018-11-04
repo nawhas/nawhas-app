@@ -13,8 +13,6 @@ $factory->define(Album::class, function (Faker $faker) {
         },
         'year' => $faker->year(),
         'artwork' => $faker->imageUrl(640, 480, 'people'),
-        'created_by' => function () {
-            return factory(User::class)->create()->id;
-        },
+        'created_by' => 1
     ];
 });

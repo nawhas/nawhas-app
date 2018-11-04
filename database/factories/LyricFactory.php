@@ -11,8 +11,6 @@ $factory->define(Lyric::class, function (Faker $faker) {
         'track_id' => function () {
             return factory(Track::class)->create()->id;
         },
-        'created_by' => function () {
-            return factory(User::class)->create()->id;
-        },
+        'created_by' => 1
     ];
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Language;
 use Auth;
 use App\Album;
 use App\Lyric;
@@ -53,11 +54,18 @@ class LyricsController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Reciter $reciter, Album $album, Track $track) : JsonResponse
+    public function store(Request $request, Reciter $reciter, Album $album, Track $track)
     {
+        $native_language = $request->get('native_language');
+        if ($native_language === "true") {
+            $native_language = true;
+        } else {
+            $native_language = false;
+        }
         $lyric = new Lyric();
         $lyric->track_id = $track->id;
         $lyric->text = $request->get('text');
+        $lyric->native_language = $native_language;
         $lyric->created_by = Auth::user()->id;
         $lyric->save();
 
@@ -93,6 +101,7 @@ class LyricsController extends Controller
     public function update(Request $request, Reciter $reciter, Album $album, Track $track, Lyric $lyric) : JsonResponse
     {
         $lyric->text = $request->get('text');
+        //$lyric->native_language = $request->get('native_language');
         $lyric->save();
 
         return $this->respondWithItem(Lyric::find($lyric->id));
@@ -107,6 +116,7 @@ class LyricsController extends Controller
      * @param Lyric $lyric
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Reciter $reciter, Album $album, Track $track, Lyric $lyric)
     {

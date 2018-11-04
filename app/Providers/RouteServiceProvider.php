@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Album;
 use App\Reciter;
+use App\Track;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -33,15 +35,19 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('album', function ($value, $route) {
             if ($reciter = $route->parameter('reciter')) {
-                return $reciter->albums()->where('year', $value)->firstOrFail();
+                return Album::where('reciter_id', $reciter->id)->where('year', $value)->firstOrFail();
             } else {
                 throw new ModelNotFoundException();
             }
         });
 
         Route::bind('track', function ($value, $route) {
-            if ($album = $route->parameter('album')) {
-                return $album->tracks()->where('id', $value)->orWhere('slug', $value)->orWhere('number', $value)->firstOrFail();
+            if ($reciter = $route->parameter('reciter')) {
+                if ($album = $route->parameter('album')) {
+                    return $reciter->albums()->where('id', $album->id)->firstOrFail()->tracks()->where('slug', $value)->orWhere('id', $value)->orWhere('number', $value)->firstOrFail();
+                } else {
+                    throw new ModelNotFoundException();
+                }
             } else {
                 throw new ModelNotFoundException();
             }

@@ -49,6 +49,7 @@ class SetUpOAuthClients extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @throws UnreadableFileException
      */
     public function handle()
     {
