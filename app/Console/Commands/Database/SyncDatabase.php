@@ -22,7 +22,7 @@ class SyncDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'db:sync';
+    protected $signature = 'db:sync {--force}';
 
     /**
      * The console command description.
@@ -100,9 +100,13 @@ class SyncDatabase extends Command
 
         // Check if the export has already run to prevent running it again.
         if ($this->fileExportExists($file)) {
-            $this->comment('Export already exists. To re-export the database, delete the file at ' . $file);
+            if (!$this->option('force')) {
+                $this->comment('Export already exists. To re-export the database, delete the file at ' . $file);
 
-            return $file;
+                return $file;
+            }
+
+            unlink($file);
         }
 
         $ignore = '';
