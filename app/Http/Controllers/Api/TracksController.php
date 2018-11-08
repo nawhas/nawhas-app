@@ -69,6 +69,7 @@ class TracksController extends Controller
     public function store(Request $request, Reciter $reciter, Album $album)
     {
         $audio = $this->upload_audio($request->audio);
+        $video = $this->checkIfNull($request->get('video'));
 
         // storing data into database
         $track = new Track();
@@ -77,7 +78,7 @@ class TracksController extends Controller
         $track->reciter_id = $reciter->id;
         $track->album_id = $album->id;
         $track->audio = $audio;
-        $track->video = $request->get('video');
+        $track->video = $video;
         $track->number = $request->get('trackNumber');
         $track->created_by = Auth::user()->id;
         $track->save();
@@ -196,7 +197,7 @@ class TracksController extends Controller
 
     public function checkIfNull($variable)
     {
-        if ($variable === 'null' or null) {
+        if ($variable === 'null' or null or "undefined") {
             return null;
         } else {
             return $variable;
