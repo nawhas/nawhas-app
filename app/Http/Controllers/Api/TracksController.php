@@ -79,7 +79,7 @@ class TracksController extends Controller
         $track->album_id = $album->id;
         $track->audio = $audio;
         $track->video = $video;
-        $track->number = $request->get('trackNumber');
+        $track->number = $request->get('number');
         $track->created_by = Auth::user()->id;
         $track->save();
 
@@ -146,10 +146,12 @@ class TracksController extends Controller
         $video = $this->checkIfNull($request->get('video'));
         if ($video) {
             $track->video = $video;
+        } else {
+            $track->video = null;
         }
 
         $track->name = $request->get('name');
-        $track->number = $request->get('trackNumber');
+        $track->number = $request->get('number');
         $track->save();
 
         return $this->respondWithItem(Track::find($track->id));
