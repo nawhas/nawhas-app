@@ -26,6 +26,7 @@ class LyricTransformer extends Transformer
             'id' => $lyric->id,
             'title' => $lyricTitle,
             'text' => $lyric->text ? nl2br($lyricText) : null,
+            'plain_text' => $lyric->text,
             'track_id' => $lyric->track_id,
             'created_at' => $lyric->created_at->toDateTimeString(),
             'updated_at' => $lyric->updated_at->toDateTimeString(),
