@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 class LanguagesController extends Controller
 {
     use TransformsResponses;
+
     /**
      * AlbumsController constructor.
      * @param LanguagesTransformer $transformer
@@ -24,6 +25,7 @@ class LanguagesController extends Controller
     public function index()
     {
         $query = Language::query();
+
         return $this->respondWithCollection($query->get());
     }
 

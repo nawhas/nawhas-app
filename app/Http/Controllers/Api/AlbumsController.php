@@ -66,7 +66,7 @@ class AlbumsController extends Controller
         $isArtwork = null;
         if ($request->get('artwork') == 'null') {
             $isArtwork = false;
-        } else if($request->get('artwork') == null) {
+        } elseif ($request->get('artwork') == null) {
             $isArtwork = false;
         } else {
             $isArtwork = true;

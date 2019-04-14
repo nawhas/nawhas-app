@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use App\Reciter;
 use Faker\Generator as Faker;
 
@@ -11,6 +10,6 @@ $factory->define(Reciter::class, function (Faker $faker) {
         'description' => $faker->paragraph,
         'avatar' => $faker->imageUrl(640, 480, 'people'),
         'status' => 0,
-        'created_by' => 1
+        'created_by' => 1,
     ];
 });

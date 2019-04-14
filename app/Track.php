@@ -37,6 +37,6 @@ class Track extends Model
 
     public function language()
     {
-        return $this->belongsToMany('App\Language', 'track_languages','track_id', 'language_id');
+        return $this->belongsToMany('App\Language', 'track_languages', 'track_id', 'language_id');
     }
 }

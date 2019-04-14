@@ -13,6 +13,6 @@ return [
       'Arabic',
       'Farsi',
       'Sindhi',
-      'Saraiki'
-  ]
+      'Saraiki',
+  ],
 ];

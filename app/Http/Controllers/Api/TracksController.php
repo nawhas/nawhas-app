@@ -199,7 +199,7 @@ class TracksController extends Controller
 
     public function checkIfNull($variable)
     {
-        if ($variable === 'null' or null or "undefined") {
+        if ($variable === 'null' or null or 'undefined') {
             return null;
         } else {
             return $variable;
