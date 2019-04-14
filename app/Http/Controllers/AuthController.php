@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +26,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -55,7 +54,7 @@ class AuthController extends Controller
     {
         $userTokens = auth('api')->user()->tokens;
 
-        foreach($userTokens as $token) {
+        foreach ($userTokens as $token) {
             $token->revoke();
         }
 
@@ -84,7 +83,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
         ]);
     }
 
