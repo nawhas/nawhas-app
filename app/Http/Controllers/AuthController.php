@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,7 +11,7 @@ class AuthController extends Controller
     /**
      * Create a new AuthController instance.
      *
-     * @return void
+     * @internal param \App\Http\Controllers\Auth\LoginController $loginController
      */
     public function __construct()
     {
@@ -46,11 +47,17 @@ class AuthController extends Controller
     /**
      * Log the user out (Invalidate the token).
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout()
     {
-        auth('api')->logout();
+        $userTokens = auth('api')->user()->tokens;
+
+        foreach($userTokens as $token) {
+            $token->revoke();
+        }
 
         return response()->json(['message' => 'Successfully logged out']);
     }
