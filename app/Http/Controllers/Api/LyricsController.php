@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Language;
 use Auth;
 use App\Album;
 use App\Lyric;
@@ -57,7 +56,7 @@ class LyricsController extends Controller
     public function store(Request $request, Reciter $reciter, Album $album, Track $track)
     {
         $native_language = $request->get('native_language');
-        if ($native_language === "true") {
+        if ($native_language === 'true') {
             $native_language = true;
         } else {
             $native_language = false;

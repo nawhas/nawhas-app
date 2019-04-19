@@ -14,7 +14,7 @@ class LyricTransformer extends Transformer
     public function transform(Lyric $lyric)
     {
         $lyricText = $lyric->text;
-        if ($lyricText === "null") {
+        if ($lyricText === 'null') {
             $lyricText = null;
         }
         if ($lyric->native_language) {
@@ -22,6 +22,7 @@ class LyricTransformer extends Transformer
         } else {
             $lyricTitle = 'Roman English';
         }
+
         return [
             'id' => $lyric->id,
             'title' => $lyricTitle,

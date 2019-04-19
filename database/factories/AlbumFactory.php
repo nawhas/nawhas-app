@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use App\Reciter;
 use App\Album;
 use Faker\Generator as Faker;
@@ -13,6 +12,6 @@ $factory->define(Album::class, function (Faker $faker) {
         },
         'year' => $faker->year(),
         'artwork' => $faker->imageUrl(640, 480, 'people'),
-        'created_by' => 1
+        'created_by' => 1,
     ];
 });

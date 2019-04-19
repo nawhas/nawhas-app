@@ -10,7 +10,7 @@ class AuthController extends Controller
     /**
      * Create a new AuthController instance.
      *
-     * @return void
+     * @internal param \App\Http\Controllers\Auth\LoginController $loginController
      */
     public function __construct()
     {
@@ -26,7 +26,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -46,11 +46,17 @@ class AuthController extends Controller
     /**
      * Log the user out (Invalidate the token).
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout()
     {
-        auth('api')->logout();
+        $userTokens = auth('api')->user()->tokens;
+
+        foreach ($userTokens as $token) {
+            $token->revoke();
+        }
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -77,7 +83,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
         ]);
     }
 
