@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Track extends Model
 {
-    use Visitable;
+    use Visitable, Searchable;
 
     protected $fillable = ['name'];
 

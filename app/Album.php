@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model
 {
-    use Visitable;
+    use Visitable, Searchable;
 
     const DEFAULT_ARTWORK_URL = 'https://s3.us-east-2.amazonaws.com/nawhas/defaults/album.png';
 
