@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reciter extends Model
 {
-    use Visitable, Searchable;
+    use Visitable;
 
     const DEFAULT_AVATAR_URL = 'https://s3.us-east-2.amazonaws.com/nawhas/defaults/reciter.png';
 
