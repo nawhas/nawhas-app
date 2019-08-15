@@ -54,12 +54,14 @@ class importLyrics extends Command
         foreach ($lyricsFolder as $lyricFolder) {
             // Set the reciters name
             $reciter = substr($lyricFolder, strrpos($lyricFolder, '/') + 1);
+            $this->info("Reciter Folder Name: $reciter");
             $reciter = Reciter::where('name', $reciter)->first();
             // Loop through reciters folder to get album details
             $albumsFolder = Storage::disk('public')->directories($lyricFolder);
             foreach ($albumsFolder as $albumFolder) {
                 // Set the Album details
                 $album = substr($albumFolder, strrpos($albumFolder, '/') + 1);
+                $this->info("Reciter Name: $reciter->name Album Folder: $album");
                 $album = $reciter->albums()->where('year', $album)->first();
                 foreach ($album->tracks as $track) {
                     if (Storage::exists("$albumFolder/$track->number.txt")) {
