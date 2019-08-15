@@ -67,8 +67,6 @@ class importLyrics extends Command
                         $textFileContent = Storage::disk('public')->get("$albumFolder/$track->number.txt");
                         $textFileContent = mb_convert_encoding($textFileContent, 'UTF-8', 'Windows-1252');
 
-//                        dd($textFileContent);
-
                         $lyric = new Lyric();
                         $lyric->track_id = $track->id;
                         $lyric->text = $textFileContent;
