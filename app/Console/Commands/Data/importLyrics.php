@@ -67,7 +67,7 @@ class importLyrics extends Command
                     if (Storage::exists("$albumFolder/$track->number.txt")) {
                         // Read the file and store the lyric into database
                         $textFileContent = Storage::disk('public')->get("$albumFolder/$track->number.txt");
-                        $textFileContent = mb_convert_encoding($textFileContent, 'UTF-8', 'Windows-1252');
+                        // $textFileContent = mb_convert_encoding($textFileContent, 'UTF-8', 'Windows-1252');
 
                         $lyric = new Lyric();
                         $lyric->track_id = $track->id;
