@@ -35,15 +35,15 @@ class TrackTransformer extends Transformer
             'links' => [
                 [
                     'rel' => 'self',
-                    'url' => '/api/reciters/' . $track->reciter->slug . '/albums/' . $track->album->year . '/' . $track->slug,
+                    'url' => config('app.url') . '/v1/reciters/' . $track->reciter->slug . '/albums/' . $track->album->year . '/' . $track->slug,
                 ],
                 [
                     'rel' => 'album',
-                    'url' => '/api/reciters/' . $track->reciter->slug . '/albums/' . $track->album->year,
+                    'url' => config('app.url') . '/v1/reciters/' . $track->reciter->slug . '/albums/' . $track->album->year,
                 ],
                 [
                     'rel' => 'reciter',
-                    'url' => '/api/reciters/' . $track->reciter->slug,
+                    'url' => config('app.url') . '/v1/reciters/' . $track->reciter->slug,
                 ],
             ],
         ];
