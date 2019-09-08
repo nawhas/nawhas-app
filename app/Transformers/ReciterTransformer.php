@@ -24,11 +24,11 @@ class ReciterTransformer extends Transformer
             'links' => [
                 [
                     'rel' => 'self',
-                    'url' => config('APP_URL') . '/v1/reciters/' . $reciter->slug,
+                    'url' => config('app.name') . '/v1/reciters/' . $reciter->slug,
                 ],
                 [
                     'rel' => 'albums',
-                    'url' => config('APP_URL') . '/v1/reciters/' . $reciter->slug . '/albums',
+                    'url' => config('app.name') . '/v1/reciters/' . $reciter->slug . '/albums',
                 ],
             ],
         ];
