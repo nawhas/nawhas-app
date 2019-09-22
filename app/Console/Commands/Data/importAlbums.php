@@ -44,7 +44,7 @@ class importAlbums extends Command
 
         // Read CSV File
 
-        $csvData = $this->readCSV(Storage::path('albums.csv'));
+        $csvData = $this->readCSV(Storage::disk('public')->path('albums.csv'));
 
         $reciter = null;
 

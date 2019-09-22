@@ -43,7 +43,7 @@ class importTracks extends Command
     {
         $this->info("This script will import all tracks from a CSV sheet");
 
-        $csvData = $this->readCSV(Storage::path('tracks.csv'));
+        $csvData = $this->readCSV(Storage::disk('public')->path('tracks.csv'));
 
         $reciter = null;
         $album = null;

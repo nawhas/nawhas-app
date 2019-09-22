@@ -45,7 +45,7 @@ class importReciters extends Command
 
         // Read CSV File
 
-        $csvData = $this->readCSV(Storage::path('reciters.csv'));
+        $csvData = $this->readCSV(Storage::disk('public')->path('reciters.csv'));
 
         // Go through each reciter and import into database
         for ($i = 0; $i < count($csvData); $i ++)
