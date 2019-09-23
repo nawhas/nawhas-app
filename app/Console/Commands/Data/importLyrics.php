@@ -64,7 +64,7 @@ class importLyrics extends Command
                 $this->info("Reciter Name: $reciter->name Album Folder: $album");
                 $album = $reciter->albums()->where('year', $album)->first();
                 foreach ($album->tracks as $track) {
-                    if (Storage::exists("$albumFolder/$track->number.txt")) {
+                    if (Storage::disk('public')->exists("$albumFolder/$track->number.txt")) {
                         // Read the file and store the lyric into database
                         $textFileContent = Storage::disk('public')->get("$albumFolder/$track->number.txt");
                         $textFileContent = str_replace("’", "'", $textFileContent);
