@@ -73,7 +73,7 @@ class importLyrics extends Command
                         $lyric = new Lyric();
                         $lyric->track_id = $track->id;
                         $lyric->text = $textFileContent;
-                        $lyric->native_language = true;
+                        $lyric->native_language = false;
                         $lyric->created_by = 1;
                         $lyric->save();
                     }
